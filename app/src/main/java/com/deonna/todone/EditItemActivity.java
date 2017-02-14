@@ -9,7 +9,6 @@ import android.widget.EditText;
 public class EditItemActivity extends AppCompatActivity {
 
     private EditText etEditedItem;
-    public static final int EDITED = 2;
 
     private int currentTodoPosition;
 
@@ -35,7 +34,7 @@ public class EditItemActivity extends AppCompatActivity {
             data.putExtra("new_todo", etEditedItem.getText().toString());
             data.putExtra("position", currentTodoPosition);
 
-            setResult(EDITED, data);
+            setResult(Codes.EDITED, data);
         }
 
         finish();
