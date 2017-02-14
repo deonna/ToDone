@@ -11,11 +11,11 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayAdapter<String> mTodoAdapter;
+    private ArrayAdapter<String> todoAdapter;
     private ListView lvItems;
     private EditText etNewItem;
 
-    private Todos mTodos;
+    private Todos todos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,45 +39,47 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (hasBeenEdited(requestCode, resultCode)) {
-            String newTodo = data.getStringExtra("new_todo");
-            int position = data.getIntExtra("position", 0);
+            String newTodo = data.getStringExtra(IntentConstants.NEW_TODO);
+            int position = data.getIntExtra(IntentConstants.POSITION, 0);
 
-            mTodos.edit(position, newTodo);
-            mTodoAdapter.notifyDataSetChanged();
+            todos.edit(position, newTodo);
+            todoAdapter.notifyDataSetChanged();
         }
     }
 
     private void removeTodo(int position) {
 
-        mTodos.remove(position);
-        mTodoAdapter.notifyDataSetChanged();
+        todos.remove(position);
+        todoAdapter.notifyDataSetChanged();
     }
 
     private void populateTodoItems() {
 
-        mTodos = new Todos(getFilesDir());
-        mTodoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                mTodos.getItems());
+        todos = new Todos(getFilesDir());
+        todoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+                todos.getItems());
     }
 
     public void onAddItem(View view) {
 
-        String newItem = etNewItem.getText().toString();
+        String newItem = etNewItem.getText().toString().trim();
 
-        if (mTodos.add(newItem)) {
-            mTodoAdapter.notifyDataSetChanged();
+        if (todos.add(newItem)) {
+            todoAdapter.notifyDataSetChanged();
             etNewItem.setText("");
         }
     }
 
     private void initializeListView() {
+
         lvItems = (ListView) findViewById(R.id.lvItems);
-        lvItems.setAdapter(mTodoAdapter);
+        lvItems.setAdapter(todoAdapter);
 
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
                 removeTodo(position);
                 return true;
             }
@@ -87,9 +89,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
-                intent.putExtra("current_todo", mTodos.get(i));
-                intent.putExtra("position", i);
+                intent.putExtra(IntentConstants.CURRENT_TODO, todos.get(i));
+                intent.putExtra(IntentConstants.POSITION, i);
                 startActivityForResult(intent, Code.EDIT_REQUEST.ordinal());
             }
         });
