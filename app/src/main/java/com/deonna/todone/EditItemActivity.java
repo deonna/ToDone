@@ -29,13 +29,11 @@ public class EditItemActivity extends AppCompatActivity {
     public void onEditItem(View view) {
         String editedItem = etEditedItem.getText().toString();
 
-        if (!editedItem.equals("")) {
-            Intent data = new Intent();
-            data.putExtra("new_todo", etEditedItem.getText().toString());
-            data.putExtra("position", currentTodoPosition);
+        Intent data = new Intent();
+        data.putExtra("new_todo", editedItem);
+        data.putExtra("position", currentTodoPosition);
 
-            setResult(Codes.EDITED, data);
-        }
+        setResult(Code.EDITED.ordinal(), data);
 
         finish();
     }
