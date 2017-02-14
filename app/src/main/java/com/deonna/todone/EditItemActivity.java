@@ -1,5 +1,6 @@
 package com.deonna.todone;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,9 @@ import android.widget.EditText;
 public class EditItemActivity extends AppCompatActivity {
 
     private EditText etEditedItem;
+    public static final int EDITED = 2;
+
+    private int currentTodoPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,14 +23,19 @@ public class EditItemActivity extends AppCompatActivity {
         String currentTodo = getIntent().getStringExtra("current_todo");
         etEditedItem.setText(currentTodo);
         etEditedItem.setSelection(etEditedItem.getText().length());
+
+        currentTodoPosition = getIntent().getIntExtra("position", 0);
     }
 
     public void onEditItem(View view) {
         String editedItem = etEditedItem.getText().toString();
 
-
         if (!editedItem.equals("")) {
-            // TODO: 2/14/17 Send back saved result
+            Intent data = new Intent();
+            data.putExtra("new_todo", etEditedItem.getText().toString());
+            data.putExtra("position", currentTodoPosition);
+
+            setResult(EDITED, data);
         }
 
         finish();

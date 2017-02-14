@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final String FILENAME = "todo.txt";
 
+    public static final int EDIT_REQUEST = 1;
+    public static final int EDITED = 2;
+
     private ArrayList<String> todoItems;
     private ArrayAdapter<String> todoAdapter;
     private ListView lvItems;
@@ -52,9 +55,24 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
                 intent.putExtra("current_todo", todoItems.get(i));
-                startActivity(intent);
+                intent.putExtra("position", i);
+                startActivityForResult(intent, EDIT_REQUEST);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == EDIT_REQUEST && resultCode == EDITED) {
+            String newTodo = data.getExtras().getString("new_todo");
+
+            int position = data.getExtras().getInt("position");
+
+            todoItems.set(position, newTodo);
+            todoAdapter.notifyDataSetChanged();
+
+            writeItems();
+        }
     }
 
     private void readItems() {
