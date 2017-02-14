@@ -32,15 +32,15 @@ public class MainActivity extends AppCompatActivity {
 
     private static boolean hasBeenEdited(int requestCode, int resultCode) {
 
-        return (requestCode == Codes.EDIT_REQUEST && resultCode == Codes.EDITED);
+        return (requestCode == Code.EDIT_REQUEST.ordinal() && resultCode == Code.EDITED.ordinal());
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (hasBeenEdited(requestCode, resultCode)) {
-            String newTodo = data.getExtras().getString("new_todo");
-            int position = data.getExtras().getInt("position");
+            String newTodo = data.getStringExtra("new_todo");
+            int position = data.getIntExtra("position", 0);
 
             mTodos.edit(position, newTodo);
             mTodoAdapter.notifyDataSetChanged();
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
                 intent.putExtra("current_todo", mTodos.get(i));
                 intent.putExtra("position", i);
-                startActivityForResult(intent, Codes.EDIT_REQUEST);
+                startActivityForResult(intent, Code.EDIT_REQUEST.ordinal());
             }
         });
     }

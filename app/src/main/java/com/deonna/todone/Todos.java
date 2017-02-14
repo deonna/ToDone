@@ -16,6 +16,7 @@ import java.util.ArrayList;
 class Todos {
     private static final String TAG = Todos.class.getSimpleName();
     private static final String FILENAME = "todo.txt";
+    private static final String ENCODING = "UTF-8";
 
     private ArrayList<String> mItems;
     private final File mFilesDir;
@@ -31,7 +32,7 @@ class Todos {
 
     public boolean add(String text) {
 
-        if(!text.equals("")) {
+        if(!text.isEmpty()) {
             mItems.add(text);
             writeToFile();
             return true;
@@ -41,11 +42,13 @@ class Todos {
     }
 
     public void edit(int position, String text) {
-        if(!text.equals("")) {
+        if(!text.isEmpty()) {
             mItems.set(position, text);
         } else {
             mItems.remove(position);
         }
+
+        writeToFile();
     }
 
     public void remove(int position) {
@@ -71,7 +74,7 @@ class Todos {
         File file =  new File(mFilesDir, FILENAME);
 
         try {
-            mItems = new ArrayList<String>(FileUtils.readLines(file, "UTF-8"));
+            mItems = new ArrayList<String>(FileUtils.readLines(file, ENCODING));
         } catch (IOException e) {
             Log.e(TAG, "Exception caught while reading " + FILENAME + " ", e);
         }
