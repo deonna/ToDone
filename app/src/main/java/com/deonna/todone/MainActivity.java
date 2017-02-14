@@ -11,11 +11,11 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayAdapter<String> mTodoAdapter;
+    private ArrayAdapter<String> todoAdapter;
     private ListView lvItems;
     private EditText etNewItem;
 
-    private Todos mTodos;
+    private Todos todos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,37 +42,37 @@ public class MainActivity extends AppCompatActivity {
             String newTodo = data.getStringExtra("new_todo");
             int position = data.getIntExtra("position", 0);
 
-            mTodos.edit(position, newTodo);
-            mTodoAdapter.notifyDataSetChanged();
+            todos.edit(position, newTodo);
+            todoAdapter.notifyDataSetChanged();
         }
     }
 
     private void removeTodo(int position) {
 
-        mTodos.remove(position);
-        mTodoAdapter.notifyDataSetChanged();
+        todos.remove(position);
+        todoAdapter.notifyDataSetChanged();
     }
 
     private void populateTodoItems() {
 
-        mTodos = new Todos(getFilesDir());
-        mTodoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                mTodos.getItems());
+        todos = new Todos(getFilesDir());
+        todoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+                todos.getItems());
     }
 
     public void onAddItem(View view) {
 
         String newItem = etNewItem.getText().toString();
 
-        if (mTodos.add(newItem)) {
-            mTodoAdapter.notifyDataSetChanged();
+        if (todos.add(newItem)) {
+            todoAdapter.notifyDataSetChanged();
             etNewItem.setText("");
         }
     }
 
     private void initializeListView() {
         lvItems = (ListView) findViewById(R.id.lvItems);
-        lvItems.setAdapter(mTodoAdapter);
+        lvItems.setAdapter(todoAdapter);
 
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
-                intent.putExtra("current_todo", mTodos.get(i));
+                intent.putExtra("current_todo", todos.get(i));
                 intent.putExtra("position", i);
                 startActivityForResult(intent, Code.EDIT_REQUEST.ordinal());
             }
