@@ -15,10 +15,15 @@ public class EditItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_item);
 
         etEditedItem = (EditText) findViewById(R.id.etEditedItem);
+
+        String currentTodo = getIntent().getStringExtra("current_todo");
+        etEditedItem.setText(currentTodo);
+        etEditedItem.setSelection(etEditedItem.getText().length());
     }
 
     public void onEditItem(View view) {
         String editedItem = etEditedItem.getText().toString();
+
 
         if (!editedItem.equals("")) {
             // TODO: 2/14/17 Send back saved result

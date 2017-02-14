@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
+                intent.putExtra("current_todo", todoItems.get(i));
                 startActivity(intent);
             }
         });
