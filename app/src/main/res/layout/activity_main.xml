@@ -18,6 +18,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:onClick="onAddItem"
         android:id="@+id/btnAddItem"/>
 
     <ListView
@@ -34,7 +35,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/etEditText"
+        android:id="@+id/etNewItem"
         android:layout_alignBaseline="@+id/btnAddItem"
         android:layout_alignBottom="@+id/btnAddItem"
         android:layout_alignParentLeft="true"
