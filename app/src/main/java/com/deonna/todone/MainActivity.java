@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (hasBeenEdited(requestCode, resultCode)) {
-            String newTodo = data.getStringExtra("new_todo");
-            int position = data.getIntExtra("position", 0);
+            String newTodo = data.getStringExtra(IntentConstants.NEW_TODO);
+            int position = data.getIntExtra(IntentConstants.POSITION, 0);
 
             todos.edit(position, newTodo);
             todoAdapter.notifyDataSetChanged();
@@ -88,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
-                intent.putExtra("current_todo", todos.get(i));
-                intent.putExtra("position", i);
+                intent.putExtra(IntentConstants.CURRENT_TODO, todos.get(i));
+                intent.putExtra(IntentConstants.POSITION, i);
                 startActivityForResult(intent, Code.EDIT_REQUEST.ordinal());
             }
         });

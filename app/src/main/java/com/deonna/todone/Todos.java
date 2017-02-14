@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Todos {
+
     private static final String TAG = Todos.class.getSimpleName();
     private static final String FILENAME = "todo.txt";
     private static final String ENCODING = "UTF-8";

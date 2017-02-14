@@ -19,19 +19,19 @@ public class EditItemActivity extends AppCompatActivity {
 
         etEditedItem = (EditText) findViewById(R.id.etEditedItem);
 
-        String currentTodo = getIntent().getStringExtra("current_todo");
+        String currentTodo = getIntent().getStringExtra(IntentConstants.CURRENT_TODO);
         etEditedItem.setText(currentTodo);
         etEditedItem.setSelection(etEditedItem.getText().length());
 
-        currentTodoPosition = getIntent().getIntExtra("position", 0);
+        currentTodoPosition = getIntent().getIntExtra(IntentConstants.POSITION, 0);
     }
 
     public void onEditItem(View view) {
         String editedItem = etEditedItem.getText().toString().trim();
 
         Intent data = new Intent();
-        data.putExtra("new_todo", editedItem);
-        data.putExtra("position", currentTodoPosition);
+        data.putExtra(IntentConstants.NEW_TODO, editedItem);
+        data.putExtra(IntentConstants.POSITION, currentTodoPosition);
 
         setResult(Code.EDITED.ordinal(), data);
 
