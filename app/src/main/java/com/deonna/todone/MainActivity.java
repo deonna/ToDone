@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onAddItem(View view) {
 
-        String newItem = etNewItem.getText().toString();
+        String newItem = etNewItem.getText().toString().trim();
 
         if (todos.add(newItem)) {
             todoAdapter.notifyDataSetChanged();

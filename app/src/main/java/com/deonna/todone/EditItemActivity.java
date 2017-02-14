@@ -27,7 +27,7 @@ public class EditItemActivity extends AppCompatActivity {
     }
 
     public void onEditItem(View view) {
-        String editedItem = etEditedItem.getText().toString();
+        String editedItem = etEditedItem.getText().toString().trim();
 
         Intent data = new Intent();
         data.putExtra("new_todo", editedItem);
