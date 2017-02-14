@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeListView() {
+
         lvItems = (ListView) findViewById(R.id.lvItems);
         lvItems.setAdapter(todoAdapter);
 
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
                 removeTodo(position);
                 return true;
             }
@@ -87,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
                 intent.putExtra(IntentConstants.CURRENT_TODO, todos.get(i));
                 intent.putExtra(IntentConstants.POSITION, i);

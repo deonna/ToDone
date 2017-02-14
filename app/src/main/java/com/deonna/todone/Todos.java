@@ -18,11 +18,13 @@ public class Todos {
     private final File filesDir;
 
     public Todos(File fileDir) {
+
         filesDir = fileDir;
         readFromFile();
     }
 
     public ArrayList<String> getItems() {
+
         return items;
     }
 
@@ -38,6 +40,7 @@ public class Todos {
     }
 
     public void edit(int position, String text) {
+
         if(!text.isEmpty()) {
             items.set(position, text);
         } else {
@@ -48,15 +51,18 @@ public class Todos {
     }
 
     public void remove(int position) {
+
         items.remove(position);
         writeToFile();
     }
 
     public String get(int position) {
+
         return items.get(position);
     }
 
     private void writeToFile() {
+
         File file =  new File(filesDir, FILENAME);
 
         try {
@@ -67,6 +73,7 @@ public class Todos {
     }
 
     private void readFromFile() {
+
         File file =  new File(filesDir, FILENAME);
 
         try {

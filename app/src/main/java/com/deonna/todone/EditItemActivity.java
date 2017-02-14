@@ -14,6 +14,7 @@ public class EditItemActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
 
@@ -27,6 +28,7 @@ public class EditItemActivity extends AppCompatActivity {
     }
 
     public void onEditItem(View view) {
+
         String editedItem = etEditedItem.getText().toString().trim();
 
         Intent data = new Intent();
