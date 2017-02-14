@@ -3,6 +3,7 @@ package com.deonna.todone;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,6 +27,20 @@ public class MainActivity extends AppCompatActivity {
         lvItems.setAdapter(todoAdapter);
 
         etNewItem = (EditText) findViewById(R.id.etNewItem);
+
+        lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                removeTodo(position);
+                return true;
+            }
+        });
+    }
+
+    private void removeTodo(int position) {
+        todoItems.remove(position);
+        todoAdapter.notifyDataSetChanged();
     }
 
     private void populateTodoItems() {
