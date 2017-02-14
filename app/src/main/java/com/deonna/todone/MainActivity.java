@@ -2,20 +2,28 @@ package com.deonna.todone;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> todoItems;
-    ArrayAdapter<String> todoAdapter;
-    ListView lvItems;
-    EditText etNewItem;
+    public static final String TAG = MainActivity.class.getSimpleName();
+    public static final String FILENAME = "todo.txt";
+
+    private ArrayList<String> todoItems;
+    private ArrayAdapter<String> todoAdapter;
+    private ListView lvItems;
+    private EditText etNewItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +46,38 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void readItems() {
+        File filesDir = getFilesDir();
+        File file =  new File(filesDir, FILENAME);
+
+        try {
+            todoItems = new ArrayList<String>(FileUtils.readLines(file));
+        } catch (IOException e) {
+            Log.e(TAG, "Exception caught while reading " + FILENAME + " ", e);
+        }
+    }
+
+    private void writeItems() {
+        File filesDir = getFilesDir();
+        File file =  new File(filesDir, FILENAME);
+
+        try {
+            FileUtils.writeLines(file, todoItems);
+        } catch (IOException e) {
+            Log.e(TAG, "Exception caught while writing to " + FILENAME + " ", e);
+        }
+    }
+
     private void removeTodo(int position) {
         todoItems.remove(position);
         todoAdapter.notifyDataSetChanged();
+        writeItems();
     }
 
     private void populateTodoItems() {
         todoItems = new ArrayList<String>();
 
-        for(int i = 1; i < 4; i++) {
-            todoItems.add("Item " + i);
-        }
+        readItems();
 
         todoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
                 todoItems);
@@ -59,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
 
         if(!newItem.equals("")) {
             todoAdapter.add(etNewItem.getText().toString());
+            writeItems();
+
             etNewItem.setText("");
         }
     }
