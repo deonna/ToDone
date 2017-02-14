@@ -8,12 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
-/**
- * Created by deonna on 2/14/17.
- */
-
-class Todos {
+public class Todos {
     private static final String TAG = Todos.class.getSimpleName();
     private static final String FILENAME = "todo.txt";
     private static final String ENCODING = "UTF-8";
