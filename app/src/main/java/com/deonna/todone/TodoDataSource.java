@@ -26,7 +26,7 @@ public class TodoDataSource {
         db.close();
     }
 
-    private void delete(int todoId) {
+    public void delete(long todoId) {
         SQLiteDatabase db = open();
 
         db.beginTransaction();
@@ -37,7 +37,7 @@ public class TodoDataSource {
         db.endTransaction();
     }
 
-    private void readTodos() {
+    public ArrayList<Todo> getAll() {
         SQLiteDatabase db = open();
 
         Cursor cursor = db.query(
@@ -55,6 +55,8 @@ public class TodoDataSource {
                 todos.add(todo);
             } while(cursor.moveToNext());
         }
+
+        return todos;
     }
 
     private int getIntFromColumnName(Cursor cursor, String columnName) {

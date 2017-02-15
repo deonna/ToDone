@@ -1,5 +1,6 @@
 package com.deonna.todone;
 
+import android.content.Context;
 import android.util.Log;
 
 import org.apache.commons.io.FileUtils;
@@ -17,11 +18,14 @@ public class Todos {
 
     private ArrayList<Todo> items;
     private final File filesDir;
+    private final TodoDataSource todosDataSource;
 
-    public Todos(File fileDir) {
+    public Todos(Context context, File fileDir) {
 
+        todosDataSource = new TodoDataSource(context);
         filesDir = fileDir;
-        readFromFile();
+
+        items = todosDataSource.getAll();
     }
 
     public ArrayList<Todo> getItems() {
@@ -32,8 +36,10 @@ public class Todos {
     public boolean add(String text) {
 
         if(!text.isEmpty()) {
-            items.add(new Todo(text));
-            writeToFile();
+            Todo todo = new Todo(text);
+
+            items.add(todo);
+            addToDataSource(todo);
             return true;
         }
 
@@ -42,27 +48,40 @@ public class Todos {
 
     public void edit(int position, String text) {
 
+
         if(!text.isEmpty()) {
             Todo todo = items.get(position);
             todo.setName(text);
 
             items.set(position, todo);
+            updateInDataSource(todo);
         } else {
-            items.remove(position);
+            remove(position);
         }
-
-        writeToFile();
     }
 
     public void remove(int position) {
 
+        Todo todo = items.get(position);
+        removeFromDataSource(todo);
         items.remove(position);
-        writeToFile();
     }
 
     public Todo get(int position) {
 
         return items.get(position);
+    }
+
+    private void addToDataSource(Todo todo) {
+        todosDataSource.create(todo);
+    }
+
+    private void updateInDataSource(Todo todo) {
+        todosDataSource.update(todo);
+    }
+
+    private void removeFromDataSource(Todo todo) {
+        todosDataSource.delete(todo.getId());
     }
 
     private void writeToFile() {
