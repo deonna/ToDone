@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void populateTodoItems() {
 
-        todos = new Todos(getFilesDir());
+        todos = new Todos(this, getFilesDir());
         todoAdapter = new TodosAdapter(this, todos.getItems());
     }
 
