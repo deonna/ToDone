@@ -5,13 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayAdapter<String> todoAdapter;
+    private TodosAdapter todoAdapter;
     private ListView lvItems;
     private EditText etNewItem;
 
@@ -56,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private void populateTodoItems() {
 
         todos = new Todos(getFilesDir());
-        todoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                todos.getItems());
+        todoAdapter = new TodosAdapter(this, todos.getItems());
     }
 
     public void onAddItem(View view) {
@@ -91,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
-                intent.putExtra(IntentConstants.CURRENT_TODO, todos.get(i));
+                intent.putExtra(IntentConstants.CURRENT_TODO, todos.get(i).getName());
                 intent.putExtra(IntentConstants.POSITION, i);
                 startActivityForResult(intent, Code.EDIT_REQUEST.getValue());
             }
