@@ -14,10 +14,10 @@ public class TodoSQLiteHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Table Names
-    private static final String TABLE_TODOS = "todos";
+    public static final String TABLE_TODOS = "todos";
 
     // Todos Table Columns
-    private static final String COLUMN_NAME = "name";
+    public static final String COLUMN_NAME = "name";
 
     private TodoSQLiteHelper(Context context) {
 
