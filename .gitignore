@@ -41,6 +41,7 @@ captures/
 .idea/misc.xml
 .idea/gradle.xml
 .idea/libraries
+.idea/codeStyleSettings.xml
 
 # Keystore files
 *.jks
