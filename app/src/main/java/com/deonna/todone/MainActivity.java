@@ -1,6 +1,6 @@
 package com.deonna.todone;
 
-import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EditTodoDialogFragment.EditTodoDialogListener {
 
     private TodosAdapter todoAdapter;
     private ListView lvItems;
@@ -27,23 +27,6 @@ public class MainActivity extends AppCompatActivity {
         etNewItem = (EditText) findViewById(R.id.etNewItem);
 
         initializeListView();
-    }
-
-    private static boolean hasBeenEdited(int requestCode, int resultCode) {
-
-        return (requestCode == Code.EDIT_REQUEST.getValue() && resultCode == Code.EDITED.getValue());
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (hasBeenEdited(requestCode, resultCode)) {
-            String newTodo = data.getStringExtra(IntentConstants.NEW_TODO);
-            int position = data.getIntExtra(IntentConstants.POSITION, 0);
-
-            todos.edit(position, newTodo);
-            todoAdapter.notifyDataSetChanged();
-        }
     }
 
     private void removeTodo(int position) {
@@ -68,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void showEditDialog(String name, int position) {
+        FragmentManager fm = getSupportFragmentManager();
+        EditTodoDialogFragment editTodoDialogFragment = EditTodoDialogFragment.newInstance(name, position);
+        editTodoDialogFragment.show(fm, "fragment_edit_todo");
+    }
+
     private void initializeListView() {
 
         lvItems = (ListView) findViewById(R.id.lvItems);
@@ -88,11 +77,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
-                intent.putExtra(IntentConstants.CURRENT_TODO, todos.get(i).getName());
-                intent.putExtra(IntentConstants.POSITION, i);
-                startActivityForResult(intent, Code.EDIT_REQUEST.getValue());
+                showEditDialog(todos.get(i).getName(), i);
             }
         });
+    }
+
+    @Override
+    public void onFinishEditDialog(String name, int position) {
+        todos.edit(position, name);
+        todoAdapter.notifyDataSetChanged();
     }
 }
