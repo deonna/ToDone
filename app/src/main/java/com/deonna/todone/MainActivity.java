@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static boolean hasBeenEdited(int requestCode, int resultCode) {
 
-        return (requestCode == Code.EDIT_REQUEST.ordinal() && resultCode == Code.EDITED.ordinal());
+        return (requestCode == Code.EDIT_REQUEST.getValue() && resultCode == Code.EDITED.getValue());
     }
 
     @Override
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, EditItemActivity.class);
                 intent.putExtra(IntentConstants.CURRENT_TODO, todos.get(i));
                 intent.putExtra(IntentConstants.POSITION, i);
-                startActivityForResult(intent, Code.EDIT_REQUEST.ordinal());
+                startActivityForResult(intent, Code.EDIT_REQUEST.getValue());
             }
         });
     }
