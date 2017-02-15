@@ -10,11 +10,9 @@ import java.util.ArrayList;
 
 public class TodoDataSource {
 
-    private Context context;
-    private TodoSQLiteHelper todoSQLiteHelper;
+    private final TodoSQLiteHelper todoSQLiteHelper;
 
     public TodoDataSource(Context context) {
-        this.context = context;
         todoSQLiteHelper = TodoSQLiteHelper.getInstance(context);
     }
 
