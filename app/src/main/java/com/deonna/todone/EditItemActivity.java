@@ -35,7 +35,7 @@ public class EditItemActivity extends AppCompatActivity {
         data.putExtra(IntentConstants.NEW_TODO, editedItem);
         data.putExtra(IntentConstants.POSITION, currentTodoPosition);
 
-        setResult(Code.EDITED.ordinal(), data);
+        setResult(Code.EDITED.getValue(), data);
 
         finish();
     }
