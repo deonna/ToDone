@@ -1,24 +1,22 @@
 package com.deonna.todone;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 public class EditTodoDialogFragment extends DialogFragment {
 
-    public static final String TITLE = "Edit Item";
+    public static final String TITLE = "Edit Todo";
 
     private EditText etEditedItem;
-    private Button btnSave;
+    private ImageView ivSave;
+    private ImageView ivSetDueDate;
 
     private String name;
     private int position;
@@ -44,7 +42,8 @@ public class EditTodoDialogFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogTheme);
+
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogTheme);
     }
 
     @Nullable
@@ -62,27 +61,29 @@ public class EditTodoDialogFragment extends DialogFragment {
         name = args.getString(Constants.CURRENT_TODO, "");
         position = args.getInt(Constants.POSITION, 0);
 
-        initEditField(view);
-
+        getDialog().setTitle(TITLE);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-        initSaveButton(view);
+        initializeEditField(view);
+
+        Utilities.initializePriorityListeners(view, R.id.ivLowPriorityDialog, R.id.ivMediumPriorityDialog, R.id.ivHighPriorityDialog);
+
+        initializeSaveButton(view);
+        initializeSetDueDateButton(view);
     }
 
-    private void initEditField(View view) {
+    private void initializeEditField(View view) {
         etEditedItem = (EditText) view.findViewById(R.id.etEditedItem);
         etEditedItem.setText(name);
         etEditedItem.setSelection(etEditedItem.getText().length());
 
-        getDialog().setTitle(TITLE);
-
         etEditedItem.requestFocus();
     }
 
-    private void initSaveButton(View view) {
-        btnSave = (Button) view.findViewById(R.id.btnSave);
+    private void initializeSaveButton(View view) {
+        ivSave = (ImageView) view.findViewById(R.id.ivSave);
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
+        ivSave.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -92,16 +93,24 @@ public class EditTodoDialogFragment extends DialogFragment {
 
                 listener.onFinishEditDialog(newName, position);
 
-                hideSoftKeyboard();
+                Utilities.hideSoftKeyboard(view, getActivity());
 
                 dismiss();
             }
         });
     }
 
-    private void hideSoftKeyboard() {
+    private void initializeSetDueDateButton(View view) {
+        ivSetDueDate = (ImageView) view.findViewById(R.id.ivSetDueDate);
 
-        final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+        ivSetDueDate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                DatePickerFragment newFragment = new DatePickerFragment();
+                newFragment.show(getFragmentManager(), "datePicker");
+            }
+        });
     }
 }

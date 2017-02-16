@@ -31,7 +31,7 @@ public class TodosAdapter extends ArrayAdapter<Todo> {
 
         tvName.setText(todo.getName());
 
-        initializePriorityListeners(convertView);
+        Utilities.initializePriorityListeners(convertView, R.id.ivLowPriority, R.id.ivMediumPriority, R.id.ivHighPriority);
 
         return convertView;
     }
