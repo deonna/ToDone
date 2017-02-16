@@ -1,5 +1,6 @@
 package com.deonna.todone;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ public class EditTodoDialogFragment extends DialogFragment {
 
     private EditText etEditedItem;
     private Button btnSave;
+    private Button btnSetDueDate;
 
     private String name;
     private int position;
@@ -66,7 +68,8 @@ public class EditTodoDialogFragment extends DialogFragment {
 
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-//        initSaveButton(view);
+        initializeSaveButton(view);
+        initializeSetDueDateButton(view);
     }
 
     private void initEditField(View view) {
@@ -79,23 +82,37 @@ public class EditTodoDialogFragment extends DialogFragment {
         etEditedItem.requestFocus();
     }
 
-//    private void initSaveButton(View view) {
-//        btnSave = (Button) view.findViewById(R.id.btnSave);
-//
-//        btnSave.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//
-//                EditTodoDialogListener listener = (EditTodoDialogListener) getActivity();
-//                String newName = etEditedItem.getText().toString().trim();
-//
-//                listener.onFinishEditDialog(newName, position);
-//
-//                Utilities.hideSoftKeyboard(view, getActivity());
-//
-//                dismiss();
-//            }
-//        });
-//    }
+    private void initializeSaveButton(View view) {
+        btnSave = (Button) view.findViewById(R.id.btnSave);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                EditTodoDialogListener listener = (EditTodoDialogListener) getActivity();
+                String newName = etEditedItem.getText().toString().trim();
+
+                listener.onFinishEditDialog(newName, position);
+
+                Utilities.hideSoftKeyboard(view, getActivity());
+
+                dismiss();
+            }
+        });
+    }
+
+    private void initializeSetDueDateButton(View view) {
+        btnSetDueDate = (Button) view.findViewById(R.id.btnSetDueDate);
+
+        btnSetDueDate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                DatePickerFragment newFragment = new DatePickerFragment();
+                newFragment.show(getFragmentManager(), "datePicker");
+            }
+        });
+    }
 }
