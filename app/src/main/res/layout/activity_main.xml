@@ -33,6 +33,17 @@
         android:layout_alignParentStart="true"
         android:paddingBottom="12dp">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_add"
+            android:id="@+id/ivAddItem"
+            android:onClick="onAddItem"
+            android:alpha=".75"
+            android:layout_gravity="right"
+            android:layout_weight="0.15"
+            android:layout_marginLeft="8dp"/>
+
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,22 +54,12 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginLeft="17dp"
-            android:layout_marginStart="17dp"
             android:layout_weight="0.9"
             android:textColor="@android:color/white"
             android:background="@android:color/transparent"
-            android:textCursorDrawable="@android:color/white"/>
+            android:textCursorDrawable="@android:color/white"
+            android:layout_marginLeft="16dp"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_add"
-            android:id="@+id/ivAddItem"
-            android:onClick="onAddItem"
-            android:alpha=".75"
-            android:layout_gravity="right"
-            android:layout_weight="0.33"/>
     </LinearLayout>
 
 </RelativeLayout>
