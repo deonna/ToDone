@@ -60,20 +60,19 @@ public class EditTodoDialogFragment extends DialogFragment {
         name = args.getString(Constants.CURRENT_TODO, "");
         position = args.getInt(Constants.POSITION, 0);
 
-        initEditField(view);
-
+        getDialog().setTitle(TITLE);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+        initializeEditField(view);
 
         initializeSaveButton(view);
         initializeSetDueDateButton(view);
     }
 
-    private void initEditField(View view) {
+    private void initializeEditField(View view) {
         etEditedItem = (EditText) view.findViewById(R.id.etEditedItem);
         etEditedItem.setText(name);
         etEditedItem.setSelection(etEditedItem.getText().length());
-
-        getDialog().setTitle(TITLE);
 
         etEditedItem.requestFocus();
     }
