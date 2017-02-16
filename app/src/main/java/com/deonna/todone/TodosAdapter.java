@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,45 +33,26 @@ public class TodosAdapter extends ArrayAdapter<Todo> {
 
         tvName.setText(todo.getName());
 
-        Utilities.initializePriorityListeners(convertView, R.id.ivLowPriority, R.id.ivMediumPriority, R.id.ivHighPriority);
+        initializeCheckboxListener(convertView, todo);
+        Utilities.initializePriorityListeners(convertView, todo, R.id.ivLowPriority, R.id
+                .ivMediumPriority, R.id.ivHighPriority);
 
         return convertView;
     }
 
-    private void changePriority(ImageView ivOldPriority, ImageView ivNewPriority) {
+    private void initializeCheckboxListener(View view, Todo todo) {
 
-        ivOldPriority.setVisibility(View.GONE);
-        ivNewPriority.setVisibility(View.VISIBLE);
-    }
+        final CheckBox cbIsCompleted = (CheckBox) view.findViewById(R.id.cbIsCompleted);
+        final Todo currentTodo = todo;
 
-    private void initializePriorityListeners(View convertView) {
+        cbIsCompleted.setChecked(currentTodo.getIsCompleted());
 
-        final ImageView ivLowPriority = (ImageView) convertView.findViewById(R.id.ivLowPriority);
-        final ImageView ivMediumPriority = (ImageView) convertView.findViewById(R.id
-                .ivMediumPriority);
-        final ImageView ivHighPriority = (ImageView) convertView.findViewById(R.id.ivHighPriority);
-
-        ivLowPriority.setOnClickListener(new View.OnClickListener() {
-
+        cbIsCompleted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                changePriority(ivLowPriority, ivMediumPriority);
-            }
-        });
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-        ivMediumPriority.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                changePriority(ivMediumPriority,ivHighPriority);
-            }
-        });
-
-        ivHighPriority.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                changePriority(ivHighPriority, ivLowPriority);
+                currentTodo.setIsCompleted(isChecked);
+                currentTodo.updateInDataSource();
             }
         });
     }

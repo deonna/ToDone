@@ -1,14 +1,17 @@
 package com.deonna.todone;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Todo {
+public class Todo implements Serializable {
 
     private long id;
     private String name;
     private Priority priority;
     private boolean isCompleted;
     private Date dueDate;
+
+    private static final long serialVersionUID = 1L;
 
     private final TodoDataSource todosDataSource;
 
@@ -62,6 +65,11 @@ public class Todo {
         return isCompleted;
     }
 
+    public void setIsCompleted(boolean isCompleted) {
+
+        this.isCompleted = isCompleted;
+    }
+
     public int getIsCompletedAsInt() {
 
         if (isCompleted) {
@@ -85,6 +93,11 @@ public class Todo {
         return dueDate;
     }
 
+    public void setDueDate(Date dueDate) {
+
+        this.dueDate = dueDate;
+    }
+
     public long getEpochDueDate() {
 
         if (dueDate == null) {
@@ -94,10 +107,6 @@ public class Todo {
         return dueDate.getTime();
     }
 
-    public void setDueDate(Date dueDate) {
-
-        this.dueDate = dueDate;
-    }
 
     public void setDueDateFromEpochDueDate(long epochDueDate) {
 

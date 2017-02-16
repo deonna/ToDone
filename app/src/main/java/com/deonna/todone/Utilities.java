@@ -14,17 +14,21 @@ public class Utilities {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    public static void initializePriorityListeners(View convertView, int lowPriorityId, int mediumPriority, int highPriority) {
+    public static void initializePriorityListeners(View convertView, Todo todo, int lowPriorityId,
+                                                   int mediumPriority, int highPriority) {
 
         final ImageView ivLowPriority = (ImageView) convertView.findViewById(lowPriorityId);
         final ImageView ivMediumPriority = (ImageView) convertView.findViewById(mediumPriority);
         final ImageView ivHighPriority = (ImageView) convertView.findViewById(highPriority);
+
+        final Todo currentTodo = todo;
 
         ivLowPriority.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 changePriority(ivLowPriority, ivMediumPriority);
+                currentTodo.updateInDataSource();
             }
         });
 
@@ -33,6 +37,7 @@ public class Utilities {
             @Override
             public void onClick(View v) {
                 changePriority(ivMediumPriority,ivHighPriority);
+                currentTodo.updateInDataSource();
             }
         });
 
@@ -41,10 +46,15 @@ public class Utilities {
             @Override
             public void onClick(View v) {
                 changePriority(ivHighPriority, ivLowPriority);
+                currentTodo.updateInDataSource();
             }
         });
     }
 
+    private static void updatePriorities() {
+        // TODO: 2/16/17 update UI for stars     
+    }
+    
     private static void changePriority(ImageView ivOldPriority, ImageView ivNewPriority) {
 
         ivOldPriority.setVisibility(View.GONE);

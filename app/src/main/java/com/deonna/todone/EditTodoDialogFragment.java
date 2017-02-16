@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -18,7 +19,7 @@ public class EditTodoDialogFragment extends DialogFragment {
     private ImageView ivSave;
     private ImageView ivSetDueDate;
 
-    private String name;
+    private Todo currentTodo;
     private int position;
 
     public EditTodoDialogFragment() {}
@@ -27,11 +28,11 @@ public class EditTodoDialogFragment extends DialogFragment {
         void onFinishEditDialog(String name, int position);
     }
 
-    public static EditTodoDialogFragment newInstance(String name, int position) {
+    public static EditTodoDialogFragment newInstance(Todo todo, int position) {
         EditTodoDialogFragment fragment = new EditTodoDialogFragment();
 
         Bundle args = new Bundle();
-        args.putString(Constants.CURRENT_TODO, name);
+        args.putSerializable(Constants.CURRENT_TODO, todo);
         args.putInt(Constants.POSITION, position);
 
         fragment.setArguments(args);
@@ -58,7 +59,7 @@ public class EditTodoDialogFragment extends DialogFragment {
 
         Bundle args = getArguments();
 
-        name = args.getString(Constants.CURRENT_TODO, "");
+        currentTodo = (Todo) args.getSerializable(Constants.CURRENT_TODO);
         position = args.getInt(Constants.POSITION, 0);
 
         getDialog().setTitle(TITLE);
@@ -66,7 +67,8 @@ public class EditTodoDialogFragment extends DialogFragment {
 
         initializeEditField(view);
 
-        Utilities.initializePriorityListeners(view, R.id.ivLowPriorityDialog, R.id.ivMediumPriorityDialog, R.id.ivHighPriorityDialog);
+        Utilities.initializePriorityListeners(view, currentTodo, R.id.ivLowPriorityDialog, R.id
+                .ivMediumPriorityDialog, R.id.ivHighPriorityDialog);
 
         initializeSaveButton(view);
         initializeSetDueDateButton(view);
@@ -74,7 +76,7 @@ public class EditTodoDialogFragment extends DialogFragment {
 
     private void initializeEditField(View view) {
         etEditedItem = (EditText) view.findViewById(R.id.etEditedItem);
-        etEditedItem.setText(name);
+        etEditedItem.setText(currentTodo.getName());
         etEditedItem.setSelection(etEditedItem.getText().length());
 
         etEditedItem.requestFocus();

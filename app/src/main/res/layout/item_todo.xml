@@ -20,7 +20,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox"
+        android:id="@+id/cbIsCompleted"
         android:theme="@style/checkBoxStyle"
         android:layout_marginLeft="10dp"
         android:background="@android:color/transparent"
@@ -35,10 +35,10 @@
         android:layout_marginLeft="21dp"
         android:layout_weight="0.9"
         android:layout_marginStart="21dp"
-        android:layout_alignBaseline="@+id/checkBox"
-        android:layout_alignBottom="@+id/checkBox"
-        android:layout_toRightOf="@+id/checkBox"
-        android:layout_toEndOf="@+id/checkBox"/>
+        android:layout_alignBaseline="@+id/cbIsCompleted"
+        android:layout_alignBottom="@+id/cbIsCompleted"
+        android:layout_toRightOf="@+id/cbIsCompleted"
+        android:layout_toEndOf="@+id/cbIsCompleted"/>
 
     <TextView
         android:text="Feb 17, 2017"
