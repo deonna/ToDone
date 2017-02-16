@@ -19,9 +19,8 @@
         <item name="android:textColorSecondary">@color/colorTextHint</item>
     </style>
 
-    <style name="DialogTheme" parent="@android:style/Theme.Dialog">
+    <style name="DialogTheme" parent="@android:style/Theme.Holo.Dialog.MinWidth">
         <item name="android:windowBackground">@color/colorDialog</item>
-        <item name="android:windowIsFloating">false</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:gravity">center</item>
     </style>

@@ -6,6 +6,6 @@
     <color name="colorPrimaryDark">#DE5846</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorTextHint">#99FFFFFF</color>
-    <color name="colorDialog">#EEF6F4F5</color>
-    <color name="colorDialogTitle">#FAFAFA</color>
+    <color name="colorDialog">#F6F4F5</color>
+    <color name="colorDialogTitleBackground">#FAFAFA</color>
 </resources>

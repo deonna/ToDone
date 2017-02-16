@@ -44,7 +44,7 @@ public class EditTodoDialogFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogTheme);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogTheme);
     }
 
     @Nullable
@@ -66,7 +66,7 @@ public class EditTodoDialogFragment extends DialogFragment {
 
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-        initSaveButton(view);
+//        initSaveButton(view);
     }
 
     private void initEditField(View view) {
@@ -79,23 +79,23 @@ public class EditTodoDialogFragment extends DialogFragment {
         etEditedItem.requestFocus();
     }
 
-    private void initSaveButton(View view) {
-        btnSave = (Button) view.findViewById(R.id.btnSave);
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                EditTodoDialogListener listener = (EditTodoDialogListener) getActivity();
-                String newName = etEditedItem.getText().toString().trim();
-
-                listener.onFinishEditDialog(newName, position);
-
-                Utilities.hideSoftKeyboard(view, getActivity());
-
-                dismiss();
-            }
-        });
-    }
+//    private void initSaveButton(View view) {
+//        btnSave = (Button) view.findViewById(R.id.btnSave);
+//
+//        btnSave.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//
+//                EditTodoDialogListener listener = (EditTodoDialogListener) getActivity();
+//                String newName = etEditedItem.getText().toString().trim();
+//
+//                listener.onFinishEditDialog(newName, position);
+//
+//                Utilities.hideSoftKeyboard(view, getActivity());
+//
+//                dismiss();
+//            }
+//        });
+//    }
 }
