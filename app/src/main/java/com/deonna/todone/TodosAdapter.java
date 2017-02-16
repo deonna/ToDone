@@ -50,6 +50,7 @@ public class TodosAdapter extends ArrayAdapter<Todo> {
         final ImageView ivHighPriority = (ImageView) convertView.findViewById(R.id.ivHighPriority);
 
         ivLowPriority.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 changePriority(ivLowPriority, ivMediumPriority);
@@ -57,6 +58,7 @@ public class TodosAdapter extends ArrayAdapter<Todo> {
         });
 
         ivMediumPriority.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 changePriority(ivMediumPriority,ivHighPriority);
@@ -64,6 +66,7 @@ public class TodosAdapter extends ArrayAdapter<Todo> {
         });
 
         ivHighPriority.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 changePriority(ivHighPriority, ivLowPriority);
