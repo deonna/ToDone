@@ -10,7 +10,7 @@ public class TodoSQLiteHelper extends SQLiteOpenHelper {
     private static TodoSQLiteHelper sInstance;
 
     // Database Info
-    private static final String DATABASE_NAME = "todosDatabase";
+    private static final String DATABASE_NAME = "todos.db";
     private static final int DATABASE_VERSION = 1;
 
     // Table Names
@@ -18,6 +18,9 @@ public class TodoSQLiteHelper extends SQLiteOpenHelper {
 
     // Todos Table Columns
     public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_COMPLETED = "completed";
+    public static final String COLUMN_PRIORITY = "priority";
+    public static final String COLUMN_DUE_DATE = "due date";
 
     private TodoSQLiteHelper(Context context) {
 
@@ -43,11 +46,11 @@ public class TodoSQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String CREATE_TODOS_TABLE = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY " +
-                "AUTOINCREMENT, %s TEXT)",
-                TABLE_TODOS,
-                BaseColumns._ID,
-                COLUMN_NAME);
+        String CREATE_TODOS_TABLE = String.format(
+                "CREATE TABLE %s (%s INTEGER PRIMARY KEY " + "AUTOINCREMENT, " +
+                        "%s TEXT, %s INTEGER, %s INTEGER, %s INTEGER)",
+                TABLE_TODOS, BaseColumns._ID,
+                COLUMN_NAME, COLUMN_COMPLETED, COLUMN_PRIORITY, COLUMN_DUE_DATE);
 
         db.execSQL(CREATE_TODOS_TABLE);
     }
