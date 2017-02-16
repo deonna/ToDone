@@ -1,0 +1,25 @@
+package com.deonna.todone;
+
+import android.content.Intent;
+import android.os.SystemClock;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import java.util.concurrent.TimeUnit;
+
+public class SplashActivity extends AppCompatActivity {
+
+    public static final int DELAY = 3;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+
+        SystemClock.sleep(TimeUnit.SECONDS.toMillis(DELAY));
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+}
