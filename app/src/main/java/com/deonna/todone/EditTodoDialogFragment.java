@@ -65,6 +65,8 @@ public class EditTodoDialogFragment extends DialogFragment {
 
         initializeEditField(view);
 
+        Utilities.initializePriorityListeners(view, R.id.ivLowPriorityDialog, R.id.ivMediumPriorityDialog, R.id.ivHighPriorityDialog);
+
         initializeSaveButton(view);
         initializeSetDueDateButton(view);
     }
