@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -11,35 +12,54 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.deonna.todone.MainActivity">
 
-    <Button
-        android:text="@string/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="onAddItem"
-        android:id="@+id/btnAddItem"/>
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/lvItems"
+        android:layout_below="@+id/llAddItem"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingTop="12dp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryTransparent"
+        android:paddingTop="12dp"
+        android:id="@+id/llAddItem"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/btnAddItem"
-        android:id="@+id/lvItems"/>
+        android:paddingBottom="12dp">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/etNewItem"
-        android:hint="@string/add_item"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/btnAddItem"
-        android:layout_toStartOf="@+id/btnAddItem" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_add"
+            android:id="@+id/ivAddItem"
+            android:onClick="onAddItem"
+            android:alpha=".75"
+            android:layout_gravity="right"
+            android:layout_weight="0.15"
+            android:layout_marginLeft="8dp"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/etNewItem"
+            android:hint="@string/add_item"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="0.9"
+            android:textColor="@android:color/white"
+            android:background="@android:color/transparent"
+            android:textCursorDrawable="@android:color/white"
+            android:layout_marginLeft="16dp"/>
+
+    </LinearLayout>
+
 </RelativeLayout>
