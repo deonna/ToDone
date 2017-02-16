@@ -92,16 +92,10 @@ public class EditTodoDialogFragment extends DialogFragment {
 
                 listener.onFinishEditDialog(newName, position);
 
-                hideSoftKeyboard();
+                Utilities.hideSoftKeyboard(view, getActivity());
 
                 dismiss();
             }
         });
-    }
-
-    private void hideSoftKeyboard() {
-
-        final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
     }
 }
