@@ -13,7 +13,7 @@ import android.widget.EditText;
 
 public class EditTodoDialogFragment extends DialogFragment {
 
-    public static final String TITLE = "title";
+    public static final String TITLE = "Edit Item";
 
     private EditText etEditedItem;
     private Button btnSave;
