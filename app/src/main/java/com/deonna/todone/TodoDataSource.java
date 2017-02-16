@@ -84,10 +84,14 @@ public class TodoDataSource {
     }
 
     private Todo initializeTodoFromDb(Cursor cursor) {
+
         Todo todo = new Todo(getStringFromColumnName(cursor, TodoSQLiteHelper.COLUMN_NAME));
 
         todo.setId(getIntFromColumnName(cursor, BaseColumns._ID));
-        todo.setDueDateFromEpochDueDate(getIntFromColumnName(cursor, TodoSQLiteHelper.COLUMN_DUE_DATE));
+
+        int dueDate = getIntFromColumnName(cursor, TodoSQLiteHelper.COLUMN_DUE_DATE);
+
+        todo.setDueDateFromEpochDueDate(dueDate);
         todo.setIsCompleted(getIntFromColumnName(cursor, TodoSQLiteHelper.COLUMN_COMPLETED));
         todo.setPriorityFromInt(getIntFromColumnName(cursor, TodoSQLiteHelper.COLUMN_PRIORITY));
 

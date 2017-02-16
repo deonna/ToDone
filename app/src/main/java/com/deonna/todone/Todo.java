@@ -98,19 +98,20 @@ public class Todo implements Serializable {
         this.dueDate = dueDate;
     }
 
-    public long getEpochDueDate() {
+    public Long getEpochDueDate() {
 
         if (dueDate == null) {
-            return -1;
+            return null;
+        } else {
+            return dueDate.getTime();
         }
-
-        return dueDate.getTime();
     }
-
 
     public void setDueDateFromEpochDueDate(long epochDueDate) {
 
-        this.dueDate = new Date(epochDueDate);
+        if (epochDueDate != 0) {
+            this.dueDate = new Date(epochDueDate);
+        }
     }
 
     public void addToDataSource() {
