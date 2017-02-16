@@ -18,7 +18,8 @@
         android:id="@+id/lvItems"
         android:layout_below="@+id/llAddItem"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:paddingTop="12dp"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -44,7 +45,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginLeft="17dp"
             android:layout_marginStart="17dp"
-            android:layout_weight="1"
+            android:layout_weight="0.9"
             android:textColor="@android:color/white"
             android:background="@android:color/transparent"
             android:textCursorDrawable="@android:color/white"/>
@@ -52,11 +53,12 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_add_white_24dp"
+            app:srcCompat="@mipmap/ic_add"
             android:id="@+id/ivAddItem"
             android:onClick="onAddItem"
             android:alpha=".75"
-            android:layout_weight="0.13"/>
+            android:layout_gravity="right"
+            android:layout_weight="0.33"/>
     </LinearLayout>
 
 </RelativeLayout>
