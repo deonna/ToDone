@@ -45,6 +45,11 @@ captures/
 .idea/libraries
 .idea/codeStyleSettings.xml
 
+# Plugins
+.idea/markdown-navigator/
+.idea/markdown-exported-files.xml
+.idea/markdown-navigator.xml
+
 # Keystore files
 *.jks
 
