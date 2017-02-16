@@ -63,7 +63,6 @@ public class TodoDataSource {
 
         if(cursor.moveToFirst()) {
             do {
-                //Todo todo = new Todo(getStringFromColumnName(cursor, TodoSQLiteHelper.COLUMN_NAME));
 
                 Todo todo = initializeTodoFromDb(cursor);
                 todos.add(todo);

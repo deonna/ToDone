@@ -20,7 +20,7 @@ public class TodoSQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_COMPLETED = "completed";
     public static final String COLUMN_PRIORITY = "priority";
-    public static final String COLUMN_DUE_DATE = "due date";
+    public static final String COLUMN_DUE_DATE = "due_date";
 
     private TodoSQLiteHelper(Context context) {
 
