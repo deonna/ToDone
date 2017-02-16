@@ -38,7 +38,6 @@ public class Todos {
 
     public void edit(int position, String text) {
 
-
         if(!text.isEmpty()) {
             Todo todo = items.get(position);
             todo.setName(text);
