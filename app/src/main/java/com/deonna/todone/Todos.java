@@ -8,11 +8,12 @@ public class Todos {
 
     private ArrayList<Todo> items;
     private final File filesDir;
-    private final TodoDataSource todosDataSource;
+    private static TodoDataSource todosDataSource;
 
     public Todos(Context context, File fileDir) {
 
-        todosDataSource = new TodoDataSource(context);
+        todosDataSource = TodoDataSource.getInstance(context);
+
         filesDir = fileDir;
 
         items = todosDataSource.getAll();
@@ -23,13 +24,17 @@ public class Todos {
         return items;
     }
 
+    public static TodoDataSource getDataSource() {
+        return todosDataSource;
+    }
+
     public boolean add(String text) {
 
         if(!text.isEmpty()) {
             Todo todo = new Todo(text);
 
             items.add(todo);
-            addToDataSource(todo);
+            todo.addToDataSource();
             return true;
         }
 
@@ -43,7 +48,7 @@ public class Todos {
             todo.setName(text);
 
             items.set(position, todo);
-            updateInDataSource(todo);
+            todo.updateInDataSource();
         } else {
             remove(position);
         }
@@ -52,24 +57,12 @@ public class Todos {
     public void remove(int position) {
 
         Todo todo = items.get(position);
-        removeFromDataSource(todo);
+        todo.removeFromDataSource();
         items.remove(position);
     }
 
     public Todo get(int position) {
 
         return items.get(position);
-    }
-
-    private void addToDataSource(Todo todo) {
-        todosDataSource.create(todo);
-    }
-
-    private void updateInDataSource(Todo todo) {
-        todosDataSource.update(todo);
-    }
-
-    private void removeFromDataSource(Todo todo) {
-        todosDataSource.delete(todo.getId());
     }
 }

@@ -10,12 +10,16 @@ public class Todo {
     private boolean isCompleted;
     private Date dueDate;
 
+    private final TodoDataSource todosDataSource;
+
     public Todo(String name) {
 
         this.name = name;
         priority = Priority.LOW;
         isCompleted = false;
         dueDate = null;
+
+        todosDataSource = Todos.getDataSource();
     }
 
     public String getName() {
@@ -98,5 +102,20 @@ public class Todo {
     public void setDueDateFromEpochDueDate(long epochDueDate) {
 
         this.dueDate = new Date(epochDueDate);
+    }
+
+    public void addToDataSource() {
+
+        todosDataSource.create(this);
+    }
+
+    public void updateInDataSource() {
+
+        todosDataSource.update(this);
+    }
+
+    public void removeFromDataSource() {
+
+        todosDataSource.delete(getId());
     }
 }

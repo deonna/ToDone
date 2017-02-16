@@ -10,11 +10,21 @@ import java.util.ArrayList;
 
 public class TodoDataSource {
 
+    private static TodoDataSource sInstance;
     private final TodoSQLiteHelper todoSQLiteHelper;
 
-    public TodoDataSource(Context context) {
+    private TodoDataSource(Context context) {
 
         todoSQLiteHelper = TodoSQLiteHelper.getInstance(context);
+    }
+
+    public static TodoDataSource getInstance(Context context) {
+
+        if(sInstance == null) {
+            sInstance = new TodoDataSource(context.getApplicationContext());
+        }
+
+        return sInstance;
     }
 
     private SQLiteDatabase open() {
