@@ -3,12 +3,18 @@ package com.deonna.todone;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements EditTodoDialogFragment.EditTodoDialogListener {
+
+    public static final int SIDEBAR_WIDTH = 70;
 
     private TodosAdapter todoAdapter;
     private ListView lvItems;
@@ -27,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
         etNewItem = (EditText) findViewById(R.id.etNewItem);
 
         initializeListView();
+
+        centerActionBarTitle();
     }
 
     private void removeTodo(int position) {
@@ -86,5 +94,19 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
     public void onFinishEditDialog(String name, int position) {
         todos.edit(position, name);
         todoAdapter.notifyDataSetChanged();
+    }
+
+    private void centerActionBarTitle() {
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.action_bar);
+        TextView tvTitle = (TextView) toolbar.getChildAt(0);
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+
+        Toolbar.LayoutParams layoutParams = (Toolbar.LayoutParams) tvTitle.getLayoutParams();
+        layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+        layoutParams.width = metrics.widthPixels - SIDEBAR_WIDTH;
+
+        tvTitle.setLayoutParams(layoutParams);
+        tvTitle.setGravity(Gravity.CENTER);
     }
 }
