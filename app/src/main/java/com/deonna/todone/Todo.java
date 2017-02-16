@@ -1,27 +1,102 @@
 package com.deonna.todone;
 
+import java.util.Date;
+
 public class Todo {
 
     private long id;
     private String name;
+    private Priority priority;
+    private boolean isCompleted;
+    private Date dueDate;
 
     public Todo(String name) {
+
         this.name = name;
+        priority = Priority.LOW;
+        isCompleted = false;
+        dueDate = null;
     }
 
     public String getName() {
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 
     public void setId(long newId) {
+
         id = newId;
     }
 
     public long getId() {
+
         return id;
+    }
+
+    public Priority getPriority() {
+
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+
+        this.priority = priority;
+    }
+
+    public void setPriorityFromInt(int priority) {
+
+        this.priority = Priority.fromInt(priority);
+    }
+
+    public boolean getIsCompleted() {
+
+        return isCompleted;
+    }
+
+    public int getIsCompletedAsInt() {
+
+        if (isCompleted) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public void setIsCompleted(int completed) {
+
+        if (completed == 0) {
+            isCompleted = false;
+        } else {
+            isCompleted = true;
+        }
+    }
+
+    public Date getDueDate() {
+
+        return dueDate;
+    }
+
+    public long getEpochDueDate() {
+
+        if (dueDate == null) {
+            return -1;
+        }
+
+        return dueDate.getTime();
+    }
+
+    public void setDueDate(Date dueDate) {
+
+        this.dueDate = dueDate;
+    }
+
+    public void setDueDateFromEpochDueDate(long epochDueDate) {
+
+        this.dueDate = new Date(epochDueDate);
     }
 }

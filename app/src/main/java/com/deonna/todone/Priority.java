@@ -10,4 +10,18 @@ public enum Priority {
     Priority(int value) { this.value = value; }
 
     public int getValue() { return value; }
+
+    public static Priority fromInt(int value) {
+
+        switch(value) {
+            case 0:
+                return LOW;
+            case 1:
+                return MEDIUM;
+            case 2:
+                return HIGH;
+            default:
+                return LOW;
+        }
+    }
 }
