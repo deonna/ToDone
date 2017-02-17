@@ -47,10 +47,11 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Describe any challenges encountered while building the app:
 
-- The UI was a challenge for me. Even though I have little to no formal design training, I
-appreciate good design and tweaking the UI when something looks 'off' is a task I feel compelled
+- The UI was time consuming for me. Even though I have little to no design training besides the
+tricks + inspiration I pick up on blogs and design sites, I
+appreciate good design and tweaking the UI when something looks 'off' is a task I feel strongly compelled
 to do. I spent a good amount of time creating a basic mockup and tweaking it so that everything
-was positioned well.
+was well positioned.
 
 - Communication between fragments was also a challenge. I felt I was doing this in somewhat of a
 hack-y way, because there seem to be many options (leveraging the FragmentManager's ability to
