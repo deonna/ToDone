@@ -27,16 +27,15 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [x] Added a splash page to the app
-* [x] Added dynamic UI updating upon selecting a due date
-* [x] Added dynamic UI updating upon selecting a priority
-* [x] Added a custom logo for app
+* [x] Added dynamic UI updating upon selecting a due date when edit dialog is closed
+* [x] Added dynamic UI updating upon selecting a priority (by clicking on stars) when edit dialog is opened
 * [x] Added ability for user to mark items as 'complete' using a checkbox
-* [x] Added custom styles for checkbox, splash screen, ActionBar, Edit Dialog, etc.
+* [x] Added custom styles for checkbox, splash screen, ActionBar, Edit Dialog, etc. + iconography
 * [x] Added a DatePicker for selecting due dates
 * [x] Implemented modal dialogs for edit Dialog and due date selection dialog
+* [x] Added soft keyboard hiding after edit dialog is saved
 
-Handle Orientation Change, so that data is not lost.
-## Video Walkthrough 
+## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
@@ -59,9 +58,9 @@ get all fragments, using Bundle,
 using custom event listeners, using the backstack [which I didn't experiment with, but learned
 about after reading a few StackOverflow posts.
 
-- There were a couple of areas I thought would be challenging, but turned out not to be:
+There were a couple of areas I thought would be challenging, but turned out not to be:
 
-- SQLite DB configruation and transactions were surprisingly simple, as well as creating a custom
+- SQLite DB configuration and transactions were surprisingly simple, as well as creating a custom
 ArrayAdapter. The Android Activity lifecycle and figuring out which methods I needed to hook into
  wasn't difficult to figure out, either.
 
