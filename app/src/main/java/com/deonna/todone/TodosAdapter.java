@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -28,49 +27,14 @@ public class TodosAdapter extends ArrayAdapter<Todo> {
         }
 
         TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-
         tvName.setText(todo.getName());
 
-        Utilities.initializePriorityListeners(convertView, R.id.ivLowPriority, R.id.ivMediumPriority, R.id.ivHighPriority);
+        Utilities.updateDueDateUi((TextView) convertView.findViewById(R.id.tvDueDate), todo);
+
+        Utilities.initializeCheckboxListener(convertView, todo);
+        Utilities.initializePriorityListeners(convertView, todo, R.id.ivLowPriority, R.id
+                .ivMediumPriority, R.id.ivHighPriority);
 
         return convertView;
-    }
-
-    private void changePriority(ImageView ivOldPriority, ImageView ivNewPriority) {
-
-        ivOldPriority.setVisibility(View.GONE);
-        ivNewPriority.setVisibility(View.VISIBLE);
-    }
-
-    private void initializePriorityListeners(View convertView) {
-
-        final ImageView ivLowPriority = (ImageView) convertView.findViewById(R.id.ivLowPriority);
-        final ImageView ivMediumPriority = (ImageView) convertView.findViewById(R.id
-                .ivMediumPriority);
-        final ImageView ivHighPriority = (ImageView) convertView.findViewById(R.id.ivHighPriority);
-
-        ivLowPriority.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                changePriority(ivLowPriority, ivMediumPriority);
-            }
-        });
-
-        ivMediumPriority.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                changePriority(ivMediumPriority,ivHighPriority);
-            }
-        });
-
-        ivHighPriority.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                changePriority(ivHighPriority, ivLowPriority);
-            }
-        });
     }
 }

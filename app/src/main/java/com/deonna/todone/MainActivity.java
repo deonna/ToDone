@@ -65,9 +65,11 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
         Utilities.hideSoftKeyboard(view, this);
     }
 
-    private void showEditDialog(String name, int position) {
+    private void showEditDialog(Todo todo, int position) {
         FragmentManager fm = getSupportFragmentManager();
-        EditTodoDialogFragment editTodoDialogFragment = EditTodoDialogFragment.newInstance(name, position);
+        EditTodoDialogFragment editTodoDialogFragment = EditTodoDialogFragment.newInstance(todo,
+                position);
+
         editTodoDialogFragment.show(fm, "fragment_edit_todo");
     }
 
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                showEditDialog(todos.get(i).getName(), i);
+                showEditDialog(todos.get(i), i);
             }
         });
     }

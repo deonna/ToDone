@@ -10,11 +10,21 @@ import java.util.ArrayList;
 
 public class TodoDataSource {
 
+    private static TodoDataSource sInstance;
     private final TodoSQLiteHelper todoSQLiteHelper;
 
-    public TodoDataSource(Context context) {
+    private TodoDataSource(Context context) {
 
         todoSQLiteHelper = TodoSQLiteHelper.getInstance(context);
+    }
+
+    public static TodoDataSource getInstance(Context context) {
+
+        if(sInstance == null) {
+            sInstance = new TodoDataSource(context.getApplicationContext());
+        }
+
+        return sInstance;
     }
 
     private SQLiteDatabase open() {
@@ -74,10 +84,12 @@ public class TodoDataSource {
     }
 
     private Todo initializeTodoFromDb(Cursor cursor) {
+
         Todo todo = new Todo(getStringFromColumnName(cursor, TodoSQLiteHelper.COLUMN_NAME));
 
         todo.setId(getIntFromColumnName(cursor, BaseColumns._ID));
-        todo.setDueDateFromEpochDueDate(getIntFromColumnName(cursor, TodoSQLiteHelper.COLUMN_DUE_DATE));
+
+        todo.setDueDateText(getStringFromColumnName(cursor, TodoSQLiteHelper.COLUMN_DUE_DATE));
         todo.setIsCompleted(getIntFromColumnName(cursor, TodoSQLiteHelper.COLUMN_COMPLETED));
         todo.setPriorityFromInt(getIntFromColumnName(cursor, TodoSQLiteHelper.COLUMN_PRIORITY));
 
@@ -132,7 +144,7 @@ public class TodoDataSource {
         ContentValues todoValues = new ContentValues();
         todoValues.put(TodoSQLiteHelper.COLUMN_NAME, todo.getName());
         todoValues.put(TodoSQLiteHelper.COLUMN_COMPLETED, todo.getIsCompletedAsInt());
-        todoValues.put(TodoSQLiteHelper.COLUMN_DUE_DATE, todo.getEpochDueDate());
+        todoValues.put(TodoSQLiteHelper.COLUMN_DUE_DATE, todo.getDueDateText());
         todoValues.put(TodoSQLiteHelper.COLUMN_PRIORITY, todo.getPriority().getValue());
 
         return todoValues;
