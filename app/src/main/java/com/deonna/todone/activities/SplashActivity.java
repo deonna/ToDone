@@ -1,9 +1,11 @@
-package com.deonna.todone;
+package com.deonna.todone.activities;
 
 import android.content.Intent;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.deonna.todone.activities.MainActivity;
 
 import java.util.concurrent.TimeUnit;
 

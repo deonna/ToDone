@@ -1,4 +1,4 @@
-package com.deonna.todone;
+package com.deonna.todone.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.deonna.todone.R;
+import com.deonna.todone.models.Todo;
+import com.deonna.todone.utils.Utilities;
 
 import java.util.ArrayList;
 

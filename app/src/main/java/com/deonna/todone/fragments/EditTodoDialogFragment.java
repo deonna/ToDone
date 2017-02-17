@@ -1,4 +1,4 @@
-package com.deonna.todone;
+package com.deonna.todone.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +10,11 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.deonna.todone.constants.Constants;
+import com.deonna.todone.R;
+import com.deonna.todone.models.Todo;
+import com.deonna.todone.utils.Utilities;
 
 public class EditTodoDialogFragment extends DialogFragment implements DatePickerFragment.DatePickerFragmentListener {
 

@@ -1,6 +1,9 @@
-package com.deonna.todone;
+package com.deonna.todone.models;
 
 import android.util.Log;
+
+import com.deonna.todone.constants.Priority;
+import com.deonna.todone.database.TodoDataSource;
 
 import java.io.Serializable;
 import java.text.ParseException;

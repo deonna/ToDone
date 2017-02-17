@@ -1,10 +1,12 @@
-package com.deonna.todone;
+package com.deonna.todone.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
+
+import com.deonna.todone.models.Todo;
 
 import java.util.ArrayList;
 

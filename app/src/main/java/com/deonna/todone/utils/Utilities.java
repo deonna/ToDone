@@ -1,4 +1,4 @@
-package com.deonna.todone;
+package com.deonna.todone.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,7 +9,9 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
+import com.deonna.todone.constants.Priority;
+import com.deonna.todone.R;
+import com.deonna.todone.models.Todo;
 
 public class Utilities {
 

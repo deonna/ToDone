@@ -1,4 +1,4 @@
-package com.deonna.todone;
+package com.deonna.todone.constants;
 
 public class Constants {
 

@@ -1,19 +1,16 @@
-package com.deonna.todone;
+package com.deonna.todone.fragments;
 
 import android.app.Dialog;
-import android.content.ReceiverCallNotAllowedException;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.View;
 import android.widget.DatePicker;
-import android.widget.TextView;
+
+import com.deonna.todone.models.Todo;
+import com.deonna.todone.constants.Constants;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 

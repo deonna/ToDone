@@ -1,20 +1,23 @@
-package com.deonna.todone;
+package com.deonna.todone.activities;
 
-import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.deonna.todone.fragments.EditTodoDialogFragment;
+import com.deonna.todone.R;
+import com.deonna.todone.models.Todo;
+import com.deonna.todone.models.Todos;
+import com.deonna.todone.adapters.TodosAdapter;
+import com.deonna.todone.utils.Utilities;
 
 public class MainActivity extends AppCompatActivity implements EditTodoDialogFragment.EditTodoDialogListener {
 
