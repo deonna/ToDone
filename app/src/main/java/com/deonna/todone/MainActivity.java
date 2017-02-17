@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
         FragmentManager fm = getSupportFragmentManager();
         EditTodoDialogFragment editTodoDialogFragment = EditTodoDialogFragment.newInstance(todo,
                 position);
+
         editTodoDialogFragment.show(fm, "fragment_edit_todo");
     }
 

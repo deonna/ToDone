@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class EditTodoDialogFragment extends DialogFragment {
+public class EditTodoDialogFragment extends DialogFragment implements DatePickerFragment.DatePickerFragmentListener {
 
     public static final String TITLE = "Edit Todo";
 
@@ -19,10 +19,17 @@ public class EditTodoDialogFragment extends DialogFragment {
     private ImageView ivSave;
     private ImageView ivSetDueDate;
 
+    private TextView tvDueDateDialog;
+
     private Todo currentTodo;
     private int position;
 
     public EditTodoDialogFragment() {}
+
+    @Override
+    public void onFinishSettingDueDate(String newDate) {
+        tvDueDateDialog.setText(newDate);
+    }
 
     public interface EditTodoDialogListener {
         void onFinishEditDialog(String name, int position);
@@ -64,6 +71,8 @@ public class EditTodoDialogFragment extends DialogFragment {
 
         getDialog().setTitle(TITLE);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+        tvDueDateDialog = (TextView) view.findViewById(R.id.tvDueDateDialog);
 
         initializeEditField(view);
 

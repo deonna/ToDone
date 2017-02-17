@@ -135,7 +135,7 @@ public class Todo implements Serializable {
     }
 
     public void setDueDateText(String dueDateText) {
-        
+
         if (!dueDateText.isEmpty()) {
             this.dueDateText = dueDateText;
 
