@@ -82,6 +82,8 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
         initializeSaveButton(view);
         initializeSetDueDateButton(view);
+
+        setCancelable(false);
     }
 
     private void initializeEditField(View view) {

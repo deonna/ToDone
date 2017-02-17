@@ -10,6 +10,7 @@ import java.util.Date;
 public class Todo implements Serializable {
 
     private static final String TAG = Todo.class.getSimpleName() ;
+    private static final String FORMAT_PATTERN = "MMM d, yyyy";
 
     private long id;
     private String name;
@@ -127,11 +128,17 @@ public class Todo implements Serializable {
         if (dueDate == null) {
             return "";
         } else {
-            SimpleDateFormat formatter = new SimpleDateFormat("MMM d, yyyy");
-            dueDateText = formatter.format(dueDate);
-
+            dueDateText = getFormattedDate(dueDate);
             return dueDateText;
         }
+    }
+
+    private String getFormattedDate(Date date) {
+
+        SimpleDateFormat formatter = new SimpleDateFormat(FORMAT_PATTERN);
+        String formattedDate = formatter.format(date);
+
+        return formattedDate;
     }
 
     public void setDueDateText(String dueDateText) {
@@ -139,7 +146,7 @@ public class Todo implements Serializable {
         if (!dueDateText.isEmpty()) {
             this.dueDateText = dueDateText;
 
-            SimpleDateFormat formatter = new SimpleDateFormat("MMM d, yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat(FORMAT_PATTERN);
 
             try {
                 dueDate = formatter.parse(dueDateText);

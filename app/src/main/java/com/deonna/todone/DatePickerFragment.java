@@ -34,6 +34,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        setCancelable(false);
+
         return new DatePickerDialog(getActivity(), this, year, month, day);
     }
 
