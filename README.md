@@ -4,7 +4,7 @@
 
 Submitted by: **Deonna Hodges**
 
-Time spent: **5** hours spent in total
+Time spent: **21** hours spent in total
 
 ## User Stories
 
@@ -19,15 +19,23 @@ The following **optional** features are implemented:
 * [x] Persist the todo items [into SQLite](http://guides.codepath.com/android/Persisting-Data-to-the-Device#sqlite) instead of a text file
 * [x] Improve style of the todo items in the list [using a custom adapter](http://guides
 .codepath.com/android/Using-an-ArrayAdapter-with-ListView)
-* [ ] Add support for completion due dates for todo items (and display within listview item)
+* [x] Add support for completion due dates for todo items (and display within listview item)
 * [x] Use a [DialogFragment](http://guides.codepath.com/android/Using-DialogFragment) instead of new Activity for editing items
-* [ ] Add support for selecting the priority of each todo item (and display in listview item)
-* [ ] Tweak the style improving the UI / UX, play with colors, images or backgrounds
+* [x] Add support for selecting the priority of each todo item (and display in listview item)
+* [x] Tweak the style improving the UI / UX, play with colors, images or backgrounds
 
 The following **additional** features are implemented:
 
-* [ ] List anything else that you can get done to improve the app functionality!
+* [x] Added a splash page to the app
+* [x] Added dynamic UI updating upon selecting a due date
+* [x] Added dynamic UI updating upon selecting a priority
+* [x] Added a custom logo for app
+* [x] Added ability for user to mark items as 'complete' using a checkbox
+* [x] Added custom styles for checkbox, splash screen, ActionBar, Edit Dialog, etc.
+* [x] Added a DatePicker for selecting due dates
+* [x] Implemented modal dialogs for edit Dialog and due date selection dialog
 
+Handle Orientation Change, so that data is not lost.
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
@@ -38,7 +46,24 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Describe any challenges encountered while building the app:
+
+- The UI was a challenge for me. Even though I have little to no formal design training, I
+appreciate good design and tweaking the UI when something looks 'off' is a task I feel compelled
+to do. I spent a good amount of time creating a basic mockup and tweaking it so that everything
+was positioned well.
+
+- Communication between fragments was also a challenge. I felt I was doing this in somewhat of a
+hack-y way, because there seem to be many options (leveraging the FragmentManager's ability to
+get all fragments, using Bundle,
+using custom event listeners, using the backstack [which I didn't experiment with, but learned
+about after reading a few StackOverflow posts.
+
+- There were a couple of areas I thought would be challenging, but turned out not to be:
+
+- SQLite DB configruation and transactions were surprisingly simple, as well as creating a custom
+ArrayAdapter. The Android Activity lifecycle and figuring out which methods I needed to hook into
+ wasn't difficult to figure out, either.
 
 ## License
 
