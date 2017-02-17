@@ -48,7 +48,7 @@ public class TodoSQLiteHelper extends SQLiteOpenHelper {
 
         String CREATE_TODOS_TABLE = String.format(
                 "CREATE TABLE %s (%s INTEGER PRIMARY KEY " + "AUTOINCREMENT, " +
-                        "%s TEXT, %s INTEGER, %s INTEGER, %s INTEGER)",
+                        "%s TEXT, %s INTEGER, %s INTEGER, %s TEXT)",
                 TABLE_TODOS, BaseColumns._ID,
                 COLUMN_NAME, COLUMN_COMPLETED, COLUMN_PRIORITY, COLUMN_DUE_DATE);
 

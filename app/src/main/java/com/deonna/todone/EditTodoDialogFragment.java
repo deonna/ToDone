@@ -7,9 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class EditTodoDialogFragment extends DialogFragment {
 
@@ -67,6 +67,7 @@ public class EditTodoDialogFragment extends DialogFragment {
 
         initializeEditField(view);
 
+        Utilities.updateDueDateUi((TextView) view.findViewById(R.id.tvDueDateDialog), currentTodo);
         Utilities.initializePriorityListeners(view, currentTodo, R.id.ivLowPriorityDialog, R.id
                 .ivMediumPriorityDialog, R.id.ivHighPriorityDialog);
 
@@ -105,12 +106,18 @@ public class EditTodoDialogFragment extends DialogFragment {
     private void initializeSetDueDateButton(View view) {
         ivSetDueDate = (ImageView) view.findViewById(R.id.ivSetDueDate);
 
+        Bundle args = new Bundle();
+        args.putSerializable(Constants.CURRENT_TODO, currentTodo);
+
+        final DatePickerFragment fragment = new DatePickerFragment();
+        fragment.setArguments(args);
+
         ivSetDueDate.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
-                DatePickerFragment newFragment = new DatePickerFragment();
+                DatePickerFragment newFragment = fragment;
                 newFragment.show(getFragmentManager(), "datePicker");
             }
         });

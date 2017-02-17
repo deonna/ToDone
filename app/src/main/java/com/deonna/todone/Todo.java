@@ -1,15 +1,22 @@
 package com.deonna.todone;
 
+import android.util.Log;
+
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Todo implements Serializable {
+
+    private static final String TAG = Todo.class.getSimpleName() ;
 
     private long id;
     private String name;
     private Priority priority;
     private boolean isCompleted;
     private Date dueDate;
+    private String dueDateText;
 
     private static final long serialVersionUID = 1L;
 
@@ -21,6 +28,7 @@ public class Todo implements Serializable {
         priority = Priority.LOW;
         isCompleted = false;
         dueDate = null;
+        dueDateText = "";
 
         todosDataSource = Todos.getDataSource();
     }
@@ -96,22 +104,7 @@ public class Todo implements Serializable {
     public void setDueDate(Date dueDate) {
 
         this.dueDate = dueDate;
-    }
-
-    public Long getEpochDueDate() {
-
-        if (dueDate == null) {
-            return null;
-        } else {
-            return dueDate.getTime();
-        }
-    }
-
-    public void setDueDateFromEpochDueDate(long epochDueDate) {
-
-        if (epochDueDate != 0) {
-            this.dueDate = new Date(epochDueDate);
-        }
+        setDueDateText(getDueDateText());
     }
 
     public void addToDataSource() {
@@ -127,5 +120,32 @@ public class Todo implements Serializable {
     public void removeFromDataSource() {
 
         todosDataSource.delete(getId());
+    }
+
+    public String getDueDateText() {
+
+        if (dueDate == null) {
+            return "";
+        } else {
+            SimpleDateFormat formatter = new SimpleDateFormat("MMM d, yyyy");
+            dueDateText = formatter.format(dueDate);
+
+            return dueDateText;
+        }
+    }
+
+    public void setDueDateText(String dueDateText) {
+        
+        if (!dueDateText.isEmpty()) {
+            this.dueDateText = dueDateText;
+
+            SimpleDateFormat formatter = new SimpleDateFormat("MMM d, yyyy");
+
+            try {
+                dueDate = formatter.parse(dueDateText);
+            } catch (ParseException e) {
+                Log.e(TAG, "Error parsing due date: " + e);
+            }
+        }
     }
 }

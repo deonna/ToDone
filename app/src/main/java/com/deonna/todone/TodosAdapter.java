@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class TodosAdapter extends ArrayAdapter<Todo> {
 
@@ -31,23 +29,12 @@ public class TodosAdapter extends ArrayAdapter<Todo> {
         TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
         tvName.setText(todo.getName());
 
-        initializeDueDate(convertView, todo);
+        Utilities.updateDueDateUi((TextView) convertView.findViewById(R.id.tvDueDate), todo);
 
         Utilities.initializeCheckboxListener(convertView, todo);
         Utilities.initializePriorityListeners(convertView, todo, R.id.ivLowPriority, R.id
                 .ivMediumPriority, R.id.ivHighPriority);
 
         return convertView;
-    }
-
-    private void initializeDueDate(View view,  Todo todo) {
-        TextView tvDueDate = (TextView) view.findViewById(R.id.tvDueDate);
-
-        if (todo.getDueDate() == null) {
-            tvDueDate.setVisibility(View.GONE);
-        } else {
-            SimpleDateFormat formatter = new SimpleDateFormat("MMM d, yyyy");
-            tvDueDate.setText(formatter.format(todo.getDueDate()));
-        }
     }
 }

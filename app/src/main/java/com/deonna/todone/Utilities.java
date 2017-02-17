@@ -7,6 +7,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
 
 public class Utilities {
 
@@ -31,6 +34,16 @@ public class Utilities {
                 currentTodo.updateInDataSource();
             }
         });
+    }
+
+
+    public static void updateDueDateUi(TextView tvDueDate, Todo todo) {
+
+        if (todo.getDueDate() == null) {
+            tvDueDate.setText("");
+        } else {
+            tvDueDate.setText(todo.getDueDateText());
+        }
     }
 
     public static void initializePriorityListeners(View convertView, Todo todo, int lowPriorityId,
@@ -78,7 +91,7 @@ public class Utilities {
         });
     }
 
-    private static void updatePriorityUi(ImageView ivLowPriority, ImageView ivMediumPriority,
+    public static void updatePriorityUi(ImageView ivLowPriority, ImageView ivMediumPriority,
                                          ImageView ivHighPriority, Todo todo) {
 
         switch (todo.getPriority()) {
