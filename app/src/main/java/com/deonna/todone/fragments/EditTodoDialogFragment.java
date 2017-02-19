@@ -145,7 +145,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     }
 
     @OnClick(R.id.ivSetDueDate)
-    public void openDatePicker(View view) {
+    public void openDatePicker() {
 
         Bundle args = new Bundle();
         args.putSerializable(Constants.CURRENT_TODO, currentTodo);
@@ -153,9 +153,9 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         final DatePickerFragment fragment = new DatePickerFragment();
         fragment.setArguments(args);
 
-        DatePickerFragment newFragment = fragment;
-        newFragment.show(getFragmentManager(), "datePicker");
+        fragment.show(getFragmentManager(), DatePickerFragment.TAG_DATE_PICKER);
     }
+
 
     @OnClick(R.id.ivLowPriorityDialog)
     public void changeUiToMediumPriority() {

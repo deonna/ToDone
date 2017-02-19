@@ -1,50 +1,54 @@
 package com.deonna.todone.fragments;
 
-import android.app.Dialog;
-import android.support.v4.app.DialogFragment;
-import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.widget.DatePicker;
+import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 
+import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
+import com.deonna.todone.constants.Constants;
 import com.deonna.todone.interfaces.DatePickerFragmentListener;
 import com.deonna.todone.models.Todo;
-import com.deonna.todone.constants.Constants;
 
 import java.util.Calendar;
 import java.util.Date;
 
-public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+public class DatePickerFragment extends DialogFragment {
+
+    public static final String TAG_DATE_PICKER = "fragment_date_picker";
+
+    private CalendarDatePickerDialogFragment datePickerDialog;
 
     private Todo currentTodo;
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
         currentTodo = (Todo) args.getSerializable(Constants.CURRENT_TODO);
 
-        final Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
         setCancelable(false);
 
-        return new DatePickerDialog(getActivity(), this, year, month, day);
-    }
+        datePickerDialog = new CalendarDatePickerDialogFragment();
 
-    @Override
-    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        datePickerDialog.setOnDateSetListener(new CalendarDatePickerDialogFragment.OnDateSetListener() {
+            @Override
+            public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year, monthOfYear, dayOfMonth);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
+                currentTodo.setDueDate(new Date(calendar.getTimeInMillis()));
+                Todo.updateInDataSource(currentTodo);
 
-        currentTodo.setDueDate(new Date(calendar.getTimeInMillis()));
-        Todo.updateInDataSource(currentTodo);
+                DatePickerFragmentListener listener = (DatePickerFragmentListener) getFragmentManager()
+                        .getFragments().get(0);
 
-        DatePickerFragmentListener listener = (DatePickerFragmentListener) getFragmentManager()
-                .getFragments().get(0);
+                listener.onFinishSettingDueDate(currentTodo.getDueDateText());
 
-        listener.onFinishSettingDueDate(currentTodo.getDueDateText());
+                dismiss();
+            }
+        });
+
+        datePickerDialog.show(getFragmentManager(), TAG_DATE_PICKER);
     }
 }
