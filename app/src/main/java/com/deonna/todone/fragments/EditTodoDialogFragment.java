@@ -129,7 +129,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     }
 
     @OnClick(R.id.ivSave)
-    public void saveItem() {
+    public void saveItem(View view) {
 
         String newName = etEditedItem.getText().toString().trim();
 
@@ -140,6 +140,8 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
         EditTodoDialogListener listener = (EditTodoDialogListener) getActivity();
         listener.onFinishEditDialog();
+
+        Utilities.hideSoftKeyboard(view, getActivity());
 
         dismiss();
     }
