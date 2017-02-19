@@ -4,7 +4,7 @@
 
 Submitted by: **Deonna Hodges**
 
-Time spent: **21** hours spent in total
+Time spent: **22** hours spent in total
 
 ## User Stories
 
@@ -26,6 +26,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
+* [x] Added ButterKnife library to reduce boilerplate code
 * [x] Added a splash page to the app
 * [x] Added dynamic UI updating upon selecting a due date when edit dialog is closed
 * [x] Added dynamic UI updating upon selecting a priority (by clicking on stars) when edit dialog is opened
@@ -68,6 +69,11 @@ There were a couple of areas I thought would be challenging, but turned out not 
 - SQLite DB configuration and transactions were surprisingly simple, as well as creating a custom
 ArrayAdapter. The Android Activity lifecycle and figuring out which methods I needed to hook into
  wasn't difficult to figure out, either.
+
+Things I loved:
+
+- Wow. ButterKnife tremendously reduced the amount of boilerplate code I wrote and including it
+strengthened the overall architecture of the application to be better encapsulated.
 
 ## License
 
