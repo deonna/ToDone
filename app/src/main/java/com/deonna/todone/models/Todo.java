@@ -24,7 +24,7 @@ public class Todo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final TodoDataSource todosDataSource;
+    private static TodoDataSource todosDataSource;
 
     public Todo(String name) {
 
@@ -111,19 +111,19 @@ public class Todo implements Serializable {
         setDueDateText(getDueDateText());
     }
 
-    public void addToDataSource() {
+    public static void addToDataSource(Todo todo) {
 
-        todosDataSource.create(this);
+        todosDataSource.create(todo);
     }
 
-    public void updateInDataSource() {
+    public static void updateInDataSource(Todo todo) {
 
-        todosDataSource.update(this);
+        todosDataSource.update(todo);
     }
 
-    public void removeFromDataSource() {
+    public static void removeFromDataSource(long id) {
 
-        todosDataSource.delete(getId());
+        todosDataSource.delete(id);
     }
 
     public String getDueDateText() {
