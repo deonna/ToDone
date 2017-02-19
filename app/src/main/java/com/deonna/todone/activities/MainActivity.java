@@ -19,13 +19,17 @@ import com.deonna.todone.models.Todos;
 import com.deonna.todone.adapters.TodosAdapter;
 import com.deonna.todone.utils.Utilities;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements EditTodoDialogFragment.EditTodoDialogListener {
 
     public static final int SIDEBAR_WIDTH = 70;
 
     private TodosAdapter todoAdapter;
-    private ListView lvItems;
-    private EditText etNewItem;
+
+    @BindView(R.id.lvItems) ListView lvItems;
+    @BindView(R.id.etNewItem) EditText etNewItem;
 
     private Todos todos;
 
@@ -35,9 +39,9 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        populateTodoItems();
+        ButterKnife.bind(this);
 
-        etNewItem = (EditText) findViewById(R.id.etNewItem);
+        populateTodoItems();
 
         initializeListView();
 
@@ -78,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
 
     private void initializeListView() {
 
-        lvItems = (ListView) findViewById(R.id.lvItems);
         lvItems.setAdapter(todoAdapter);
 
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -109,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogFra
 
     private void centerActionBarTitle() {
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.action_bar);
+        Toolbar toolbar = ButterKnife.findById(this, R.id.action_bar);
         TextView tvTitle = (TextView) toolbar.getChildAt(0);
         DisplayMetrics metrics = getResources().getDisplayMetrics();
 
