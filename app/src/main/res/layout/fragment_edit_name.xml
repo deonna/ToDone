@@ -15,7 +15,7 @@
             android:paddingTop="6dp"
             android:src="@mipmap/ic_set_due_date"
             android:alpha=".75"
-            android:onClick="showDatePickerDialog"/>
+            android:onClick="openDatePicker"/>
 
         <ImageView
             android:id="@+id/ivSave"
@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             android:paddingTop="6dp"
             android:src="@mipmap/ic_save"
-            android:alpha=".75"/>
+            android:alpha=".75"
+            android:onClick="saveItem()"/>
 
     </LinearLayout>
 
@@ -68,7 +69,8 @@
             android:layout_weight="0.1"
             android:visibility="visible"
             android:layout_marginTop="12dp"
-            android:layout_marginLeft="24dp"/>
+            android:layout_marginLeft="24dp"
+            android:onClick="changeToMediumPriority"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -79,7 +81,8 @@
             android:layout_weight="0.1"
             android:visibility="gone"
             android:layout_marginTop="12dp"
-            android:layout_marginLeft="24dp"/>
+            android:layout_marginLeft="24dp"
+            android:onClick="changeToHighPriority"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -90,7 +93,8 @@
             android:layout_weight="0.1"
             android:visibility="gone"
             android:layout_marginTop="12dp"
-            android:layout_marginLeft="24dp"/>
+            android:layout_marginLeft="24dp"
+            android:onClick="changeToLowPriority"/>
 
     </LinearLayout>
 

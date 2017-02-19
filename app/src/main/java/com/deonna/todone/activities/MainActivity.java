@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.deonna.todone.fragments.EditTodoDialogFragment;
 import com.deonna.todone.R;
+import com.deonna.todone.interfaces.EditTodoDialogListener;
 import com.deonna.todone.models.Todo;
 import com.deonna.todone.models.Todos;
 import com.deonna.todone.adapters.TodosAdapter;
@@ -22,7 +23,7 @@ import com.deonna.todone.utils.Utilities;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements EditTodoDialogFragment.EditTodoDialogListener {
+public class MainActivity extends AppCompatActivity implements EditTodoDialogListener {
 
     public static final int SIDEBAR_WIDTH = 70;
 

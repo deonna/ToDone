@@ -109,45 +109,5 @@ public class TodosAdapter extends BaseAdapter {
             currentTodo.setIsCompleted(cbIsCompleted.isChecked());
             currentTodo.updateInDataSource();
         }
-
-        @OnClick(R.id.ivLowPriority)
-        public void changeToMediumPriority() {
-
-
-            ImageView ivLowPriority = ButterKnife.findById(view, R.id.ivLowPriority);
-            ImageView ivMediumPriority = ButterKnife.findById(view, R.id.ivMediumPriority);
-
-            changePriority(ivLowPriority, ivMediumPriority);
-            currentTodo.setPriority(Priority.MEDIUM);
-            currentTodo.updateInDataSource();
-        }
-
-        @OnClick(R.id.ivMediumPriority)
-        public void changeToHighPriority() {
-
-            ImageView ivMediumPriority = ButterKnife.findById(view, R.id.ivMediumPriority);
-            ImageView ivHighPriority = ButterKnife.findById(view, R.id.ivHighPriority);
-
-            changePriority(ivMediumPriority,ivHighPriority);
-            currentTodo.setPriority(Priority.HIGH);
-            currentTodo.updateInDataSource();
-        }
-
-        @OnClick(R.id.ivHighPriority)
-        public void changeToLowPriority() {
-
-            ImageView ivLowPriority = ButterKnife.findById(view, R.id.ivLowPriority);
-            ImageView ivHighPriority = ButterKnife.findById(view, R.id.ivHighPriority);
-
-            changePriority(ivHighPriority, ivLowPriority);
-            currentTodo.setPriority(Priority.LOW);
-            currentTodo.updateInDataSource();
-        }
-
-        private void changePriority(ImageView ivOldPriority, ImageView ivNewPriority) {
-
-            ivOldPriority.setVisibility(View.GONE);
-            ivNewPriority.setVisibility(View.VISIBLE);
-        }
     }
 }

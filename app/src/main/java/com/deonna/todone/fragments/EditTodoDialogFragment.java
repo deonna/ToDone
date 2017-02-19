@@ -13,34 +13,48 @@ import android.widget.TextView;
 
 import com.deonna.todone.constants.Constants;
 import com.deonna.todone.R;
+import com.deonna.todone.constants.Priority;
+import com.deonna.todone.interfaces.EditTodoDialogListener;
 import com.deonna.todone.models.Todo;
 import com.deonna.todone.utils.Utilities;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 public class EditTodoDialogFragment extends DialogFragment implements DatePickerFragment.DatePickerFragmentListener {
 
     public static final String TITLE = "Edit Todo";
 
-    private EditText etEditedItem;
-    private ImageView ivSave;
-    private ImageView ivSetDueDate;
+    @BindView(R.id.etEditedItem) EditText etEditedItem;
+    @BindView(R.id.ivSave) ImageView ivSave;
+    @BindView(R.id.ivSetDueDate) ImageView ivSetDueDate;
 
-    private TextView tvDueDateDialog;
+    @BindView(R.id.ivLowPriorityDialog) ImageView ivLowPriorityDialog;
+    @BindView(R.id.ivMediumPriorityDialog) ImageView ivMediumPriorityDialog;
+    @BindView(R.id.ivHighPriorityDialog) ImageView ivHighPriorityDialog;
+
+    @BindView(R.id.tvDueDateDialog) TextView tvDueDateDialog;
 
     private Todo currentTodo;
     private int position;
 
-    public EditTodoDialogFragment() {}
+    private View view;
+    private Unbinder unbinder;
+
+    public EditTodoDialogFragment() {
+    }
 
     @Override
     public void onFinishSettingDueDate(String newDate) {
         tvDueDateDialog.setText(newDate);
     }
 
-    public interface EditTodoDialogListener {
-        void onFinishEditDialog(String name, int position);
-    }
+
 
     public static EditTodoDialogFragment newInstance(Todo todo, int position) {
+
         EditTodoDialogFragment fragment = new EditTodoDialogFragment();
 
         Bundle args = new Bundle();
@@ -54,20 +68,36 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogTheme);
+
+        ButterKnife.bind(getActivity());
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_edit_name, container);
+
+        View view = inflater.inflate(R.layout.fragment_edit_name, container);
+        unbinder = ButterKnife.bind(this, view);
+
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
+        this.view = view;
 
         Bundle args = getArguments();
 
@@ -77,53 +107,40 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         getDialog().setTitle(TITLE);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-        tvDueDateDialog = (TextView) view.findViewById(R.id.tvDueDateDialog);
+        initializeEditField();
 
-        initializeEditField(view);
-
-        //Utilities.updateDueDateUi((TextView) view.findViewById(R.id.tvDueDateDialog), currentTodo);
-        TextView tvDueDateDialog = (TextView) view.findViewById(R.id.tvDueDateDialog);
         tvDueDateDialog.setText(currentTodo.getDueDateText());
 
-        Utilities.initializePriorityListeners(view, currentTodo, R.id.ivLowPriorityDialog, R.id
-                .ivMediumPriorityDialog, R.id.ivHighPriorityDialog);
-
-        initializeSaveButton(view);
-        initializeSetDueDateButton(view);
+        Utilities.updatePriorityUi(
+                ivLowPriorityDialog,
+                ivMediumPriorityDialog,
+                ivHighPriorityDialog,
+                currentTodo
+        );
 
         setCancelable(false);
     }
 
-    private void initializeEditField(View view) {
-        etEditedItem = (EditText) view.findViewById(R.id.etEditedItem);
+    private void initializeEditField() {
         etEditedItem.setText(currentTodo.getName());
         etEditedItem.setSelection(etEditedItem.getText().length());
 
         etEditedItem.requestFocus();
     }
 
-    private void initializeSaveButton(View view) {
-        ivSave = (ImageView) view.findViewById(R.id.ivSave);
+    @OnClick(R.id.ivSave)
+    public void saveItem() {
 
-        ivSave.setOnClickListener(new View.OnClickListener() {
+        EditTodoDialogListener listener = (EditTodoDialogListener) getActivity();
+        String newName = etEditedItem.getText().toString().trim();
 
-            @Override
-            public void onClick(View view) {
+        listener.onFinishEditDialog(newName, position);
 
-                EditTodoDialogListener listener = (EditTodoDialogListener) getActivity();
-                String newName = etEditedItem.getText().toString().trim();
-
-                listener.onFinishEditDialog(newName, position);
-
-                Utilities.hideSoftKeyboard(view, getActivity());
-
-                dismiss();
-            }
-        });
+        dismiss();
     }
 
-    private void initializeSetDueDateButton(View view) {
-        ivSetDueDate = (ImageView) view.findViewById(R.id.ivSetDueDate);
+    @OnClick(R.id.ivSetDueDate)
+    public void openDatePicker(View view) {
 
         Bundle args = new Bundle();
         args.putSerializable(Constants.CURRENT_TODO, currentTodo);
@@ -131,14 +148,37 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         final DatePickerFragment fragment = new DatePickerFragment();
         fragment.setArguments(args);
 
-        ivSetDueDate.setOnClickListener(new View.OnClickListener() {
+        DatePickerFragment newFragment = fragment;
+        newFragment.show(getFragmentManager(), "datePicker");
+    }
 
-            @Override
-            public void onClick(View view) {
+    @OnClick(R.id.ivLowPriorityDialog)
+    public void changeToMediumPriority() {
 
-                DatePickerFragment newFragment = fragment;
-                newFragment.show(getFragmentManager(), "datePicker");
-            }
-        });
+        changePriority(R.id.ivLowPriorityDialog, R.id.ivMediumPriorityDialog, Priority.MEDIUM);
+    }
+
+    @OnClick(R.id.ivMediumPriorityDialog)
+    public void changeToHighPriority() {
+
+        changePriority(R.id.ivMediumPriorityDialog, R.id.ivHighPriorityDialog, Priority.HIGH);
+    }
+
+    @OnClick(R.id.ivHighPriorityDialog)
+    public void changeToLowPriority() {
+
+        changePriority(R.id.ivHighPriorityDialog,  R.id.ivLowPriorityDialog, Priority.LOW);
+    }
+
+    private void changePriority(int oldPriority, int newPriority, Priority currentPriority) {
+
+        ImageView ivOldPriority = ButterKnife.findById(view, oldPriority);
+        ImageView ivNewPriority = ButterKnife.findById(view, newPriority);
+
+        ivOldPriority.setVisibility(View.GONE);
+        ivNewPriority.setVisibility(View.VISIBLE);
+
+        currentTodo.setPriority(currentPriority);
+        currentTodo.updateInDataSource();
     }
 }

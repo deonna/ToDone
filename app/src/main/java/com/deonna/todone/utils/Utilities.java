@@ -21,77 +21,50 @@ public class Utilities {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-//    public static void initializeCheckboxListener(View view, Todo todo) {
+//    public static void initializePriorityListeners(View convertView, Todo todo, int lowPriorityId,
+//                                                   int mediumPriority, int highPriority) {
 //
-//        final CheckBox cbIsCompleted = (CheckBox) view.findViewById(R.id.cbIsCompleted);
+//        final ImageView ivLowPriority = (ImageView) convertView.findViewById(lowPriorityId);
+//        final ImageView ivMediumPriority = (ImageView) convertView.findViewById(mediumPriority);
+//        final ImageView ivHighPriority = (ImageView) convertView.findViewById(highPriority);
+//
 //        final Todo currentTodo = todo;
 //
-//        cbIsCompleted.setChecked(currentTodo.getIsCompleted());
+//        updatePriorityUi(ivLowPriority, ivMediumPriority, ivHighPriority, todo);
 //
-//        cbIsCompleted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//        ivLowPriority.setOnClickListener(new View.OnClickListener() {
+//
 //            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//            public void onClick(View v) {
 //
-//                currentTodo.setIsCompleted(isChecked);
+//                changePriority(ivLowPriority, ivMediumPriority);
+//                currentTodo.setPriority(Priority.MEDIUM);
+//                currentTodo.updateInDataSource();
+//            }
+//        });
+//
+//        ivMediumPriority.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//
+//                changePriority(ivMediumPriority,ivHighPriority);
+//                currentTodo.setPriority(Priority.HIGH);
+//                currentTodo.updateInDataSource();
+//            }
+//        });
+//
+//        ivHighPriority.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//
+//                changePriority(ivHighPriority, ivLowPriority);
+//                currentTodo.setPriority(Priority.LOW);
 //                currentTodo.updateInDataSource();
 //            }
 //        });
 //    }
-
-
-//    public static void updateDueDateUi(TextView tvDueDate, Todo todo) {
-//
-//        if (todo.getDueDate() == null) {
-//            tvDueDate.setText("");
-//        } else {
-//            tvDueDate.setText(todo.getDueDateText());
-//        }
-//    }
-
-    public static void initializePriorityListeners(View convertView, Todo todo, int lowPriorityId,
-                                                   int mediumPriority, int highPriority) {
-
-        final ImageView ivLowPriority = (ImageView) convertView.findViewById(lowPriorityId);
-        final ImageView ivMediumPriority = (ImageView) convertView.findViewById(mediumPriority);
-        final ImageView ivHighPriority = (ImageView) convertView.findViewById(highPriority);
-
-        final Todo currentTodo = todo;
-
-        updatePriorityUi(ivLowPriority, ivMediumPriority, ivHighPriority, todo);
-
-        ivLowPriority.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                changePriority(ivLowPriority, ivMediumPriority);
-                currentTodo.setPriority(Priority.MEDIUM);
-                currentTodo.updateInDataSource();
-            }
-        });
-
-        ivMediumPriority.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                changePriority(ivMediumPriority,ivHighPriority);
-                currentTodo.setPriority(Priority.HIGH);
-                currentTodo.updateInDataSource();
-            }
-        });
-
-        ivHighPriority.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                changePriority(ivHighPriority, ivLowPriority);
-                currentTodo.setPriority(Priority.LOW);
-                currentTodo.updateInDataSource();
-            }
-        });
-    }
 
     public static void updatePriorityUi(ImageView ivLowPriority, ImageView ivMediumPriority,
                                          ImageView ivHighPriority, Todo todo) {
@@ -119,9 +92,9 @@ public class Utilities {
         }
     }
     
-    private static void changePriority(ImageView ivOldPriority, ImageView ivNewPriority) {
-
-        ivOldPriority.setVisibility(View.GONE);
-        ivNewPriority.setVisibility(View.VISIBLE);
-    }
+//    private static void changePriority(ImageView ivOldPriority, ImageView ivNewPriority) {
+//
+//        ivOldPriority.setVisibility(View.GONE);
+//        ivNewPriority.setVisibility(View.VISIBLE);
+//    }
 }
