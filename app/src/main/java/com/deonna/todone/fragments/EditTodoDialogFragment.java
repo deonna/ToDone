@@ -81,7 +81,10 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
         initializeEditField(view);
 
-        Utilities.updateDueDateUi((TextView) view.findViewById(R.id.tvDueDateDialog), currentTodo);
+        //Utilities.updateDueDateUi((TextView) view.findViewById(R.id.tvDueDateDialog), currentTodo);
+        TextView tvDueDateDialog = (TextView) view.findViewById(R.id.tvDueDateDialog);
+        tvDueDateDialog.setText(currentTodo.getDueDateText());
+
         Utilities.initializePriorityListeners(view, currentTodo, R.id.ivLowPriorityDialog, R.id
                 .ivMediumPriorityDialog, R.id.ivHighPriorityDialog);
 

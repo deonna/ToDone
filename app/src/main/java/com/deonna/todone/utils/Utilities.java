@@ -21,32 +21,32 @@ public class Utilities {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    public static void initializeCheckboxListener(View view, Todo todo) {
+//    public static void initializeCheckboxListener(View view, Todo todo) {
+//
+//        final CheckBox cbIsCompleted = (CheckBox) view.findViewById(R.id.cbIsCompleted);
+//        final Todo currentTodo = todo;
+//
+//        cbIsCompleted.setChecked(currentTodo.getIsCompleted());
+//
+//        cbIsCompleted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//
+//                currentTodo.setIsCompleted(isChecked);
+//                currentTodo.updateInDataSource();
+//            }
+//        });
+//    }
 
-        final CheckBox cbIsCompleted = (CheckBox) view.findViewById(R.id.cbIsCompleted);
-        final Todo currentTodo = todo;
 
-        cbIsCompleted.setChecked(currentTodo.getIsCompleted());
-
-        cbIsCompleted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                currentTodo.setIsCompleted(isChecked);
-                currentTodo.updateInDataSource();
-            }
-        });
-    }
-
-
-    public static void updateDueDateUi(TextView tvDueDate, Todo todo) {
-
-        if (todo.getDueDate() == null) {
-            tvDueDate.setText("");
-        } else {
-            tvDueDate.setText(todo.getDueDateText());
-        }
-    }
+//    public static void updateDueDateUi(TextView tvDueDate, Todo todo) {
+//
+//        if (todo.getDueDate() == null) {
+//            tvDueDate.setText("");
+//        } else {
+//            tvDueDate.setText(todo.getDueDateText());
+//        }
+//    }
 
     public static void initializePriorityListeners(View convertView, Todo todo, int lowPriorityId,
                                                    int mediumPriority, int highPriority) {
