@@ -78,7 +78,7 @@ public class TodosAdapter extends BaseAdapter {
                 holder.ivLowPriority,
                 holder.ivMediumPriority,
                 holder.ivHighPriority,
-                currentTodo
+                currentTodo.getPriority()
         );
 
         return convertView;
@@ -108,7 +108,7 @@ public class TodosAdapter extends BaseAdapter {
         public void completeTodo(View view) {
 
             currentTodo.setIsCompleted(cbIsCompleted.isChecked());
-            currentTodo.updateInDataSource();
+            Todo.updateInDataSource(currentTodo);
         }
     }
 }

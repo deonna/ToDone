@@ -38,30 +38,17 @@ public class Todos {
             Todo todo = new Todo(text);
 
             items.add(todo);
-            todo.addToDataSource();
+            Todo.addToDataSource(todo);
             return true;
         }
 
         return false;
     }
 
-    public void edit(int position, String text) {
-
-        if(!text.isEmpty()) {
-            Todo todo = items.get(position);
-            todo.setName(text);
-
-            items.set(position, todo);
-            todo.updateInDataSource();
-        } else {
-            remove(position);
-        }
-    }
-
     public void remove(int position) {
 
         Todo todo = items.get(position);
-        todo.removeFromDataSource();
+        Todo.removeFromDataSource(todo.getId());
         items.remove(position);
     }
 

@@ -39,7 +39,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     @BindView(R.id.tvDueDateDialog) TextView tvDueDateDialog;
 
     private Todo currentTodo;
-    private int position;
+    private Priority currentPriority;
 
     private View view;
     private Unbinder unbinder;
@@ -53,14 +53,12 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     }
 
 
-
-    public static EditTodoDialogFragment newInstance(Todo todo, int position) {
+    public static EditTodoDialogFragment newInstance(Todo todo) {
 
         EditTodoDialogFragment fragment = new EditTodoDialogFragment();
 
         Bundle args = new Bundle();
         args.putSerializable(Constants.CURRENT_TODO, todo);
-        args.putInt(Constants.POSITION, position);
 
         fragment.setArguments(args);
 
@@ -103,7 +101,6 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         Bundle args = getArguments();
 
         currentTodo = (Todo) args.getSerializable(Constants.CURRENT_TODO);
-        position = args.getInt(Constants.POSITION, 0);
 
         getDialog().setTitle(TITLE);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -112,11 +109,13 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
         tvDueDateDialog.setText(currentTodo.getDueDateText());
 
+        currentPriority = currentTodo.getPriority();
+
         Utilities.updatePriorityUi(
                 ivLowPriorityDialog,
                 ivMediumPriorityDialog,
                 ivHighPriorityDialog,
-                currentTodo
+                currentPriority
         );
 
         setCancelable(false);
@@ -132,10 +131,15 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     @OnClick(R.id.ivSave)
     public void saveItem() {
 
-        EditTodoDialogListener listener = (EditTodoDialogListener) getActivity();
         String newName = etEditedItem.getText().toString().trim();
 
-        listener.onFinishEditDialog(newName, position);
+        currentTodo.setName(newName);
+        currentTodo.setPriority(currentPriority);
+
+        Todo.updateInDataSource(currentTodo);
+
+        EditTodoDialogListener listener = (EditTodoDialogListener) getActivity();
+        listener.onFinishEditDialog();
 
         dismiss();
     }
@@ -154,32 +158,32 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     }
 
     @OnClick(R.id.ivLowPriorityDialog)
-    public void changeToMediumPriority() {
+    public void changeUiToMediumPriority() {
 
-        changePriority(R.id.ivLowPriorityDialog, R.id.ivMediumPriorityDialog, Priority.MEDIUM);
+        currentPriority = Priority.MEDIUM;
+        changeUiPriority(R.id.ivLowPriorityDialog, R.id.ivMediumPriorityDialog);
     }
 
     @OnClick(R.id.ivMediumPriorityDialog)
-    public void changeToHighPriority() {
+    public void changeUiToHighPriority() {
 
-        changePriority(R.id.ivMediumPriorityDialog, R.id.ivHighPriorityDialog, Priority.HIGH);
+        currentPriority = Priority.HIGH;
+        changeUiPriority(R.id.ivMediumPriorityDialog, R.id.ivHighPriorityDialog);
     }
 
     @OnClick(R.id.ivHighPriorityDialog)
-    public void changeToLowPriority() {
+    public void changeUiToLowPriority() {
 
-        changePriority(R.id.ivHighPriorityDialog,  R.id.ivLowPriorityDialog, Priority.LOW);
+        currentPriority = Priority.LOW;
+        changeUiPriority(R.id.ivHighPriorityDialog,  R.id.ivLowPriorityDialog);
     }
 
-    private void changePriority(int oldPriority, int newPriority, Priority currentPriority) {
+    private void changeUiPriority(int oldPriority, int newPriority) {
 
         ImageView ivOldPriority = ButterKnife.findById(view, oldPriority);
         ImageView ivNewPriority = ButterKnife.findById(view, newPriority);
 
         ivOldPriority.setVisibility(View.GONE);
         ivNewPriority.setVisibility(View.VISIBLE);
-
-        currentTodo.setPriority(currentPriority);
-        currentTodo.updateInDataSource();
     }
 }

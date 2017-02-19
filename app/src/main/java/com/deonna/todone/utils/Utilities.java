@@ -22,9 +22,9 @@ public class Utilities {
     }
 
     public static void updatePriorityUi(ImageView ivLowPriority, ImageView ivMediumPriority,
-                                         ImageView ivHighPriority, Todo todo) {
+                                         ImageView ivHighPriority, Priority priority) {
 
-        switch (todo.getPriority()) {
+        switch (priority) {
             case LOW:
                 ivLowPriority.setVisibility(View.VISIBLE);
                 ivMediumPriority.setVisibility(View.GONE);

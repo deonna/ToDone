@@ -13,31 +13,31 @@
     tools:context="com.deonna.todone.activities.MainActivity">
 
     <ListView
+        android:id="@+id/lvItems"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/lvItems"
         android:layout_below="@+id/llAddItem"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:paddingTop="12dp"/>
 
     <LinearLayout
+        android:id="@+id/llAddItem"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryTransparent"
         android:paddingTop="12dp"
-        android:id="@+id/llAddItem"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:paddingBottom="12dp">
 
         <ImageView
+            android:id="@+id/ivAddItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/ic_add"
-            android:id="@+id/ivAddItem"
             android:onClick="onAddItem"
             android:alpha=".75"
             android:layout_gravity="right"
@@ -45,11 +45,11 @@
             android:layout_marginLeft="8dp"/>
 
         <EditText
+            android:id="@+id/etNewItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/etNewItem"
             android:hint="@string/add_item"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"

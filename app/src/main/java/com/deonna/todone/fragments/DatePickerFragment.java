@@ -40,7 +40,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         calendar.set(year, month, day);
 
         currentTodo.setDueDate(new Date(calendar.getTimeInMillis()));
-        currentTodo.updateInDataSource();
+        Todo.updateInDataSource(currentTodo);
 
         DatePickerFragmentListener listener = (DatePickerFragmentListener) getFragmentManager()
                 .getFragments().get(0);

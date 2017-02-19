@@ -22,6 +22,9 @@ import com.deonna.todone.utils.Utilities;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
+import butterknife.OnItemLongClick;
 
 public class MainActivity extends AppCompatActivity implements EditTodoDialogListener {
 
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
 
         populateTodoItems();
 
-        initializeListView();
+        lvItems.setAdapter(todoAdapter);
 
         centerActionBarTitle();
     }
@@ -73,42 +76,27 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
         Utilities.hideSoftKeyboard(view, this);
     }
 
-    private void showEditDialog(Todo todo, int position) {
+    @OnItemClick(R.id.lvItems)
+    public void showEditDialog(int position) {
+
+        Todo todo = todos.get(position);
 
         FragmentManager fm = getSupportFragmentManager();
-        EditTodoDialogFragment editTodoDialogFragment = EditTodoDialogFragment.newInstance(todo,
-                position);
+        EditTodoDialogFragment editTodoDialogFragment = EditTodoDialogFragment.newInstance(todo);
 
         editTodoDialogFragment.show(fm, "fragment_edit_todo");
     }
 
-    private void initializeListView() {
+    @OnItemLongClick(R.id.lvItems)
+    public boolean removeTodoFromList(int position) {
 
-        lvItems.setAdapter(todoAdapter);
-
-        lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                removeTodo(position);
-                return true;
-            }
-        });
-
-        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                showEditDialog(todos.get(i), i);
-            }
-        });
+        removeTodo(position);
+        return true;
     }
 
     @Override
-    public void onFinishEditDialog(String name, int position) {
-        todos.edit(position, name);
+    public void onFinishEditDialog() {
+
         todoAdapter.notifyDataSetChanged();
     }
 
