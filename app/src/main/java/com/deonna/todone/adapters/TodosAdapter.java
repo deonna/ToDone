@@ -1,6 +1,7 @@
 package com.deonna.todone.adapters;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -107,8 +108,16 @@ public class TodosAdapter extends BaseAdapter {
         @OnClick(R.id.cbIsCompleted)
         public void completeTodo(View view) {
 
-            currentTodo.setIsCompleted(cbIsCompleted.isChecked());
+            boolean isChecked = cbIsCompleted.isChecked();
+
+            currentTodo.setIsCompleted(isChecked);
             Todo.updateInDataSource(currentTodo);
+
+            if (isChecked) {
+                tvName.setPaintFlags(tvName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            } else {
+                tvName.setPaintFlags(tvName.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+            }
         }
     }
 }
