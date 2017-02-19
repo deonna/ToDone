@@ -28,6 +28,7 @@ The following **additional** features are implemented:
 
 * [x] Added [ButterKnife](https://github.com/JakeWharton/butterknife) library to reduce boilerplate code
 * [x] Added a splash page to the app
+* [x] Added dynamic sorting by priority (highest to lowest) when todos' priority is edited or a new todo is added
 * [x] Added dynamic UI updating upon selecting a due date when edit dialog is closed
 * [x] Added dynamic UI updating upon selecting a priority (by clicking on stars) when edit dialog is opened
 * [x] Added ability for user to mark items as 'complete' using a checkbox, including a strikethrough for visual feedback to the user
