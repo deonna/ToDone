@@ -26,7 +26,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-* [x] Added ButterKnife library to reduce boilerplate code
+* [x] Added [ButterKnife](https://github.com/JakeWharton/butterknife) library to reduce boilerplate code
 * [x] Added a splash page to the app
 * [x] Added dynamic UI updating upon selecting a due date when edit dialog is closed
 * [x] Added dynamic UI updating upon selecting a priority (by clicking on stars) when edit dialog is opened
