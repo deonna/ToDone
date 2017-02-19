@@ -20,6 +20,8 @@ import com.deonna.todone.models.Todo;
 import com.deonna.todone.utils.Utilities;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +39,7 @@ public class TodosAdapter extends BaseAdapter {
 
         this.context = context;
         this.todos = todos;
+        sort();
     }
 
     @Override
@@ -83,6 +86,33 @@ public class TodosAdapter extends BaseAdapter {
         );
 
         return convertView;
+    }
+
+    private void sort() {
+
+        Collections.sort(todos, new Comparator<Todo>() {
+            @Override
+            public int compare(Todo todo1, Todo todo2) {
+
+                int priority1 = todo1.getPriority().getValue();
+                int priority2 = todo2.getPriority().getValue();
+
+                if (priority1 < priority2) {
+                    return 1;
+                } else if (priority1 > priority2) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+
+        sort();
+        super.notifyDataSetChanged();
     }
 
 
