@@ -30,7 +30,7 @@ The following **additional** features are implemented:
 * [x] Added a splash page to the app
 * [x] Added dynamic UI updating upon selecting a due date when edit dialog is closed
 * [x] Added dynamic UI updating upon selecting a priority (by clicking on stars) when edit dialog is opened
-* [x] Added ability for user to mark items as 'complete' using a checkbox
+* [x] Added ability for user to mark items as 'complete' using a checkbox, including a strikethrough for visual feedback to the user
 * [x] Added custom styles for checkbox, splash screen, ActionBar, Edit Dialog, etc. + iconography
 * [x] Added a DatePicker for selecting due dates
 * [x] Implemented modal dialogs for edit Dialog and due date selection dialog
