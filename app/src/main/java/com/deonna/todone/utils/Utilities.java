@@ -21,51 +21,6 @@ public class Utilities {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-//    public static void initializePriorityListeners(View convertView, Todo todo, int lowPriorityId,
-//                                                   int mediumPriority, int highPriority) {
-//
-//        final ImageView ivLowPriority = (ImageView) convertView.findViewById(lowPriorityId);
-//        final ImageView ivMediumPriority = (ImageView) convertView.findViewById(mediumPriority);
-//        final ImageView ivHighPriority = (ImageView) convertView.findViewById(highPriority);
-//
-//        final Todo currentTodo = todo;
-//
-//        updatePriorityUi(ivLowPriority, ivMediumPriority, ivHighPriority, todo);
-//
-//        ivLowPriority.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                changePriority(ivLowPriority, ivMediumPriority);
-//                currentTodo.setPriority(Priority.MEDIUM);
-//                currentTodo.updateInDataSource();
-//            }
-//        });
-//
-//        ivMediumPriority.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                changePriority(ivMediumPriority,ivHighPriority);
-//                currentTodo.setPriority(Priority.HIGH);
-//                currentTodo.updateInDataSource();
-//            }
-//        });
-//
-//        ivHighPriority.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                changePriority(ivHighPriority, ivLowPriority);
-//                currentTodo.setPriority(Priority.LOW);
-//                currentTodo.updateInDataSource();
-//            }
-//        });
-//    }
-
     public static void updatePriorityUi(ImageView ivLowPriority, ImageView ivMediumPriority,
                                          ImageView ivHighPriority, Todo todo) {
 
@@ -91,10 +46,4 @@ public class Utilities {
                 break;
         }
     }
-    
-//    private static void changePriority(ImageView ivOldPriority, ImageView ivNewPriority) {
-//
-//        ivOldPriority.setVisibility(View.GONE);
-//        ivNewPriority.setVisibility(View.VISIBLE);
-//    }
 }

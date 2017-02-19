@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.widget.DatePicker;
 
+import com.deonna.todone.interfaces.DatePickerFragmentListener;
 import com.deonna.todone.models.Todo;
 import com.deonna.todone.constants.Constants;
 
@@ -15,10 +16,6 @@ import java.util.Date;
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
     private Todo currentTodo;
-
-    public interface DatePickerFragmentListener {
-        void onFinishSettingDueDate(String newDate);
-    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

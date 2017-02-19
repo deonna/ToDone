@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.deonna.todone.constants.Constants;
 import com.deonna.todone.R;
 import com.deonna.todone.constants.Priority;
+import com.deonna.todone.interfaces.DatePickerFragmentListener;
 import com.deonna.todone.interfaces.EditTodoDialogListener;
 import com.deonna.todone.models.Todo;
 import com.deonna.todone.utils.Utilities;
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class EditTodoDialogFragment extends DialogFragment implements DatePickerFragment.DatePickerFragmentListener {
+public class EditTodoDialogFragment extends DialogFragment implements DatePickerFragmentListener {
 
     public static final String TITLE = "Edit Todo";
 

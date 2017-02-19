@@ -33,6 +33,7 @@ public class TodosAdapter extends BaseAdapter {
     private Todo currentTodo;
 
     public TodosAdapter(Context context, ArrayList<Todo> todos) {
+
         this.context = context;
         this.todos = todos;
     }

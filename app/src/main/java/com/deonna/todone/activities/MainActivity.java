@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
     }
 
     private void showEditDialog(Todo todo, int position) {
+
         FragmentManager fm = getSupportFragmentManager();
         EditTodoDialogFragment editTodoDialogFragment = EditTodoDialogFragment.newInstance(todo,
                 position);
