@@ -35,6 +35,7 @@ The following **additional** features are implemented:
 * [x] Added a DatePicker for selecting due dates
 * [x] Implemented modal dialogs for edit Dialog and due date selection dialog
 * [x] Added soft keyboard hiding after edit dialog is saved
+* [x] Add ViewHolder pattern to reuse View containers
 
 ## Video Walkthrough
 
