@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.deonna.todone.utils.Utilities;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 import butterknife.OnItemLongClick;
 
@@ -33,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
 
     @BindView(R.id.lvItems) ListView lvItems;
     @BindView(R.id.etNewItem) EditText etNewItem;
+
+    @BindView(R.id.btnShowAll) Button btnShowAll;
+    @BindView(R.id.btnShowIncomplete) Button btnShowIncomplete;
+    @BindView(R.id.btnShowComplete) Button btnShowComplete;
 
     private Todos todos;
 
@@ -91,6 +97,21 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
 
         removeTodo(position);
         return true;
+    }
+
+    @OnClick(R.id.btnShowAll)
+    public void showAll() {
+        todoAdapter.getFilter().filter(TodosAdapter.ALL);
+    }
+
+    @OnClick(R.id.btnShowIncomplete)
+    public void showIncomplete() {
+        todoAdapter.getFilter().filter(TodosAdapter.INCOMPLETE);
+    }
+
+    @OnClick(R.id.btnShowComplete)
+    public void showComplete() {
+        todoAdapter.getFilter().filter(TodosAdapter.COMPLETE);
     }
 
     @Override

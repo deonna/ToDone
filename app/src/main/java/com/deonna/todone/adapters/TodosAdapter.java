@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,16 +31,23 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 
-public class TodosAdapter extends BaseAdapter {
+public class TodosAdapter extends BaseAdapter implements Filterable {
+
+    public static final String COMPLETE = "complete";
+    public static final String INCOMPLETE = "incomplete";
+    public static final String ALL = "all";
 
     private Context context;
     private ArrayList<Todo> todos;
+    private ArrayList<Todo> initialTodos;
     private Todo currentTodo;
 
     public TodosAdapter(Context context, ArrayList<Todo> todos) {
 
         this.context = context;
         this.todos = todos;
+        this.initialTodos = new ArrayList<>(todos);
+
         sort();
     }
 
@@ -75,6 +84,8 @@ public class TodosAdapter extends BaseAdapter {
         currentTodo = todos.get(position);
 
         holder.tvName.setText(currentTodo.getName());
+        holder.updateCheckedUi(currentTodo.getIsCompleted());
+
         holder.tvDueDate.setText(currentTodo.getDueDateText());
         holder.cbIsCompleted.setChecked(currentTodo.getIsCompleted());
 
@@ -115,6 +126,47 @@ public class TodosAdapter extends BaseAdapter {
         super.notifyDataSetChanged();
     }
 
+    @Override
+    public Filter getFilter() {
+
+        final Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                FilterResults results = new FilterResults();
+                ArrayList<Todo> filteredTodos = new ArrayList<>();
+
+                constraint = constraint.toString().toLowerCase();
+
+                for (Todo todo : initialTodos) {
+
+                    boolean isCompleted = todo.getIsCompleted();
+
+                    if (constraint.equals(COMPLETE) && isCompleted) {
+                        filteredTodos.add(todo);
+                    } else if (constraint.equals(INCOMPLETE) && !isCompleted) {
+                        filteredTodos.add(todo);
+                    } else if (constraint.equals(ALL)) {
+                        filteredTodos.add(todo);
+                    }
+                }
+
+                results.count = filteredTodos.size();
+                results.values = filteredTodos;
+
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults results) {
+                todos = (ArrayList<Todo>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+
+        return filter;
+    }
+
 
     public class ViewHolder {
 
@@ -142,6 +194,11 @@ public class TodosAdapter extends BaseAdapter {
 
             currentTodo.setIsCompleted(isChecked);
             Todo.updateInDataSource(currentTodo);
+
+            updateCheckedUi(isChecked);
+        }
+
+        private void updateCheckedUi(boolean isChecked) {
 
             if (isChecked) {
                 tvName.setPaintFlags(tvName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
