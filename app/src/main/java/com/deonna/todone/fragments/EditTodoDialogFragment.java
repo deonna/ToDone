@@ -70,7 +70,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
         super.onCreate(savedInstanceState);
 
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogTheme);
+        setStyle(DialogFragment.STYLE_NO_FRAME, R.style.DialogTheme);
 
         ButterKnife.bind(getActivity());
     }
@@ -79,7 +79,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_edit_name, container);
+        View view = inflater.inflate(R.layout.fragment_edit_todo, container);
         unbinder = ButterKnife.bind(this, view);
 
         return view;

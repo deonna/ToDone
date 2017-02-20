@@ -19,7 +19,7 @@
         <item name="android:textColorSecondary">@color/colorTextHint</item>
     </style>
 
-    <style name="DialogTheme" parent="@android:style/Theme.Holo.Dialog">
+    <style name="DialogTheme" parent="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
         <item name="android:windowBackground">@color/colorDialog</item>
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:gravity">center</item>
