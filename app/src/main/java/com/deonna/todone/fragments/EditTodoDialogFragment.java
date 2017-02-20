@@ -130,7 +130,11 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         currentPriority = currentTodo.getPriority();
 
         setPriorityLabel();
-        setCompletedLabel(currentTodo.getIsCompleted());
+
+        boolean isCompleted = currentTodo.getIsCompleted();
+        cbIsCompleted.setChecked(isCompleted);
+        setCompletedLabel(isCompleted);
+        updateCheckedUi(isCompleted);
 
         Utilities.updatePriorityUi(
                 ivLowPriorityDialog,

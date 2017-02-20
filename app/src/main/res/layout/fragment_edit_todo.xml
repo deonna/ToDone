@@ -311,6 +311,7 @@
             android:drawableBottom="@mipmap/ic_save"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
+            android:alpha=".85"
             android:paddingBottom="12sp"/>
 
         <Button
@@ -321,6 +322,7 @@
             android:layout_weight="1"
             android:background="@color/colorPrimary"
             android:layout_marginLeft="2dp"
+            android:alpha=".85"
             android:paddingBottom="12sp"/>
     </LinearLayout>
 

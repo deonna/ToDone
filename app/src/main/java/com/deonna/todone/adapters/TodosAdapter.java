@@ -35,7 +35,7 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
 
     public static final String COMPLETE = "Complete";
     public static final String INCOMPLETE = "Incomplete";
-    public static final String ALL = "ALL";
+    public static final String ALL = "All";
 
     private Context context;
     private ArrayList<Todo> todos;
@@ -135,8 +135,6 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
 
                 FilterResults results = new FilterResults();
                 ArrayList<Todo> filteredTodos = new ArrayList<>();
-
-                constraint = constraint.toString().toLowerCase();
 
                 for (Todo todo : initialTodos) {
 
