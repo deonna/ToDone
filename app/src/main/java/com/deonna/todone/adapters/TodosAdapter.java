@@ -33,9 +33,9 @@ import butterknife.OnItemClick;
 
 public class TodosAdapter extends BaseAdapter implements Filterable {
 
-    public static final String COMPLETE = "complete";
-    public static final String INCOMPLETE = "incomplete";
-    public static final String ALL = "all";
+    public static final String COMPLETE = "Complete";
+    public static final String INCOMPLETE = "Incomplete";
+    public static final String ALL = "ALL";
 
     private Context context;
     private ArrayList<Todo> todos;

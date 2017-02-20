@@ -27,6 +27,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static com.deonna.todone.adapters.TodosAdapter.COMPLETE;
+import static com.deonna.todone.adapters.TodosAdapter.INCOMPLETE;
+
 public class EditTodoDialogFragment extends DialogFragment implements DatePickerFragmentListener {
 
     public static final String TITLE = "Edit Todo";
@@ -42,6 +45,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     @BindView(R.id.ivHighPriorityDialog) ImageView ivHighPriorityDialog;
 
     @BindView(R.id.tvSetPriority) TextView tvSetPriority;
+    @BindView(R.id.tvSetCompleted) TextView tvSetCompleted;
 
     @BindView(R.id.cbIsCompleted) CheckBox cbIsCompleted;
 
@@ -126,6 +130,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         currentPriority = currentTodo.getPriority();
 
         setPriorityLabel();
+        setCompletedLabel(currentTodo.getIsCompleted());
 
         Utilities.updatePriorityUi(
                 ivLowPriorityDialog,
@@ -225,6 +230,16 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         boolean isChecked = cbIsCompleted.isChecked();
 
         updateCheckedUi(isChecked);
+        setCompletedLabel(isChecked);
+    }
+
+    private void setCompletedLabel(boolean isComplete) {
+
+        if (isComplete) {
+            tvSetCompleted.setText(COMPLETE);
+        } else {
+            tvSetCompleted.setText(INCOMPLETE);
+        }
     }
 
     private void updateCheckedUi(boolean isChecked) {
