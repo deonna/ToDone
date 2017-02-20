@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="Here's the name of the current todo."
+                android:hint="@string/enter_todo_name"
                 android:layout_weight="0.86"
                 android:background="@android:color/transparent"
                 android:paddingBottom="18dp"/>
@@ -196,7 +197,7 @@
                 android:alpha=".75"
                 android:layout_gravity="center"
                 android:layout_weight="1.66"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="14dp"
                 android:layout_marginBottom="12dp"
                 android:visibility="gone"/>
 
@@ -208,7 +209,7 @@
                 android:alpha=".75"
                 android:layout_gravity="center"
                 android:layout_weight="1.66"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="14dp"
                 android:layout_marginBottom="12dp"
                 android:visibility="gone"/>
 

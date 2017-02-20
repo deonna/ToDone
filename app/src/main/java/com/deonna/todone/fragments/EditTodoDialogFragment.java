@@ -112,11 +112,16 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         getDialog().setTitle(TITLE);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-        initializeEditField();
 
         if (!currentTodo.getDueDateText().isEmpty()) {
             tvShowDueDate.setText(currentTodo.getDueDateText());
         }
+
+        if (!currentTodo.getNote().isEmpty()) {
+            initializeEditField(etNote, currentTodo.getNote());
+        }
+
+        initializeEditField(etTodoName, currentTodo.getName());
 
         currentPriority = currentTodo.getPriority();
 
@@ -130,20 +135,19 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         setCancelable(false);
     }
 
-    private void initializeEditField() {
-        etTodoName.setText(currentTodo.getName());
-        etTodoName.setSelection(etTodoName.getText().length());
+    private void initializeEditField(EditText etField, String text) {
+        etField.setText(text);
+        etField.setSelection(text.length());
 
-        etTodoName.requestFocus();
+        etField.requestFocus();
     }
 
     @OnClick(R.id.btnSave)
     public void saveItem(View view) {
 
-        String newName = etTodoName.getText().toString().trim();
-
-        currentTodo.setName(newName);
+        currentTodo.setName(etTodoName.getText().toString().trim());
         currentTodo.setPriority(currentPriority);
+        currentTodo.setNote(etNote.getText().toString().trim());
 
         Todo.updateInDataSource(currentTodo);
 
@@ -151,6 +155,12 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         listener.onFinishEditDialog();
 
         Utilities.hideSoftKeyboard(view, getActivity());
+
+        dismiss();
+    }
+
+    @OnClick(R.id.btnCancel)
+    public void cancel() {
 
         dismiss();
     }

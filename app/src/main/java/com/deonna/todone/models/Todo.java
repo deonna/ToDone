@@ -21,6 +21,7 @@ public class Todo implements Serializable {
     private boolean isCompleted;
     private Date dueDate;
     private String dueDateText;
+    String note;
 
     private static final long serialVersionUID = 1L;
 
@@ -33,6 +34,7 @@ public class Todo implements Serializable {
         isCompleted = false;
         dueDate = null;
         dueDateText = "";
+        note = "";
 
         todosDataSource = Todos.getDataSource();
     }
@@ -157,5 +159,13 @@ public class Todo implements Serializable {
                 Log.e(TAG, "Error parsing due date: " + e);
             }
         }
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getNote() {
+        return note;
     }
 }

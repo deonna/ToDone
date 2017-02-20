@@ -21,6 +21,7 @@ public class TodoSQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_COMPLETED = "completed";
     public static final String COLUMN_PRIORITY = "priority";
     public static final String COLUMN_DUE_DATE = "due_date";
+    public static final String COLUMN_NOTE = "note";
 
     private TodoSQLiteHelper(Context context) {
 
@@ -48,9 +49,9 @@ public class TodoSQLiteHelper extends SQLiteOpenHelper {
 
         String CREATE_TODOS_TABLE = String.format(
                 "CREATE TABLE %s (%s INTEGER PRIMARY KEY " + "AUTOINCREMENT, " +
-                        "%s TEXT, %s INTEGER, %s INTEGER, %s TEXT)",
+                        "%s TEXT, %s INTEGER, %s INTEGER, %s TEXT, %s TEXT)",
                 TABLE_TODOS, BaseColumns._ID,
-                COLUMN_NAME, COLUMN_COMPLETED, COLUMN_PRIORITY, COLUMN_DUE_DATE);
+                COLUMN_NAME, COLUMN_COMPLETED, COLUMN_PRIORITY, COLUMN_DUE_DATE, COLUMN_NOTE);
 
         db.execSQL(CREATE_TODOS_TABLE);
     }

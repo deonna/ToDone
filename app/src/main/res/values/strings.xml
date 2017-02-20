@@ -12,4 +12,5 @@
     <string name="add_a_note">Add a note...</string>
     <string name="set_completed">Set Completed</string>
     <string name="set_due_date_reminder">Set Due Date</string>
+    <string name="enter_todo_name">Enter todo name...</string>
 </resources>
