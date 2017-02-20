@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
     @OnItemClick(R.id.lvItems)
     public void showEditDialog(int position) {
 
-        Todo todo = todos.get(position);
+        Todo todo = (Todo) todoAdapter.getItem(position);
 
         FragmentManager fm = getSupportFragmentManager();
         EditTodoDialogFragment editTodoDialogFragment = EditTodoDialogFragment.newInstance(todo);

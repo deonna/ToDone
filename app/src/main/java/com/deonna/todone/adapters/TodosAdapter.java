@@ -39,26 +39,33 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
 
     private Context context;
     private ArrayList<Todo> todos;
-    private ArrayList<Todo> initialTodos;
+    private ArrayList<Integer> hiddenTodoIndices;
     private Todo currentTodo;
 
     public TodosAdapter(Context context, ArrayList<Todo> todos) {
 
         this.context = context;
         this.todos = todos;
-        this.initialTodos = new ArrayList<>(todos);
 
+        hiddenTodoIndices = new ArrayList<>();
         sort();
     }
 
     @Override
     public int getCount() {
-        return todos.size();
+        return todos.size() - hiddenTodoIndices.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return todos.get(i);
+    public Object getItem(int position) {
+
+        for(Integer hiddenIndex : hiddenTodoIndices) {
+            if(hiddenIndex <= position) {
+                position = position + 1;
+            }
+        }
+
+        return todos.get(position);
     }
 
     @Override
@@ -79,6 +86,12 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
+        }
+
+        for(Integer hiddenIndex : hiddenTodoIndices) {
+            if(hiddenIndex <= position) {
+                position = position + 1;
+            }
         }
 
         currentTodo = todos.get(position);
@@ -134,30 +147,36 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
             protected FilterResults performFiltering(CharSequence constraint) {
 
                 FilterResults results = new FilterResults();
-                ArrayList<Todo> filteredTodos = new ArrayList<>();
+                //ArrayList<Todo> filteredTodos = new ArrayList<>();
 
-                for (Todo todo : initialTodos) {
+                hiddenTodoIndices.clear();
 
+                ArrayList<Integer> filteredTodoIndices = new ArrayList<>();
+
+                for (int i = 0; i < todos.size(); i++) {
+                    Todo todo = todos.get(i);
                     boolean isCompleted = todo.getIsCompleted();
 
                     if (constraint.equals(COMPLETE) && isCompleted) {
-                        filteredTodos.add(todo);
+                        //filteredTodos.add(todo);
                     } else if (constraint.equals(INCOMPLETE) && !isCompleted) {
-                        filteredTodos.add(todo);
+                        //filteredTodos.add(todo);
                     } else if (constraint.equals(ALL)) {
-                        filteredTodos.add(todo);
+                        //filteredTodos.add(todo);
+                    } else {
+                        filteredTodoIndices.add(i);
                     }
                 }
 
-                results.count = filteredTodos.size();
-                results.values = filteredTodos;
+                results.count = filteredTodoIndices.size();
+                results.values = filteredTodoIndices;
 
                 return results;
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults results) {
-                todos = (ArrayList<Todo>) results.values;
+                hiddenTodoIndices = (ArrayList<Integer>) results.values;
                 notifyDataSetChanged();
             }
         };
