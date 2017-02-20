@@ -1,10 +1,10 @@
-# Pre-work - *ToDone*
+# Pre-work - *toDone*
 
-**ToDone** is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item.
+**toDone** is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item.
 
 Submitted by: **Deonna Hodges**
 
-Time spent: **26** hours spent in total
+Time spent: **28** hours spent in total
 
 ## User Stories
 
@@ -44,9 +44,14 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/ICXmNDy.gif' title='ToDone Demo #1' width='' alt='Video Walkthrough of ToDone' />
+<img src='http://i.imgur.com/Tvfpr2A.gif' title='toDone Demo #3' width='' alt='Video Walkthrough of toDone' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
+Previous demos:
+
+[toDone Demo #2](http://i.imgur.com/ICXmNDy.gif)
+[toDone Demo #1](http://i.imgur.com/OyLMmLd.gif)
 
 ## Notes
 
