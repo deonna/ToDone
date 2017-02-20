@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,15 +30,20 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
     public static final String TITLE = "Edit Todo";
 
-    @BindView(R.id.etEditedItem) EditText etEditedItem;
-    @BindView(R.id.ivSave) ImageView ivSave;
+    @BindView(R.id.etTodoName) EditText etTodoName;
+
     @BindView(R.id.ivSetDueDate) ImageView ivSetDueDate;
+    @BindView(R.id.tvShowDueDate) TextView tvShowDueDate;
+    @BindView(R.id.etNote) EditText etNote;
 
     @BindView(R.id.ivLowPriorityDialog) ImageView ivLowPriorityDialog;
     @BindView(R.id.ivMediumPriorityDialog) ImageView ivMediumPriorityDialog;
     @BindView(R.id.ivHighPriorityDialog) ImageView ivHighPriorityDialog;
 
-    @BindView(R.id.tvDueDateDialog) TextView tvDueDateDialog;
+    @BindView(R.id.cbIsCompleted) CheckBox cbIsCompleted;
+
+    @BindView(R.id.btnSave) Button btnSave;
+    @BindView(R.id.btnCancel) Button btnCancel;
 
     private Todo currentTodo;
     private Priority currentPriority;
@@ -49,7 +56,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
     @Override
     public void onFinishSettingDueDate(String newDate) {
-        tvDueDateDialog.setText(newDate);
+        tvShowDueDate.setText(newDate);
     }
 
 
@@ -70,7 +77,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
         super.onCreate(savedInstanceState);
 
-        setStyle(DialogFragment.STYLE_NO_FRAME, R.style.DialogTheme);
+        //setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogTheme);
 
         ButterKnife.bind(getActivity());
     }
@@ -79,7 +86,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_edit_todo, container);
+        View view = inflater.inflate(R.layout.fragment_edit_todo2, container);
         unbinder = ButterKnife.bind(this, view);
 
         return view;
@@ -107,7 +114,9 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
         initializeEditField();
 
-        tvDueDateDialog.setText(currentTodo.getDueDateText());
+        if (!currentTodo.getDueDateText().isEmpty()) {
+            tvShowDueDate.setText(currentTodo.getDueDateText());
+        }
 
         currentPriority = currentTodo.getPriority();
 
@@ -122,16 +131,16 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     }
 
     private void initializeEditField() {
-        etEditedItem.setText(currentTodo.getName());
-        etEditedItem.setSelection(etEditedItem.getText().length());
+        etTodoName.setText(currentTodo.getName());
+        etTodoName.setSelection(etTodoName.getText().length());
 
-        etEditedItem.requestFocus();
+        etTodoName.requestFocus();
     }
 
-    @OnClick(R.id.ivSave)
+    @OnClick(R.id.btnSave)
     public void saveItem(View view) {
 
-        String newName = etEditedItem.getText().toString().trim();
+        String newName = etTodoName.getText().toString().trim();
 
         currentTodo.setName(newName);
         currentTodo.setPriority(currentPriority);

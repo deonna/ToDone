@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
         FragmentManager fm = getSupportFragmentManager();
         EditTodoDialogFragment editTodoDialogFragment = EditTodoDialogFragment.newInstance(todo);
 
-        editTodoDialogFragment.show(fm, "fragment_edit_todo");
+        editTodoDialogFragment.show(fm, "fragment_edit_todo2");
     }
 
     @OnItemLongClick(R.id.lvItems)

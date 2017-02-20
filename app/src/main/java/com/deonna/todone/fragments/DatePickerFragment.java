@@ -1,9 +1,11 @@
 package com.deonna.todone.fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 
+import com.codetroopers.betterpickers.OnDialogDismissListener;
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
 import com.deonna.todone.constants.Constants;
 import com.deonna.todone.interfaces.DatePickerFragmentListener;
@@ -45,6 +47,13 @@ public class DatePickerFragment extends DialogFragment {
 
                 listener.onFinishSettingDueDate(currentTodo.getDueDateText());
 
+                dismiss();
+            }
+        });
+
+        datePickerDialog.setOnDismissListener(new OnDialogDismissListener() {
+            @Override
+            public void onDialogDismiss(DialogInterface dialoginterface) {
                 dismiss();
             }
         });
