@@ -46,11 +46,14 @@ Here's a walkthrough of implemented user stories:
 
 <img src='http://i.imgur.com/Tvfpr2A.gif' width='' alt='Video Walkthrough of toDone' />
 
+[toDone Latest Demo](http://i.imgur.com/Tvfpr2A.gif)
+
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Previous demos:
 
 [toDone Demo #2](http://i.imgur.com/ICXmNDy.gif)
+
 [toDone Demo #1](http://i.imgur.com/OyLMmLd.gif)
 
 ## Notes
