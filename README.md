@@ -27,12 +27,12 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [x] Added [ButterKnife](https://github.com/JakeWharton/butterknife) library to reduce boilerplate code
-* [x] Added ability to filter by completeness levels (all, incomplete, and complete)
-* [x] Added a splash page to the app
+* [x] Overrode BaseAdapter methods to implement filtering by completeness levels (all, incomplete, and complete)
+* [x] Designed and added splash page
 * [x] Added dynamic sorting by priority (highest to lowest) when todos' priority is edited or a new todo is added
 * [x] Added dynamic UI updating upon selecting a due date when edit dialog is closed
 * [x] Added dynamic UI updating upon selecting a priority (by clicking on stars) when edit dialog is opened
-* [x] Added ability for user to mark items as 'complete' using a checkbox, including a strikethrough for visual feedback to the user
+* [x] Added ability for user to mark items as 'complete' using a checkbox, accompanied by a strikethrough to give the user visual feedback
 * [x] Added custom styles for checkbox, splash screen, ActionBar, Edit Dialog, etc. + iconography
 * [x] Added material design DatePicker from [BetterPickers](https://github.com/code-troopers/android-betterpickers) library for selecting due dates
 * [x] Added soft keyboard hiding after edit dialog is saved
