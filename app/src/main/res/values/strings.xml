@@ -5,4 +5,12 @@
     <string name="edit_item">Edit Item Below:</string>
     <string name="save">Save</string>
     <string name="set_due_date">Set Due Date</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="set_task_priority">Set Task Priority</string>
+    <string name="add_a_note">Add a note...</string>
+    <string name="set_completed">Set Completed</string>
+    <string name="set_due_date_reminder">Set Due Date</string>
+    <string name="enter_todo_name">Enter todo name...</string>
 </resources>

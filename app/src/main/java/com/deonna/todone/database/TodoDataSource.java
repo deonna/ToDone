@@ -56,7 +56,8 @@ public class TodoDataSource {
                 TodoSQLiteHelper.COLUMN_NAME,
                 TodoSQLiteHelper.COLUMN_COMPLETED,
                 TodoSQLiteHelper.COLUMN_DUE_DATE,
-                TodoSQLiteHelper.COLUMN_PRIORITY
+                TodoSQLiteHelper.COLUMN_PRIORITY,
+                TodoSQLiteHelper.COLUMN_NOTE
         };
 
         return columns;
@@ -94,6 +95,7 @@ public class TodoDataSource {
         todo.setDueDateText(getStringFromColumnName(cursor, TodoSQLiteHelper.COLUMN_DUE_DATE));
         todo.setIsCompleted(getIntFromColumnName(cursor, TodoSQLiteHelper.COLUMN_COMPLETED));
         todo.setPriorityFromInt(getIntFromColumnName(cursor, TodoSQLiteHelper.COLUMN_PRIORITY));
+        todo.setNote(getStringFromColumnName(cursor, TodoSQLiteHelper.COLUMN_NOTE));
 
         return todo;
     }
@@ -148,6 +150,7 @@ public class TodoDataSource {
         todoValues.put(TodoSQLiteHelper.COLUMN_COMPLETED, todo.getIsCompletedAsInt());
         todoValues.put(TodoSQLiteHelper.COLUMN_DUE_DATE, todo.getDueDateText());
         todoValues.put(TodoSQLiteHelper.COLUMN_PRIORITY, todo.getPriority().getValue());
+        todoValues.put(TodoSQLiteHelper.COLUMN_NOTE, todo.getNote());
 
         return todoValues;
     }
