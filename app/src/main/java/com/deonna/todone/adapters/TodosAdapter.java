@@ -42,12 +42,15 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
     private ArrayList<Integer> hiddenTodoIndices;
     private Todo currentTodo;
 
+    private String filteringBy;
+
     public TodosAdapter(Context context, ArrayList<Todo> todos) {
 
         this.context = context;
         this.todos = todos;
 
         hiddenTodoIndices = new ArrayList<>();
+        filteringBy = ALL;
         sort();
     }
 
@@ -146,6 +149,8 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
         final Filter filter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
+
+                filteringBy = constraint.toString();
 
                 FilterResults results = new FilterResults();
 

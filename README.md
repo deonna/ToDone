@@ -44,7 +44,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/Tvfpr2A.gif' title='toDone Demo #3' width='' alt='Video Walkthrough of toDone' />
+<img src='http://i.imgur.com/Tvfpr2A.gif' width='' alt='Video Walkthrough of toDone' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
