@@ -39,6 +39,7 @@ The following **additional** features are implemented:
 * [x] Implemented modal dialogs for edit Dialog and due date selection dialog
 * [x] Implemented ViewHolder pattern to reuse View containers
 * [x] Implemented Parcelable for Todo items
+* [x] Implemented BaseAdapter instead of ArrayAdapter
 
 ## Video Walkthrough
 
