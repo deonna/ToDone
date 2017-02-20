@@ -66,7 +66,7 @@
                 android:layout_gravity="center"
                 android:onClick="openDatePicker"
                 android:layout_weight="1.66"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="14dp"
                 android:layout_marginBottom="12dp"/>
 
         </LinearLayout>
@@ -126,7 +126,7 @@
                 android:layout_gravity="center"
                 android:onClick="addNote"
                 android:layout_weight="1.66"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="14dp"
                 android:layout_marginBottom="12dp"/>
 
         </LinearLayout>
@@ -148,7 +148,7 @@
                 android:layout_marginBottom="12dp"
                 android:background="@android:color/transparent"
                 android:paddingTop="8dp"
-                android:paddingLeft="8dp"/>
+                android:paddingLeft="10dp"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -184,7 +184,7 @@
                 android:alpha=".75"
                 android:layout_gravity="center"
                 android:layout_weight="1.66"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="14dp"
                 android:layout_marginBottom="12dp"
                 android:visibility="visible"/>
 
@@ -226,7 +226,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
-                android:paddingTop="4dp"
+                android:paddingTop="3dp"
                 android:paddingLeft="4dp"
                 android:textSize="18sp"
                 android:text="@string/set_task_priority"/>
@@ -263,7 +263,7 @@
                 android:id="@+id/cbIsCompleted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="13dp"
                 android:layout_marginBottom="12dp"
                 android:background="@android:color/transparent"
                 android:onClick="completeTodo"
