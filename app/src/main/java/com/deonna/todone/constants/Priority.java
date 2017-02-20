@@ -24,4 +24,22 @@ public enum Priority {
                 return LOW;
         }
     }
+
+    public static String toString(Priority priority) {
+
+        final String LOW_PRIORITY = "Low Priority";
+        final String MEDIUM_PRIORITY = "Medium Priority";
+        final String HIGH_PRIORITY = "High Priority";
+
+        switch(priority.getValue()) {
+            case 0:
+                return LOW_PRIORITY;
+            case 1:
+                return MEDIUM_PRIORITY;
+            case 2:
+                return HIGH_PRIORITY;
+            default:
+                return LOW_PRIORITY;
+        }
+    }
 }

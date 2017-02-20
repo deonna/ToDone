@@ -41,6 +41,8 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     @BindView(R.id.ivMediumPriorityDialog) ImageView ivMediumPriorityDialog;
     @BindView(R.id.ivHighPriorityDialog) ImageView ivHighPriorityDialog;
 
+    @BindView(R.id.tvSetPriority) TextView tvSetPriority;
+
     @BindView(R.id.cbIsCompleted) CheckBox cbIsCompleted;
 
     @BindView(R.id.btnSave) Button btnSave;
@@ -123,6 +125,8 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
         currentPriority = currentTodo.getPriority();
 
+        setPriorityLabel();
+
         Utilities.updatePriorityUi(
                 ivLowPriorityDialog,
                 ivMediumPriorityDialog,
@@ -182,6 +186,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     public void changeUiToMediumPriority() {
 
         currentPriority = Priority.MEDIUM;
+        tvSetPriority.setText("Medium Priority");
         changeUiPriority(R.id.ivLowPriorityDialog, R.id.ivMediumPriorityDialog);
     }
 
@@ -189,6 +194,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     public void changeUiToHighPriority() {
 
         currentPriority = Priority.HIGH;
+        tvSetPriority.setText("High Priority");
         changeUiPriority(R.id.ivMediumPriorityDialog, R.id.ivHighPriorityDialog);
     }
 
@@ -206,6 +212,12 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
         ivOldPriority.setVisibility(View.GONE);
         ivNewPriority.setVisibility(View.VISIBLE);
+
+        setPriorityLabel();
+    }
+
+    private void setPriorityLabel() {
+        tvSetPriority.setText(Priority.toString(currentPriority));
     }
 
     @OnClick(R.id.cbIsCompleted)
