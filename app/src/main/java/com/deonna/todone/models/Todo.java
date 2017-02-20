@@ -168,10 +168,10 @@ public class Todo implements Parcelable {
 
     public void setDueDateText(String dueDateText) {
 
-//        if (!dueDateText.isEmpty()) {
+        if (!dueDateText.isEmpty()) {
             this.dueDateText = dueDateText;
             dueDate = formatDueDate(dueDateText);
-//        }
+        }
     }
 
     public static Date formatDueDate(String dueDateText) {
