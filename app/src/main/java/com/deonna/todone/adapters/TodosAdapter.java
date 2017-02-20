@@ -59,13 +59,20 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
     @Override
     public Object getItem(int position) {
 
+        position = getCorrectPosition(position);
+
+        return todos.get(position);
+    }
+
+    public int getCorrectPosition(int position) {
+
         for(Integer hiddenIndex : hiddenTodoIndices) {
             if(hiddenIndex <= position) {
                 position = position + 1;
             }
         }
 
-        return todos.get(position);
+        return position;
     }
 
     @Override
@@ -88,13 +95,7 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        for(Integer hiddenIndex : hiddenTodoIndices) {
-            if(hiddenIndex <= position) {
-                position = position + 1;
-            }
-        }
-
-        currentTodo = todos.get(position);
+        currentTodo = todos.get(getCorrectPosition(position));
 
         holder.tvName.setText(currentTodo.getName());
         holder.updateCheckedUi(currentTodo.getIsCompleted());
@@ -147,7 +148,6 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
             protected FilterResults performFiltering(CharSequence constraint) {
 
                 FilterResults results = new FilterResults();
-                //ArrayList<Todo> filteredTodos = new ArrayList<>();
 
                 hiddenTodoIndices.clear();
 
@@ -157,13 +157,10 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
                     Todo todo = todos.get(i);
                     boolean isCompleted = todo.getIsCompleted();
 
-                    if (constraint.equals(COMPLETE) && isCompleted) {
-                        //filteredTodos.add(todo);
-                    } else if (constraint.equals(INCOMPLETE) && !isCompleted) {
-                        //filteredTodos.add(todo);
-                    } else if (constraint.equals(ALL)) {
-                        //filteredTodos.add(todo);
-                    } else {
+                    if (!(constraint.equals(COMPLETE) && isCompleted) &&
+                            !(constraint.equals(INCOMPLETE) && !isCompleted) &&
+                                    !(constraint.equals(ALL))
+                            ) {
                         filteredTodoIndices.add(i);
                     }
                 }
