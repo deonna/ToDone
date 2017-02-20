@@ -22,7 +22,7 @@ public class Todo implements Parcelable {
     private boolean isCompleted;
     private Date dueDate;
     private String dueDateText;
-    String note;
+    private String note;
 
     private static TodoDataSource todosDataSource;
 
@@ -38,7 +38,7 @@ public class Todo implements Parcelable {
         todosDataSource = Todos.getDataSource();
     }
 
-    protected Todo(Parcel in) {
+    private Todo(Parcel in) {
         id = in.readLong();
         name = in.readString();
         priority = Priority.fromInt(in.readInt());
@@ -115,22 +115,7 @@ public class Todo implements Parcelable {
 
     public void setIsCompleted(int completed) {
 
-        if (completed == 0) {
-            isCompleted = false;
-        } else {
-            isCompleted = true;
-        }
-    }
-
-    public Date getDueDate() {
-
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-
-        this.dueDate = dueDate;
-        setDueDateText(getDueDateText());
+        isCompleted = completed != 0;
     }
 
     public static void addToDataSource(Todo todo) {
@@ -161,9 +146,8 @@ public class Todo implements Parcelable {
     public static String getFormattedDate(Date date) {
 
         SimpleDateFormat formatter = new SimpleDateFormat(FORMAT_PATTERN);
-        String formattedDate = formatter.format(date);
 
-        return formattedDate;
+        return formatter.format(date);
     }
 
     public void setDueDateText(String dueDateText) {

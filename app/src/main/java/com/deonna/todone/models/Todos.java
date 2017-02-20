@@ -10,16 +10,12 @@ import java.util.ArrayList;
 
 public class Todos {
 
-    private ArrayList<Todo> items;
-    private final File filesDir;
+    private final ArrayList<Todo> items;
     private static TodoDataSource todosDataSource;
 
-    public Todos(Context context, File fileDir) {
+    public Todos(Context context) {
 
         todosDataSource = TodoDataSource.getInstance(context);
-
-        filesDir = fileDir;
-
         items = todosDataSource.getAll();
     }
 
@@ -50,10 +46,5 @@ public class Todos {
         Todo todo = items.get(position);
         Todo.removeFromDataSource(todo.getId());
         items.remove(position);
-    }
-
-    public Todo get(int position) {
-
-        return items.get(position);
     }
 }

@@ -72,7 +72,7 @@ public class TodoDataSource {
                 getColumnsForQuery(),
                 null, null, null, null, null);
 
-        ArrayList<Todo> todos = new ArrayList<Todo>();
+        ArrayList<Todo> todos = new ArrayList<>();
 
         if(cursor.moveToFirst()) {
             do {

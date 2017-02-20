@@ -65,7 +65,6 @@
                 android:src="@mipmap/ic_set_due_date"
                 android:alpha=".75"
                 android:layout_gravity="center"
-                android:onClick="openDatePicker"
                 android:layout_weight="1.66"
                 android:layout_marginTop="14dp"
                 android:layout_marginBottom="12dp"/>
@@ -125,7 +124,6 @@
                 android:src="@mipmap/ic_add_note"
                 android:alpha=".75"
                 android:layout_gravity="center"
-                android:onClick="addNote"
                 android:layout_weight="1.66"
                 android:layout_marginTop="14dp"
                 android:layout_marginBottom="12dp"/>
@@ -267,7 +265,6 @@
                 android:layout_marginTop="13dp"
                 android:layout_marginBottom="12dp"
                 android:background="@android:color/transparent"
-                android:onClick="completeTodo"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_marginLeft="12dp"/>

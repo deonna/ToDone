@@ -32,7 +32,7 @@ import static com.deonna.todone.adapters.TodosAdapter.INCOMPLETE;
 
 public class EditTodoDialogFragment extends DialogFragment implements DatePickerFragmentListener {
 
-    public static final String TITLE = "Edit Todo";
+    private static final String TITLE = "Edit Todo";
 
     @BindView(R.id.etTodoName) EditText etTodoName;
 
@@ -195,7 +195,6 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     public void changeUiToMediumPriority() {
 
         currentPriority = Priority.MEDIUM;
-        tvSetPriority.setText("Medium Priority");
         changeUiPriority(R.id.ivLowPriorityDialog, R.id.ivMediumPriorityDialog);
     }
 
@@ -203,7 +202,6 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     public void changeUiToHighPriority() {
 
         currentPriority = Priority.HIGH;
-        tvSetPriority.setText("High Priority");
         changeUiPriority(R.id.ivMediumPriorityDialog, R.id.ivHighPriorityDialog);
     }
 

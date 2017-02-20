@@ -18,20 +18,15 @@ public class DatePickerFragment extends DialogFragment {
 
     public static final String TAG_DATE_PICKER = "fragment_date_picker";
 
-    private CalendarDatePickerDialogFragment datePickerDialog;
-
-    private Todo currentTodo;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
-        currentTodo = args.getParcelable(Constants.CURRENT_TODO);
 
         setCancelable(false);
 
-        datePickerDialog = new CalendarDatePickerDialogFragment();
+        CalendarDatePickerDialogFragment datePickerDialog = new CalendarDatePickerDialogFragment();
 
         datePickerDialog.setOnDateSetListener(new CalendarDatePickerDialogFragment.OnDateSetListener() {
             @Override

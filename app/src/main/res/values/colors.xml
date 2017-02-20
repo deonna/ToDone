@@ -3,11 +3,9 @@
     <color name="colorPrimary">#DE5846</color>
     <color name="colorPrimaryTransparent">#DDDE5846</color>
     <color name="colorPrimaryMoreTransparent">#99DE5846</color>
-    <color name="colorPrimaryDark">#DE5846</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorTextHint">#99FFFFFF</color>
     <color name="colorDialog">#F6F4F5</color>
-    <color name="colorDialogTitleBackground">#FAFAFA</color>
     <color name="colorButtonBackground">#40ffffff</color>
     <color name="colorButtonText">#FFFFFF</color>
 </resources>

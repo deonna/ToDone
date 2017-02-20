@@ -3,21 +3,17 @@ package com.deonna.todone.adapters;
 import android.content.Context;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.deonna.todone.R;
-import com.deonna.todone.constants.Priority;
 import com.deonna.todone.models.Todo;
 import com.deonna.todone.utils.Utilities;
 
@@ -27,9 +23,7 @@ import java.util.Comparator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
 
 public class TodosAdapter extends BaseAdapter implements Filterable {
 
@@ -37,12 +31,10 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
     public static final String INCOMPLETE = "Incomplete";
     public static final String ALL = "All";
 
-    private Context context;
-    private ArrayList<Todo> todos;
+    private final Context context;
+    private final ArrayList<Todo> todos;
     private ArrayList<Integer> hiddenTodoIndices;
     private Todo currentTodo;
-
-    private String filteringBy;
 
     public TodosAdapter(Context context, ArrayList<Todo> todos) {
 
@@ -50,7 +42,6 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
         this.todos = todos;
 
         hiddenTodoIndices = new ArrayList<>();
-        filteringBy = ALL;
         sort();
     }
 
@@ -150,8 +141,6 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
 
-                filteringBy = constraint.toString();
-
                 FilterResults results = new FilterResults();
 
                 hiddenTodoIndices.clear();
@@ -198,7 +187,7 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
         @BindView(R.id.ivMediumPriority) ImageView ivMediumPriority;
         @BindView(R.id.ivHighPriority) ImageView ivHighPriority;
 
-        View view;
+        final View view;
 
         public ViewHolder(View view) {
 
@@ -207,7 +196,7 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
         }
 
         @OnClick(R.id.cbIsCompleted)
-        public void completeTodo(View view) {
+        public void completeTodo() {
 
             boolean isChecked = cbIsCompleted.isChecked();
 

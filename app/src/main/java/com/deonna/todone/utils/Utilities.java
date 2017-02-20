@@ -4,14 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.deonna.todone.constants.Priority;
-import com.deonna.todone.R;
-import com.deonna.todone.models.Todo;
 
 public class Utilities {
 

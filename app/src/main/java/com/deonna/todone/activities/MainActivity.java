@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -29,7 +28,7 @@ import butterknife.OnItemLongClick;
 
 public class MainActivity extends AppCompatActivity implements EditTodoDialogListener {
 
-    public static final int SIDEBAR_WIDTH = 70;
+    private static final int SIDEBAR_WIDTH = 70;
     private static final String FRAGMENT_EDIT_TODO = "fragment_edit_todo";
 
     private TodosAdapter todoAdapter;
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
 
     private void populateTodoItems() {
 
-        todos = new Todos(this, getFilesDir());
+        todos = new Todos(this);
         todoAdapter = new TodosAdapter(this, todos.getItems());
     }
 
