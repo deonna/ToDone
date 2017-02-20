@@ -73,9 +73,10 @@ get all fragments, using Bundle,
 using custom event listeners, using the backstack [which I didn't experiment with, but learned
 about after reading a few StackOverflow posts.
 
-- I tried to keep myself honest when it came to writing small commits, creating feature branches,
-readable commit messages, and opening pull requests, even though it was solo project
-(which is hard when no one is going to look at your project after it's completed).
+- Filtering was hella tricky. When I introduced it, there were all sorts of event handling bugs as
+as result of the `TodosAdapter` returning the position index as if all the list items were displayed.
+I was able to resolve it by creating an `ArrayList<Integer>` contained the positions of the items that
+were supposed to be hidden and then grabbing the correct item based on that position.
 
 There were a couple of areas I thought would be challenging, but turned out not to be:
 
