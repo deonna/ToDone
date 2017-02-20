@@ -1,5 +1,6 @@
 package com.deonna.todone.fragments;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -145,6 +146,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         currentTodo.setName(etTodoName.getText().toString().trim());
         currentTodo.setPriority(currentPriority);
         currentTodo.setNote(etNote.getText().toString().trim());
+        currentTodo.setIsCompleted(cbIsCompleted.isChecked());
 
         Todo.updateInDataSource(currentTodo);
 
@@ -203,5 +205,21 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
         ivOldPriority.setVisibility(View.GONE);
         ivNewPriority.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick(R.id.cbIsCompleted)
+    public void completeTodo() {
+        boolean isChecked = cbIsCompleted.isChecked();
+
+        updateCheckedUi(isChecked);
+    }
+
+    private void updateCheckedUi(boolean isChecked) {
+
+        if (isChecked) {
+            etTodoName.setPaintFlags(etTodoName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            etTodoName.setPaintFlags(etTodoName.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+        }
     }
 }
