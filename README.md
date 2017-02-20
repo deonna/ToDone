@@ -4,7 +4,7 @@
 
 Submitted by: **Deonna Hodges**
 
-Time spent: **25** hours spent in total
+Time spent: **26** hours spent in total
 
 ## User Stories
 
@@ -27,6 +27,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [x] Added [ButterKnife](https://github.com/JakeWharton/butterknife) library to reduce boilerplate code
+* [x] Added ability to filter by completeness levels (all, incomplete, and complete)
 * [x] Added a splash page to the app
 * [x] Added dynamic sorting by priority (highest to lowest) when todos' priority is edited or a new todo is added
 * [x] Added dynamic UI updating upon selecting a due date when edit dialog is closed
@@ -34,8 +35,8 @@ The following **additional** features are implemented:
 * [x] Added ability for user to mark items as 'complete' using a checkbox, including a strikethrough for visual feedback to the user
 * [x] Added custom styles for checkbox, splash screen, ActionBar, Edit Dialog, etc. + iconography
 * [x] Added material design DatePicker from [BetterPickers](https://github.com/code-troopers/android-betterpickers) library for selecting due dates
-* [x] Implemented modal dialogs for edit Dialog and due date selection dialog
 * [x] Added soft keyboard hiding after edit dialog is saved
+* [x] Implemented modal dialogs for edit Dialog and due date selection dialog
 * [x] Implemented ViewHolder pattern to reuse View containers
 * [x] Implemented Parcelable for Todo items
 
