@@ -158,7 +158,7 @@ public class Todo implements Parcelable {
         }
     }
 
-    private String getFormattedDate(Date date) {
+    public static String getFormattedDate(Date date) {
 
         SimpleDateFormat formatter = new SimpleDateFormat(FORMAT_PATTERN);
         String formattedDate = formatter.format(date);
@@ -168,17 +168,23 @@ public class Todo implements Parcelable {
 
     public void setDueDateText(String dueDateText) {
 
-        if (!dueDateText.isEmpty()) {
+//        if (!dueDateText.isEmpty()) {
             this.dueDateText = dueDateText;
+            dueDate = formatDueDate(dueDateText);
+//        }
+    }
 
-            SimpleDateFormat formatter = new SimpleDateFormat(FORMAT_PATTERN);
+    public static Date formatDueDate(String dueDateText) {
 
-            try {
-                dueDate = formatter.parse(dueDateText);
-            } catch (ParseException e) {
-                Log.e(TAG, "Error parsing due date: " + e);
-            }
+        SimpleDateFormat formatter = new SimpleDateFormat(FORMAT_PATTERN);
+
+        try {
+             return formatter.parse(dueDateText);
+        } catch (ParseException e) {
+            Log.e(TAG, "Error parsing due date: " + e);
         }
+
+        return null;
     }
 
     public void setNote(String note) {

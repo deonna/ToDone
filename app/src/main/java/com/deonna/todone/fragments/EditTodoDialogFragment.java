@@ -147,6 +147,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         currentTodo.setPriority(currentPriority);
         currentTodo.setNote(etNote.getText().toString().trim());
         currentTodo.setIsCompleted(cbIsCompleted.isChecked());
+        currentTodo.setDueDateText(tvShowDueDate.getText().toString().trim());
 
         Todo.updateInDataSource(currentTodo);
 
