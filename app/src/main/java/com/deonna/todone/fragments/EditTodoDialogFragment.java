@@ -1,5 +1,6 @@
 package com.deonna.todone.fragments;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -26,6 +27,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static com.deonna.todone.adapters.TodosAdapter.COMPLETE;
+import static com.deonna.todone.adapters.TodosAdapter.INCOMPLETE;
+
 public class EditTodoDialogFragment extends DialogFragment implements DatePickerFragmentListener {
 
     public static final String TITLE = "Edit Todo";
@@ -39,6 +43,9 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     @BindView(R.id.ivLowPriorityDialog) ImageView ivLowPriorityDialog;
     @BindView(R.id.ivMediumPriorityDialog) ImageView ivMediumPriorityDialog;
     @BindView(R.id.ivHighPriorityDialog) ImageView ivHighPriorityDialog;
+
+    @BindView(R.id.tvSetPriority) TextView tvSetPriority;
+    @BindView(R.id.tvSetCompleted) TextView tvSetCompleted;
 
     @BindView(R.id.cbIsCompleted) CheckBox cbIsCompleted;
 
@@ -122,6 +129,13 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
         currentPriority = currentTodo.getPriority();
 
+        setPriorityLabel();
+
+        boolean isCompleted = currentTodo.getIsCompleted();
+        cbIsCompleted.setChecked(isCompleted);
+        setCompletedLabel(isCompleted);
+        updateCheckedUi(isCompleted);
+
         Utilities.updatePriorityUi(
                 ivLowPriorityDialog,
                 ivMediumPriorityDialog,
@@ -145,6 +159,8 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         currentTodo.setName(etTodoName.getText().toString().trim());
         currentTodo.setPriority(currentPriority);
         currentTodo.setNote(etNote.getText().toString().trim());
+        currentTodo.setIsCompleted(cbIsCompleted.isChecked());
+        currentTodo.setDueDateText(tvShowDueDate.getText().toString().trim());
 
         Todo.updateInDataSource(currentTodo);
 
@@ -179,6 +195,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     public void changeUiToMediumPriority() {
 
         currentPriority = Priority.MEDIUM;
+        tvSetPriority.setText("Medium Priority");
         changeUiPriority(R.id.ivLowPriorityDialog, R.id.ivMediumPriorityDialog);
     }
 
@@ -186,6 +203,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     public void changeUiToHighPriority() {
 
         currentPriority = Priority.HIGH;
+        tvSetPriority.setText("High Priority");
         changeUiPriority(R.id.ivMediumPriorityDialog, R.id.ivHighPriorityDialog);
     }
 
@@ -203,5 +221,37 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
         ivOldPriority.setVisibility(View.GONE);
         ivNewPriority.setVisibility(View.VISIBLE);
+
+        setPriorityLabel();
+    }
+
+    private void setPriorityLabel() {
+        tvSetPriority.setText(Priority.toString(currentPriority));
+    }
+
+    @OnClick(R.id.cbIsCompleted)
+    public void completeTodo() {
+        boolean isChecked = cbIsCompleted.isChecked();
+
+        updateCheckedUi(isChecked);
+        setCompletedLabel(isChecked);
+    }
+
+    private void setCompletedLabel(boolean isComplete) {
+
+        if (isComplete) {
+            tvSetCompleted.setText(COMPLETE);
+        } else {
+            tvSetCompleted.setText(INCOMPLETE);
+        }
+    }
+
+    private void updateCheckedUi(boolean isChecked) {
+
+        if (isChecked) {
+            etTodoName.setPaintFlags(etTodoName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            etTodoName.setPaintFlags(etTodoName.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+        }
     }
 }

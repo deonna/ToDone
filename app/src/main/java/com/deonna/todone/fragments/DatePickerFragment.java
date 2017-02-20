@@ -39,13 +39,11 @@ public class DatePickerFragment extends DialogFragment {
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(year, monthOfYear, dayOfMonth);
 
-                currentTodo.setDueDate(new Date(calendar.getTimeInMillis()));
-                Todo.updateInDataSource(currentTodo);
-
                 DatePickerFragmentListener listener = (DatePickerFragmentListener) getFragmentManager()
                         .getFragments().get(0);
 
-                listener.onFinishSettingDueDate(currentTodo.getDueDateText());
+                String dueDateText = Todo.getFormattedDate(new Date(calendar.getTimeInMillis()));
+                listener.onFinishSettingDueDate(dueDateText);
 
                 dismiss();
             }

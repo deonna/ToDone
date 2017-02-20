@@ -33,32 +33,46 @@ import butterknife.OnItemClick;
 
 public class TodosAdapter extends BaseAdapter implements Filterable {
 
-    public static final String COMPLETE = "complete";
-    public static final String INCOMPLETE = "incomplete";
-    public static final String ALL = "all";
+    public static final String COMPLETE = "Complete";
+    public static final String INCOMPLETE = "Incomplete";
+    public static final String ALL = "All";
 
     private Context context;
     private ArrayList<Todo> todos;
-    private ArrayList<Todo> initialTodos;
+    private ArrayList<Integer> hiddenTodoIndices;
     private Todo currentTodo;
 
     public TodosAdapter(Context context, ArrayList<Todo> todos) {
 
         this.context = context;
         this.todos = todos;
-        this.initialTodos = new ArrayList<>(todos);
 
+        hiddenTodoIndices = new ArrayList<>();
         sort();
     }
 
     @Override
     public int getCount() {
-        return todos.size();
+        return todos.size() - hiddenTodoIndices.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return todos.get(i);
+    public Object getItem(int position) {
+
+        position = getCorrectPosition(position);
+
+        return todos.get(position);
+    }
+
+    public int getCorrectPosition(int position) {
+
+        for(Integer hiddenIndex : hiddenTodoIndices) {
+            if(hiddenIndex <= position) {
+                position = position + 1;
+            }
+        }
+
+        return position;
     }
 
     @Override
@@ -81,7 +95,7 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        currentTodo = todos.get(position);
+        currentTodo = todos.get(getCorrectPosition(position));
 
         holder.tvName.setText(currentTodo.getName());
         holder.updateCheckedUi(currentTodo.getIsCompleted());
@@ -134,32 +148,32 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
             protected FilterResults performFiltering(CharSequence constraint) {
 
                 FilterResults results = new FilterResults();
-                ArrayList<Todo> filteredTodos = new ArrayList<>();
 
-                constraint = constraint.toString().toLowerCase();
+                hiddenTodoIndices.clear();
 
-                for (Todo todo : initialTodos) {
+                ArrayList<Integer> filteredTodoIndices = new ArrayList<>();
 
+                for (int i = 0; i < todos.size(); i++) {
+                    Todo todo = todos.get(i);
                     boolean isCompleted = todo.getIsCompleted();
 
-                    if (constraint.equals(COMPLETE) && isCompleted) {
-                        filteredTodos.add(todo);
-                    } else if (constraint.equals(INCOMPLETE) && !isCompleted) {
-                        filteredTodos.add(todo);
-                    } else if (constraint.equals(ALL)) {
-                        filteredTodos.add(todo);
+                    if (!(constraint.equals(COMPLETE) && isCompleted) &&
+                            !(constraint.equals(INCOMPLETE) && !isCompleted) &&
+                                    !(constraint.equals(ALL))
+                            ) {
+                        filteredTodoIndices.add(i);
                     }
                 }
 
-                results.count = filteredTodos.size();
-                results.values = filteredTodos;
+                results.count = filteredTodoIndices.size();
+                results.values = filteredTodoIndices;
 
                 return results;
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults results) {
-                todos = (ArrayList<Todo>) results.values;
+                hiddenTodoIndices = (ArrayList<Integer>) results.values;
                 notifyDataSetChanged();
             }
         };
