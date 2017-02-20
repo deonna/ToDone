@@ -1,16 +1,17 @@
 package com.deonna.todone.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.deonna.todone.constants.Priority;
 import com.deonna.todone.database.TodoDataSource;
 
-import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Todo implements Serializable {
+public class Todo implements Parcelable {
 
     private static final String TAG = Todo.class.getSimpleName() ;
     private static final String FORMAT_PATTERN = "MMM d, yyyy";
@@ -22,8 +23,6 @@ public class Todo implements Serializable {
     private Date dueDate;
     private String dueDateText;
     String note;
-
-    private static final long serialVersionUID = 1L;
 
     private static TodoDataSource todosDataSource;
 
@@ -38,6 +37,27 @@ public class Todo implements Serializable {
 
         todosDataSource = Todos.getDataSource();
     }
+
+    protected Todo(Parcel in) {
+        id = in.readLong();
+        name = in.readString();
+        priority = Priority.fromInt(in.readInt());
+        isCompleted = in.readInt() != 0;
+        dueDateText = in.readString();
+        note = in.readString();
+    }
+
+    public static final Creator<Todo> CREATOR = new Creator<Todo>() {
+        @Override
+        public Todo createFromParcel(Parcel in) {
+            return new Todo(in);
+        }
+
+        @Override
+        public Todo[] newArray(int size) {
+            return new Todo[size];
+        }
+    };
 
     public String getName() {
 
@@ -167,5 +187,23 @@ public class Todo implements Serializable {
 
     public String getNote() {
         return note;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int i) {
+        out.writeLong(id);
+        out.writeString(name);
+        out.writeInt(priority.getValue());
+
+        int completedInt = isCompleted ? 1 : 0;
+        out.writeInt(completedInt);
+
+        out.writeString(dueDateText);
+        out.writeString(note);
     }
 }

@@ -65,7 +65,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         EditTodoDialogFragment fragment = new EditTodoDialogFragment();
 
         Bundle args = new Bundle();
-        args.putSerializable(Constants.CURRENT_TODO, todo);
+        args.putParcelable(Constants.CURRENT_TODO, todo);
 
         fragment.setArguments(args);
 
@@ -76,7 +76,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     public void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        
+
         ButterKnife.bind(getActivity());
     }
 
@@ -104,8 +104,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         this.view = view;
 
         Bundle args = getArguments();
-
-        currentTodo = (Todo) args.getSerializable(Constants.CURRENT_TODO);
+        currentTodo = args.getParcelable(Constants.CURRENT_TODO);
 
         getDialog().setTitle(TITLE);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -167,7 +166,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     public void openDatePicker() {
 
         Bundle args = new Bundle();
-        args.putSerializable(Constants.CURRENT_TODO, currentTodo);
+        args.putParcelable(Constants.CURRENT_TODO, currentTodo);
 
         final DatePickerFragment fragment = new DatePickerFragment();
         fragment.setArguments(args);
