@@ -4,7 +4,7 @@
 
 Submitted by: **Deonna Hodges**
 
-Time spent: **22** hours spent in total
+Time spent: **25** hours spent in total
 
 ## User Stories
 
@@ -36,7 +36,8 @@ The following **additional** features are implemented:
 * [x] Added material design DatePicker from [BetterPickers](https://github.com/code-troopers/android-betterpickers) library for selecting due dates
 * [x] Implemented modal dialogs for edit Dialog and due date selection dialog
 * [x] Added soft keyboard hiding after edit dialog is saved
-* [x] Add ViewHolder pattern to reuse View containers
+* [x] Implemented ViewHolder pattern to reuse View containers
+* [x] Implemented Parcelable for Todo items
 
 ## Video Walkthrough
 
