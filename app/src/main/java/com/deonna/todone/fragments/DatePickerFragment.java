@@ -27,7 +27,7 @@ public class DatePickerFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
-        currentTodo = (Todo) args.getSerializable(Constants.CURRENT_TODO);
+        currentTodo = args.getParcelable(Constants.CURRENT_TODO);
 
         setCancelable(false);
 

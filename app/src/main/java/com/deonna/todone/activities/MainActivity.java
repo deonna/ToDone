@@ -22,7 +22,6 @@ import com.deonna.todone.utils.Utilities;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.OnItemClick;
 import butterknife.OnItemLongClick;
 
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
         FragmentManager fm = getSupportFragmentManager();
         EditTodoDialogFragment editTodoDialogFragment = EditTodoDialogFragment.newInstance(todo);
 
-        editTodoDialogFragment.show(fm, "fragment_edit_todo2");
+        editTodoDialogFragment.show(fm, "fragment_edit_todo");
     }
 
     @OnItemLongClick(R.id.lvItems)
