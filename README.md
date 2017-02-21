@@ -73,7 +73,7 @@ get all fragments, using Bundle,
 using custom event listeners, using the backstack [which I didn't experiment with, but learned
 about after reading a few StackOverflow posts.
 
-- Filtering was hella tricky. When I introduced it, there were all sorts of event handling bugs as
+- Filtering was tricky. When I introduced it, there were all sorts of event handling bugs as
 as result of the `TodosAdapter` returning the position index as if all the list items were displayed.
 I was able to resolve it by creating an `ArrayList<Integer>` contained the positions of the items that
 were supposed to be hidden and then grabbing the correct item based on that position.
