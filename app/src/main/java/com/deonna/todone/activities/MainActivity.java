@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
     private void populateTodoItems() {
 
         todos = new Todos();
-        todoAdapter = new TodosAdapter(this, todos.getItems());
+        todoAdapter = new TodosAdapter(this, todos);
     }
 
     public void onAddItem(View view) {
