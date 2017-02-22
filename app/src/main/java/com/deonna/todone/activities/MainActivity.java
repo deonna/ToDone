@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.deonna.todone.fragments.EditTodoDialogFragment;
 import com.deonna.todone.R;
 import com.deonna.todone.interfaces.EditTodoDialogListener;
+import com.deonna.todone.models.ContextHolder;
 import com.deonna.todone.models.Todo;
 import com.deonna.todone.models.Todos;
 import com.deonna.todone.adapters.TodosAdapter;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ContextHolder.setContext(this);
         ButterKnife.bind(this);
 
         populateTodoItems();
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
 
     private void populateTodoItems() {
 
-        todos = new Todos(this);
+        todos = new Todos();
         todoAdapter = new TodosAdapter(this, todos.getItems());
     }
 

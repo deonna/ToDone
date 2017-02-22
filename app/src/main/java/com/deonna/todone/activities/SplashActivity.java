@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.deonna.todone.activities.MainActivity;
+import com.deonna.todone.models.ContextHolder;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +18,8 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        ContextHolder.setContext(this);
 
         SystemClock.sleep(TimeUnit.SECONDS.toMillis(DELAY));
 
