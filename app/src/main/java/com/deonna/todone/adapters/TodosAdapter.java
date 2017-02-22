@@ -1,6 +1,5 @@
 package com.deonna.todone.adapters;
 
-import android.content.Context;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -14,18 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.deonna.todone.R;
+import com.deonna.todone.models.ContextHolder;
 import com.deonna.todone.models.Todo;
 import com.deonna.todone.models.Todos;
 import com.deonna.todone.utils.Utilities;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.functions.Action;
 import rx.functions.Action1;
 
 public class TodosAdapter extends BaseAdapter implements Filterable, Action1<Todos> {
@@ -34,15 +30,12 @@ public class TodosAdapter extends BaseAdapter implements Filterable, Action1<Tod
     public static final String INCOMPLETE = "Incomplete";
     public static final String ALL = "All";
 
-    private final Context context;
-
     private Todos todos;
     private ArrayList<Integer> hiddenTodoIndices;
     private Todo currentTodo;
 
-    public TodosAdapter(Context context, Todos todos) {
+    public TodosAdapter(Todos todos) {
 
-        this.context = context;
         this.todos = todos;
 
         hiddenTodoIndices = new ArrayList<>();
@@ -85,7 +78,7 @@ public class TodosAdapter extends BaseAdapter implements Filterable, Action1<Tod
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_todo, null);
+            convertView = LayoutInflater.from(ContextHolder.getContext()).inflate(R.layout.item_todo, null);
             holder = new ViewHolder(convertView);
 
             convertView.setTag(holder);
