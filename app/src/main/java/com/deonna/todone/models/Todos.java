@@ -25,11 +25,6 @@ public class Todos implements Parcelable {
         items = todosDataSource.getAll();
     }
 
-    public ArrayList<Todo> getItems() {
-
-        return items;
-    }
-
     public static TodoDataSource getDataSource() {
         return todosDataSource;
     }
@@ -88,6 +83,37 @@ public class Todos implements Parcelable {
                 }
             }
         });
+    }
+
+    public ArrayList<Todo> getComplete() {
+
+        ArrayList<Todo> complete = new ArrayList<>();
+
+        for (Todo todo : items) {
+            if (todo.getIsCompleted()) {
+                complete.add(todo);
+            }
+        }
+
+        return complete;
+    }
+
+    public ArrayList<Todo> getIncomplete() {
+
+        ArrayList<Todo> incomplete = new ArrayList<>();
+
+        for (Todo todo : items) {
+            if (!todo.getIsCompleted()) {
+                incomplete.add(todo);
+            }
+        }
+
+        return incomplete;
+    }
+
+    public ArrayList<Todo> getAll() {
+
+        return items;
     }
 
     /* PARCELABLE */

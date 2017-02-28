@@ -19,6 +19,7 @@ import com.deonna.todone.R;
 import com.deonna.todone.constants.Priority;
 import com.deonna.todone.interfaces.DatePickerFragmentListener;
 import com.deonna.todone.interfaces.EditTodoDialogListener;
+import com.deonna.todone.models.FilterStates;
 import com.deonna.todone.models.Todo;
 import com.deonna.todone.utils.Utilities;
 
@@ -26,9 +27,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-
-import static com.deonna.todone.adapters.TodosAdapter.COMPLETE;
-import static com.deonna.todone.adapters.TodosAdapter.INCOMPLETE;
 
 public class EditTodoDialogFragment extends DialogFragment implements DatePickerFragmentListener {
 
@@ -238,9 +236,9 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     private void setCompletedLabel(boolean isComplete) {
 
         if (isComplete) {
-            tvSetCompleted.setText(COMPLETE);
+            tvSetCompleted.setText(FilterStates.COMPLETE);
         } else {
-            tvSetCompleted.setText(INCOMPLETE);
+            tvSetCompleted.setText(FilterStates.INCOMPLETE);
         }
     }
 

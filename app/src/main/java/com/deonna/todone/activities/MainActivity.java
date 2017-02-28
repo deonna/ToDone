@@ -16,6 +16,7 @@ import com.deonna.todone.fragments.EditTodoDialogFragment;
 import com.deonna.todone.R;
 import com.deonna.todone.interfaces.EditTodoDialogListener;
 import com.deonna.todone.models.ContextHolder;
+import com.deonna.todone.models.FilterStates;
 import com.deonna.todone.models.Todo;
 import com.deonna.todone.models.Todos;
 import com.deonna.todone.adapters.TodosAdapter;
@@ -103,17 +104,17 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
 
     @OnClick(R.id.btnShowAll)
     public void showAll() {
-        todoAdapter.getFilter().filter(TodosAdapter.ALL);
+        todoAdapter.getFilter().filter(FilterStates.ALL);
     }
 
     @OnClick(R.id.btnShowIncomplete)
     public void showIncomplete() {
-        todoAdapter.getFilter().filter(TodosAdapter.INCOMPLETE);
+        todoAdapter.getFilter().filter(FilterStates.INCOMPLETE);
     }
 
     @OnClick(R.id.btnShowComplete)
     public void showComplete() {
-        todoAdapter.getFilter().filter(TodosAdapter.COMPLETE);
+        todoAdapter.getFilter().filter(FilterStates.COMPLETE);
     }
 
     @Override

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.deonna.todone.R;
 import com.deonna.todone.models.ContextHolder;
+import com.deonna.todone.models.FilterStates;
 import com.deonna.todone.models.Todo;
 import com.deonna.todone.models.Todos;
 import com.deonna.todone.utils.Utilities;
@@ -25,10 +26,6 @@ import butterknife.OnClick;
 import rx.functions.Action1;
 
 public class TodosAdapter extends BaseAdapter implements Filterable, Action1<Todos> {
-
-    public static final String COMPLETE = "Complete";
-    public static final String INCOMPLETE = "Incomplete";
-    public static final String ALL = "All";
 
     private Todos todos;
     private ArrayList<Integer> hiddenTodoIndices;
@@ -128,9 +125,9 @@ public class TodosAdapter extends BaseAdapter implements Filterable, Action1<Tod
                     Todo todo = todos.get(i);
                     boolean isCompleted = todo.getIsCompleted();
 
-                    if (!(constraint.equals(COMPLETE) && isCompleted) &&
-                            !(constraint.equals(INCOMPLETE) && !isCompleted) &&
-                                    !(constraint.equals(ALL))
+                    if (!(constraint.equals(FilterStates.COMPLETE) && isCompleted) &&
+                            !(constraint.equals(FilterStates.INCOMPLETE) && !isCompleted) &&
+                                    !(constraint.equals(FilterStates.ALL))
                             ) {
                         filteredTodoIndices.add(i);
                     }
