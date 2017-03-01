@@ -182,7 +182,7 @@ public class TodosAdapter extends BaseAdapter implements Filterable, Action1<Tod
             boolean isChecked = cbIsCompleted.isChecked();
 
             currentTodo.setIsCompleted(isChecked);
-            Todo.updateInDataSource(currentTodo);
+            todos.updateInDataSource(currentTodo);
 
             updateCheckedUi(isChecked);
         }

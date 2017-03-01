@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.deonna.todone.fragments.EditTodoDialogFragment;
 import com.deonna.todone.R;
-import com.deonna.todone.interfaces.EditTodoDialogListener;
 import com.deonna.todone.models.ContextHolder;
 import com.deonna.todone.models.FilterStates;
 import com.deonna.todone.models.Todo;
@@ -28,7 +27,7 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 import butterknife.OnItemLongClick;
 
-public class MainActivity extends AppCompatActivity implements EditTodoDialogListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final int SIDEBAR_WIDTH = 70;
     private static final String FRAGMENT_EDIT_TODO = "fragment_edit_todo";
@@ -89,7 +88,8 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
         Todo todo = (Todo) todosAdapter.getItem(position);
 
         FragmentManager fm = getSupportFragmentManager();
-        EditTodoDialogFragment editTodoDialogFragment = EditTodoDialogFragment.newInstance(todo);
+        EditTodoDialogFragment editTodoDialogFragment = EditTodoDialogFragment.newInstance
+                (todos, todo);
 
         editTodoDialogFragment.show(fm, FRAGMENT_EDIT_TODO);
     }
@@ -114,12 +114,6 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
     @OnClick(R.id.btnShowComplete)
     public void showComplete() {
         todosAdapter.getFilter().filter(FilterStates.COMPLETE);
-    }
-
-    @Override
-    public void onFinishEditDialog() {
-
-        todosAdapter.notifyDataSetChanged();
     }
 
     private void centerActionBarTitle() {

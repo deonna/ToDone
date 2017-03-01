@@ -18,9 +18,9 @@ import com.deonna.todone.constants.Constants;
 import com.deonna.todone.R;
 import com.deonna.todone.constants.Priority;
 import com.deonna.todone.interfaces.DatePickerFragmentListener;
-import com.deonna.todone.interfaces.EditTodoDialogListener;
 import com.deonna.todone.models.FilterStates;
 import com.deonna.todone.models.Todo;
+import com.deonna.todone.models.Todos;
 import com.deonna.todone.utils.Utilities;
 
 import butterknife.BindView;
@@ -50,6 +50,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     @BindView(R.id.btnSave) Button btnSave;
     @BindView(R.id.btnCancel) Button btnCancel;
 
+    private Todos todos;
     private Todo currentTodo;
     private Priority currentPriority;
 
@@ -65,12 +66,13 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     }
 
 
-    public static EditTodoDialogFragment newInstance(Todo todo) {
+    public static EditTodoDialogFragment newInstance(Todos todos, Todo todo) {
 
         EditTodoDialogFragment fragment = new EditTodoDialogFragment();
 
         Bundle args = new Bundle();
         args.putParcelable(Constants.CURRENT_TODO, todo);
+        args.putParcelable(Constants.TODOS, todos);
 
         fragment.setArguments(args);
 
@@ -110,6 +112,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
         Bundle args = getArguments();
         currentTodo = args.getParcelable(Constants.CURRENT_TODO);
+        todos = args.getParcelable(Constants.TODOS);
 
         getDialog().setTitle(TITLE);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -160,10 +163,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         currentTodo.setIsCompleted(cbIsCompleted.isChecked());
         currentTodo.setDueDateText(tvShowDueDate.getText().toString().trim());
 
-        Todo.updateInDataSource(currentTodo);
-
-        EditTodoDialogListener listener = (EditTodoDialogListener) getActivity();
-        listener.onFinishEditDialog();
+        todos.updateInDataSource(currentTodo);
 
         Utilities.hideSoftKeyboard(view, getActivity());
 

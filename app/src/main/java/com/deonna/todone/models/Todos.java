@@ -34,7 +34,7 @@ public class Todos implements Parcelable {
             Todo todo = new Todo(text);
 
             items.add(todo);
-            Todo.addToDataSource(todo);
+            addToDataSource(todo);
             notifier.onNext(this);
             return true;
         }
@@ -45,7 +45,7 @@ public class Todos implements Parcelable {
     public void remove(int position) {
 
         Todo todo = items.get(position);
-        Todo.removeFromDataSource(todo.getId());
+        removeFromDataSource(todo.getId());
         items.remove(position);
         notifier.onNext(this);
     }
@@ -113,6 +113,24 @@ public class Todos implements Parcelable {
     public ArrayList<Todo> getAll() {
 
         return items;
+    }
+
+    public void addToDataSource(Todo todo) {
+
+        todosDataSource.create(todo);
+        notifier.onNext(this);
+    }
+
+    public void updateInDataSource(Todo todo) {
+
+        todosDataSource.update(todo);
+        notifier.onNext(this);
+    }
+
+    public void removeFromDataSource(long id) {
+
+        todosDataSource.delete(id);
+        notifier.onNext(this);
     }
 
     /* PARCELABLE */

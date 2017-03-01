@@ -35,7 +35,7 @@ public class Todo implements Parcelable {
         dueDateText = "";
         note = "";
 
-        todosDataSource = Todos.getDataSource();
+//        todosDataSource = Todos.getDataSource();
     }
 
     private Todo(Parcel in) {
@@ -116,21 +116,6 @@ public class Todo implements Parcelable {
     public void setIsCompleted(int completed) {
 
         isCompleted = completed != 0;
-    }
-
-    public static void addToDataSource(Todo todo) {
-
-        todosDataSource.create(todo);
-    }
-
-    public static void updateInDataSource(Todo todo) {
-
-        todosDataSource.update(todo);
-    }
-
-    public static void removeFromDataSource(long id) {
-
-        todosDataSource.delete(id);
     }
 
     public String getDueDateText() {
