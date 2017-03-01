@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
     private static final int SIDEBAR_WIDTH = 70;
     private static final String FRAGMENT_EDIT_TODO = "fragment_edit_todo";
 
-    private TodosAdapter todoAdapter;
+    private TodosAdapter todosAdapter;
 
     @BindView(R.id.lvItems) ListView lvItems;
     @BindView(R.id.etNewItem) EditText etNewItem;
@@ -55,21 +55,21 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
 
         populateTodoItems();
 
-        lvItems.setAdapter(todoAdapter);
+        lvItems.setAdapter(todosAdapter);
 
         centerActionBarTitle();
     }
 
     private void removeTodo(int position) {
 
-        todos.remove(todoAdapter.getCorrectPosition(position));
-        todoAdapter.notifyDataSetChanged();
+        todos.remove(todosAdapter.getCorrectPosition(position));
     }
 
     private void populateTodoItems() {
 
         todos = new Todos();
-        todoAdapter = new TodosAdapter(todos);
+        todosAdapter = new TodosAdapter(todos);
+        todos.asObservable().subscribe(todosAdapter);
     }
 
     public void onAddItem(View view) {
@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
         String newItem = etNewItem.getText().toString().trim();
 
         if (todos.add(newItem)) {
-            todoAdapter.notifyDataSetChanged();
             etNewItem.setText("");
         }
 
@@ -87,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
     @OnItemClick(R.id.lvItems)
     public void showEditDialog(int position) {
 
-        Todo todo = (Todo) todoAdapter.getItem(position);
+        Todo todo = (Todo) todosAdapter.getItem(position);
 
         FragmentManager fm = getSupportFragmentManager();
         EditTodoDialogFragment editTodoDialogFragment = EditTodoDialogFragment.newInstance(todo);
@@ -104,23 +103,23 @@ public class MainActivity extends AppCompatActivity implements EditTodoDialogLis
 
     @OnClick(R.id.btnShowAll)
     public void showAll() {
-        todoAdapter.getFilter().filter(FilterStates.ALL);
+        todosAdapter.getFilter().filter(FilterStates.ALL);
     }
 
     @OnClick(R.id.btnShowIncomplete)
     public void showIncomplete() {
-        todoAdapter.getFilter().filter(FilterStates.INCOMPLETE);
+        todosAdapter.getFilter().filter(FilterStates.INCOMPLETE);
     }
 
     @OnClick(R.id.btnShowComplete)
     public void showComplete() {
-        todoAdapter.getFilter().filter(FilterStates.COMPLETE);
+        todosAdapter.getFilter().filter(FilterStates.COMPLETE);
     }
 
     @Override
     public void onFinishEditDialog() {
 
-        todoAdapter.notifyDataSetChanged();
+        todosAdapter.notifyDataSetChanged();
     }
 
     private void centerActionBarTitle() {

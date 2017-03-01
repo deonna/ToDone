@@ -1,6 +1,5 @@
 package com.deonna.todone.models;
 
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
