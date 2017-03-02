@@ -1,6 +1,5 @@
 package com.deonna.todone.adapters;
 
-import android.content.Context;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -14,35 +13,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.deonna.todone.R;
+import com.deonna.todone.models.ContextHolder;
+import com.deonna.todone.models.FilterStates;
 import com.deonna.todone.models.Todo;
+import com.deonna.todone.models.Todos;
 import com.deonna.todone.utils.Utilities;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.functions.Action1;
 
-public class TodosAdapter extends BaseAdapter implements Filterable {
+public class TodosAdapter extends BaseAdapter implements Filterable, Action1<Todos> {
 
-    public static final String COMPLETE = "Complete";
-    public static final String INCOMPLETE = "Incomplete";
-    public static final String ALL = "All";
-
-    private final Context context;
-    private final ArrayList<Todo> todos;
+    private Todos todos;
     private ArrayList<Integer> hiddenTodoIndices;
     private Todo currentTodo;
 
-    public TodosAdapter(Context context, ArrayList<Todo> todos) {
+    public TodosAdapter(Todos todos) {
 
-        this.context = context;
         this.todos = todos;
 
         hiddenTodoIndices = new ArrayList<>();
-        sort();
+        this.todos.sort();
     }
 
     @Override
@@ -81,7 +75,7 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_todo, null);
+            convertView = LayoutInflater.from(ContextHolder.getContext()).inflate(R.layout.item_todo, null);
             holder = new ViewHolder(convertView);
 
             convertView.setTag(holder);
@@ -107,30 +101,10 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
         return convertView;
     }
 
-    private void sort() {
-
-        Collections.sort(todos, new Comparator<Todo>() {
-            @Override
-            public int compare(Todo todo1, Todo todo2) {
-
-                int priority1 = todo1.getPriority().getValue();
-                int priority2 = todo2.getPriority().getValue();
-
-                if (priority1 < priority2) {
-                    return 1;
-                } else if (priority1 > priority2) {
-                    return -1;
-                } else {
-                    return 0;
-                }
-            }
-        });
-    }
-
     @Override
     public void notifyDataSetChanged() {
 
-        sort();
+        todos.sort();
         super.notifyDataSetChanged();
     }
 
@@ -151,9 +125,9 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
                     Todo todo = todos.get(i);
                     boolean isCompleted = todo.getIsCompleted();
 
-                    if (!(constraint.equals(COMPLETE) && isCompleted) &&
-                            !(constraint.equals(INCOMPLETE) && !isCompleted) &&
-                                    !(constraint.equals(ALL))
+                    if (!(constraint.equals(FilterStates.COMPLETE) && isCompleted) &&
+                            !(constraint.equals(FilterStates.INCOMPLETE) && !isCompleted) &&
+                                    !(constraint.equals(FilterStates.ALL))
                             ) {
                         filteredTodoIndices.add(i);
                     }
@@ -173,6 +147,13 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
         };
 
         return filter;
+    }
+
+    @Override
+    public void call(Todos todos) {
+
+        this.todos = todos;
+        notifyDataSetChanged();
     }
 
 
@@ -201,7 +182,7 @@ public class TodosAdapter extends BaseAdapter implements Filterable {
             boolean isChecked = cbIsCompleted.isChecked();
 
             currentTodo.setIsCompleted(isChecked);
-            Todo.updateInDataSource(currentTodo);
+            todos.updateInDataSource(currentTodo);
 
             updateCheckedUi(isChecked);
         }

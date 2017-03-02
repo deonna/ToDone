@@ -7,16 +7,18 @@ import android.support.v4.app.DialogFragment;
 
 import com.codetroopers.betterpickers.OnDialogDismissListener;
 import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
-import com.deonna.todone.constants.Constants;
-import com.deonna.todone.interfaces.DatePickerFragmentListener;
 import com.deonna.todone.models.Todo;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import rx.Observable;
+import rx.subjects.PublishSubject;
+
 public class DatePickerFragment extends DialogFragment {
 
     public static final String TAG_DATE_PICKER = "fragment_date_picker";
+    private PublishSubject<String> notifier = PublishSubject.create();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,11 +36,9 @@ public class DatePickerFragment extends DialogFragment {
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(year, monthOfYear, dayOfMonth);
 
-                DatePickerFragmentListener listener = (DatePickerFragmentListener) getFragmentManager()
-                        .getFragments().get(0);
-
                 String dueDateText = Todo.getFormattedDate(new Date(calendar.getTimeInMillis()));
-                listener.onFinishSettingDueDate(dueDateText);
+
+                notifier.onNext(dueDateText);
 
                 dismiss();
             }
@@ -52,5 +52,10 @@ public class DatePickerFragment extends DialogFragment {
         });
 
         datePickerDialog.show(getFragmentManager(), TAG_DATE_PICKER);
+    }
+
+    public Observable<String> asObservable() {
+
+        return notifier;
     }
 }

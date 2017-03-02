@@ -17,20 +17,18 @@ import android.widget.TextView;
 import com.deonna.todone.constants.Constants;
 import com.deonna.todone.R;
 import com.deonna.todone.constants.Priority;
-import com.deonna.todone.interfaces.DatePickerFragmentListener;
-import com.deonna.todone.interfaces.EditTodoDialogListener;
+import com.deonna.todone.models.FilterStates;
 import com.deonna.todone.models.Todo;
+import com.deonna.todone.models.Todos;
 import com.deonna.todone.utils.Utilities;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import rx.functions.Action1;
 
-import static com.deonna.todone.adapters.TodosAdapter.COMPLETE;
-import static com.deonna.todone.adapters.TodosAdapter.INCOMPLETE;
-
-public class EditTodoDialogFragment extends DialogFragment implements DatePickerFragmentListener {
+public class EditTodoDialogFragment extends DialogFragment implements Action1<String> {
 
     private static final String TITLE = "Edit Todo";
 
@@ -52,6 +50,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     @BindView(R.id.btnSave) Button btnSave;
     @BindView(R.id.btnCancel) Button btnCancel;
 
+    private Todos todos;
     private Todo currentTodo;
     private Priority currentPriority;
 
@@ -61,18 +60,13 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     public EditTodoDialogFragment() {
     }
 
-    @Override
-    public void onFinishSettingDueDate(String newDate) {
-        tvShowDueDate.setText(newDate);
-    }
-
-
-    public static EditTodoDialogFragment newInstance(Todo todo) {
+    public static EditTodoDialogFragment newInstance(Todos todos, Todo todo) {
 
         EditTodoDialogFragment fragment = new EditTodoDialogFragment();
 
         Bundle args = new Bundle();
         args.putParcelable(Constants.CURRENT_TODO, todo);
+        args.putParcelable(Constants.TODOS, todos);
 
         fragment.setArguments(args);
 
@@ -112,6 +106,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
         Bundle args = getArguments();
         currentTodo = args.getParcelable(Constants.CURRENT_TODO);
+        todos = args.getParcelable(Constants.TODOS);
 
         getDialog().setTitle(TITLE);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -162,10 +157,7 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         currentTodo.setIsCompleted(cbIsCompleted.isChecked());
         currentTodo.setDueDateText(tvShowDueDate.getText().toString().trim());
 
-        Todo.updateInDataSource(currentTodo);
-
-        EditTodoDialogListener listener = (EditTodoDialogListener) getActivity();
-        listener.onFinishEditDialog();
+        todos.updateInDataSource(currentTodo);
 
         Utilities.hideSoftKeyboard(view, getActivity());
 
@@ -188,6 +180,8 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         fragment.setArguments(args);
 
         fragment.show(getFragmentManager(), DatePickerFragment.TAG_DATE_PICKER);
+
+        fragment.asObservable().subscribe(this);
     }
 
 
@@ -238,9 +232,9 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
     private void setCompletedLabel(boolean isComplete) {
 
         if (isComplete) {
-            tvSetCompleted.setText(COMPLETE);
+            tvSetCompleted.setText(FilterStates.COMPLETE);
         } else {
-            tvSetCompleted.setText(INCOMPLETE);
+            tvSetCompleted.setText(FilterStates.INCOMPLETE);
         }
     }
 
@@ -251,5 +245,11 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         } else {
             etTodoName.setPaintFlags(etTodoName.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
         }
+    }
+
+    @Override
+    public void call(String newDate) {
+
+        tvShowDueDate.setText(newDate);
     }
 }

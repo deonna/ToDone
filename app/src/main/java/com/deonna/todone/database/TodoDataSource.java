@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
 
+import com.deonna.todone.models.ContextHolder;
 import com.deonna.todone.models.Todo;
 
 import java.util.ArrayList;
@@ -15,15 +16,15 @@ public class TodoDataSource {
     private static TodoDataSource sInstance;
     private final TodoSQLiteHelper todoSQLiteHelper;
 
-    private TodoDataSource(Context context) {
+    private TodoDataSource() {
 
-        todoSQLiteHelper = TodoSQLiteHelper.getInstance(context);
+        todoSQLiteHelper = TodoSQLiteHelper.getInstance(ContextHolder.getContext());
     }
 
-    public static TodoDataSource getInstance(Context context) {
+    public static TodoDataSource getInstance() {
 
         if(sInstance == null) {
-            sInstance = new TodoDataSource(context.getApplicationContext());
+            sInstance = new TodoDataSource();
         }
 
         return sInstance;
