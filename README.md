@@ -27,6 +27,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * [x] Added [ButterKnife](https://github.com/JakeWharton/butterknife) library to reduce boilerplate code
+* [x] Added [RxJava](https://github.com/ReactiveX/RxJava) for better state management and handling of async operatoins
 * [x] Overrode BaseAdapter methods to implement filtering by completeness levels (all, incomplete, and complete)
 * [x] Designed and added splash page
 * [x] Added dynamic sorting by priority (highest to lowest) when todos' priority is edited or a new todo is added
