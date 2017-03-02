@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.deonna.todone.constants.Constants;
 import com.deonna.todone.R;
 import com.deonna.todone.constants.Priority;
-import com.deonna.todone.interfaces.DatePickerFragmentListener;
 import com.deonna.todone.models.FilterStates;
 import com.deonna.todone.models.Todo;
 import com.deonna.todone.models.Todos;
@@ -27,8 +26,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import rx.functions.Action1;
 
-public class EditTodoDialogFragment extends DialogFragment implements DatePickerFragmentListener {
+public class EditTodoDialogFragment extends DialogFragment implements Action1<String> {
 
     private static final String TITLE = "Edit Todo";
 
@@ -59,12 +59,6 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
 
     public EditTodoDialogFragment() {
     }
-
-    @Override
-    public void onFinishSettingDueDate(String newDate) {
-        tvShowDueDate.setText(newDate);
-    }
-
 
     public static EditTodoDialogFragment newInstance(Todos todos, Todo todo) {
 
@@ -186,6 +180,8 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         fragment.setArguments(args);
 
         fragment.show(getFragmentManager(), DatePickerFragment.TAG_DATE_PICKER);
+
+        fragment.asObservable().subscribe(this);
     }
 
 
@@ -249,5 +245,11 @@ public class EditTodoDialogFragment extends DialogFragment implements DatePicker
         } else {
             etTodoName.setPaintFlags(etTodoName.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
         }
+    }
+
+    @Override
+    public void call(String newDate) {
+
+        tvShowDueDate.setText(newDate);
     }
 }
